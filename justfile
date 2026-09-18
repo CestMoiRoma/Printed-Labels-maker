@@ -6,6 +6,10 @@ ci_platform := "linux/amd64"
 # Image used by `just ci-lock` to resolve the Python closure (same Python minor as the CI image: 3.11)
 lock_image := "python:3.11-slim-bookworm@sha256:b1add8a6f2aca6bcfcf0b9c9b522352f7ce0d62a3d556a2f2f32511aa0cca250"
 
+# First recipe, so a bare `just` lists the recipes instead of running one
+_default:
+    @just --justfile {{justfile()}} --list --unsorted
+
 # Build (or pull) the CI image
 ci-image:
     #!/usr/bin/env bash
