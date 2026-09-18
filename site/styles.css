@@ -377,6 +377,13 @@ button {
   color: var(--muted);
 }
 
+.row-btn-icon {
+  display: block;
+  width: 13px;
+  height: 13px;
+  margin: 0 auto;
+}
+
 .row-btn-remove {
   font-size: 14px;
 }

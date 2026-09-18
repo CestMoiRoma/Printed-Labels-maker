@@ -596,6 +596,11 @@ function setHTML(el, html) {
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
+// MDI content-copy: U+29C9 (the export's glyph) is in none of the site's fonts, so it fell back to
+// whatever the system had.
+const COPY_ICON = '<svg class="row-btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" ' +
+  'd="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg>';
+
 function renderRows(v) {
   const box = $(".rows");
   const s = state;
@@ -605,7 +610,7 @@ function renderRows(v) {
     row.innerHTML =
       '<button type="button" class="row-main" data-action="selRow"><span class="row-title"><span></span></span><span class="row-sub"><span></span></span></button>' +
       '<input type="number" min="1" step="1" class="row-copies" data-on="setRowN">' +
-      '<button type="button" class="row-btn" data-action="dupRow">⧉</button>' +
+      '<button type="button" class="row-btn" data-action="dupRow">' + COPY_ICON + "</button>" +
       '<button type="button" class="row-btn row-btn-remove" data-action="delRow">×</button>';
     box.appendChild(row);
   }
