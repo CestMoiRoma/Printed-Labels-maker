@@ -183,6 +183,8 @@ La revue est dans `docs/review.md`. Décisions humaines :
 - Cloudflare déploie : sa build Git (Workers Builds) est reliée au repo et déploie `main` avec
   `wrangler.jsonc`. Le job `deploy` du §7 (wrangler-action, secrets `CLOUDFLARE_*`) n'est pas écrit.
 - La CI GitHub tourne sur `dev` et sur les PR vers `main`. `main` ne reçoit que des fusions d'un `dev` vert.
+- CI activée le 2026-09-18 sur les runners hébergés par GitHub : le kill switch `CI_ENABLED` du §6 est retiré
+  du workflow (pas de variable de dépôt).
 - Le reste du §7 tient : `wrangler.jsonc`, `package.json` avec wrangler épinglé, `just dev`, `just deploy`
   (déploiement manuel de secours, depuis `main` seulement), dry-run hors ligne dans `run-tests.sh tests`.
 

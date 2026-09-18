@@ -3,10 +3,9 @@
 # Every job but `image` runs directly in the image built by `image` (no Docker-in-Docker). No job may fail
 # silently: no continue-on-error anywhere. Keep this file and the `ci` recipe of the justfile in sync.
 #
-# Kill switch: every job runs only when the repository variable CI_ENABLED is "true". No runner has proved
-# the goldens yet (they are proven under amd64 emulation on a developer Mac), so pushes do not start red or
-# pending pipelines; until then `just ci` is the gate. The first run on a hosted runner is the first proof of
-# byte-identity on that CPU (docs/quality-gates.md section 8, last point).
+# No kill switch: the jobs run on GitHub-hosted runners, enabled on 2026-09-18 (PLAN.md 4.4). The goldens
+# were first proven under amd64 emulation on a developer Mac; the first hosted run is their first proof of
+# byte-identity on a real amd64 CPU (docs/quality-gates.md section 8, last point).
 #
 # Triggers: pushes to dev and pull requests into main (PLAN.md 4.4). main only receives merges of a green
 # dev and is deployed by Cloudflare Workers Builds, so this workflow does not run on main itself.
@@ -35,7 +34,6 @@ defaults:
 
 jobs:
   image:
-    if: vars.CI_ENABLED == 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -70,7 +68,6 @@ jobs:
           cache-to: type=registry,ref=${{ steps.name.outputs.repo }}:buildcache,mode=max
 
   lint:
-    if: vars.CI_ENABLED == 'true'
     needs: image
     runs-on: ubuntu-latest
     permissions:
@@ -88,7 +85,6 @@ jobs:
       - run: REPO="$GITHUB_WORKSPACE" test/ci/lint.sh
 
   test-site:
-    if: vars.CI_ENABLED == 'true'
     needs: [image, lint]
     runs-on: ubuntu-latest
     permissions:
@@ -114,7 +110,6 @@ jobs:
           if-no-files-found: error
 
   goldens-site:
-    if: vars.CI_ENABLED == 'true'
     needs: [image, test-site]
     runs-on: ubuntu-latest
     permissions:
