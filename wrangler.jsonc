@@ -1,5 +1,5 @@
 // Cloudflare Worker serving site/ as static assets, with no Worker script.
-// Production deploys come from Cloudflare Workers Builds on the main branch (`npx wrangler deploy` with this
+// Production deploys come from Cloudflare Workers Builds on the Prod branch (`npx wrangler deploy` with this
 // file); `just deploy` is the manual fallback. `just ci` validates this file offline with
 // `wrangler deploy --dry-run` (test/site/run-tests.sh, tests mode).
 // JSONC: checked by wrangler's dry-run, not by test/ci/check_json.py (treefmt matches *.json only).

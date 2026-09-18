@@ -6,18 +6,19 @@
 # No kill switch: the jobs run on GitHub-hosted runners. The goldens are byte-identical there and under
 # amd64 emulation on a developer Mac (proven by the first hosted run, 2026-09-18).
 #
-# Triggers: pushes to dev and pull requests into main. main only receives merges of a green
-# dev and is deployed by Cloudflare Workers Builds, so this workflow does not run on main itself.
+# Triggers: pull requests into Prod (the required checks of its ruleset) and pushes to Prod (the merged
+# result). Prod is the only long-lived branch: work happens on short-lived branches merged through a pull
+# request, and Cloudflare Workers Builds deploys every push to Prod.
 #
 # Third-party actions are pinned by full commit SHA, the release tag in a comment.
 
 name: ci
 
 on:
-  push:
-    branches: [dev]
   pull_request:
-    branches: [main]
+    branches: [Prod]
+  push:
+    branches: [Prod]
   workflow_dispatch:
 
 concurrency:
@@ -131,5 +132,5 @@ jobs:
           name: goldens-site
           path: test/screenshot/site/
 
-  # No deploy job: Cloudflare Workers Builds deploys main with wrangler.jsonc. Only a dev whose
-  # pipeline is green is merged into main, so production never ships a red pipeline.
+  # No deploy job: Cloudflare Workers Builds deploys Prod with wrangler.jsonc. Only a pull request whose
+  # pipeline is green is merged into Prod, so production never ships a red pipeline.
