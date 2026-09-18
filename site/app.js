@@ -263,8 +263,9 @@ function measure(t, sizeMM, weight) {
   measureCtx.font = weight + " " + (sizeMM * 10) + 'px "' + state.font + '", sans-serif';
   return measureCtx.measureText(t).width / 10;
 }
+// Breaks at ASCII whitespace only: a no-break space (U+00A0) keeps two words together (review M9).
 function wrap(t, maxMM, sizeMM, weight) {
-  const words = String(t).split(/\s+/).filter(Boolean);
+  const words = String(t).split(/[ \t\n\r]+/).filter(Boolean);
   const lines = []; let cur = "";
   for (const wd of words) {
     const test = cur ? cur + " " + wd : wd;
@@ -338,30 +339,36 @@ function buildInner(it) {
   const list = splitList(it.contents);
   const foot = [it.code, it.date].filter(Boolean).join("   ");
 
+  // Every line advances 1.2 x its size in put() below, so the estimate uses 1.2 too (review M8).
+  // w is the widest line, footer included: a label fits when both its height and its width do (I3).
   const layout = (k) => {
     const tS = s.titlePt * PT * k, sS = s.subPt * PT * k, bS = s.bodyPt * PT * k, fS = Math.max(4.5, s.bodyPt * 0.88) * PT * k;
     const tl = it.title ? wrap(it.title, tw, tS, "700") : [];
     const sl = it.subtitle ? wrap(it.subtitle, tw, sS, "400") : [];
     let ll = [];
     if (list.length) {
-      if (s.listStyle === "inline") ll = wrap(list.join("  ·  "), tw, bS, "400");
+      // the separator sticks to the next item: a line never ends with a lone "·" (M9)
+      if (s.listStyle === "inline") ll = wrap(list.join(" ·\u00a0"), tw, bS, "400");
       else list.forEach(x => wrap("· " + x, tw, bS, "400").forEach(l => ll.push(l)));
     }
     let h = tl.length * tS * 1.2;
-    if (sl.length) h += tS * 0.35 + sl.length * sS * 1.25;
-    if (ll.length) h += Math.max(1, bS * 0.9) + ll.length * bS * 1.32;
-    if (foot) h += Math.max(1.2, fS * 1.1) + fS * 1.1;
-    return { h, tl, sl, ll, tS, sS, bS, fS };
+    if (sl.length) h += tS * 0.35 + sl.length * sS * 1.2;
+    if (ll.length) h += Math.max(1, bS * 0.9) + ll.length * bS * 1.2;
+    if (foot) h += Math.max(1.2, fS * 1.1) + fS * 1.2;
+    const widths = tl.map(l => measure(l, tS, "700")).concat(sl.map(l => measure(l, sS, "400")), ll.map(l => measure(l, bS, "400")));
+    if (foot) widths.push(measure(foot, fS, "500"));
+    return { h, w: Math.max(0, ...widths), tl, sl, ll, tS, sS, bS, fS };
   };
+  const fits = (L) => L.h <= avail && L.w <= tw;
 
   let k = 1;
   if (s.autoFit) {
     let lo = 0.5, hi = 2.4;
-    for (let i = 0; i < 14; i++) { const mid = (lo + hi) / 2; if (layout(mid).h <= avail) lo = mid; else hi = mid; }
+    for (let i = 0; i < 14; i++) { const mid = (lo + hi) / 2; if (fits(layout(mid))) lo = mid; else hi = mid; }
     k = lo;
-  } else if (layout(1).h > avail) {
+  } else if (!fits(layout(1))) {
     let lo = 0.5, hi = 1;
-    for (let i = 0; i < 12; i++) { const mid = (lo + hi) / 2; if (layout(mid).h <= avail) lo = mid; else hi = mid; }
+    for (let i = 0; i < 12; i++) { const mid = (lo + hi) / 2; if (fits(layout(mid))) lo = mid; else hi = mid; }
     k = lo;
   }
 
@@ -371,7 +378,7 @@ function buildInner(it) {
   let ty = pad + Math.max(0, (avail - L.h) / 2);
   const put = (t, size, weight, opacity, mono) => {
     ty += size * 0.88;
-    o.push('<text x="' + ax + '" y="' + ty + '" text-anchor="' + anchor + '" font-family="' + esc(s.font) + ', ' + (mono ? "monospace" : "sans-serif") + '" font-weight="' + weight + '" font-size="' + size + '" fill="' + ink + '"' + (opacity ? ' opacity="' + opacity + '"' : "") + (mono ? ' letter-spacing="0.04"' : "") + ">" + esc(t) + "</text>");
+    o.push('<text x="' + ax + '" y="' + ty + '" text-anchor="' + anchor + '" font-family="' + esc(s.font) + ', ' + (mono ? "monospace" : "sans-serif") + '" font-weight="' + weight + '" font-size="' + size + '" fill="' + ink + '"' + (opacity ? ' opacity="' + opacity + '"' : "") + (mono ? ' letter-spacing="0.04" xml:space="preserve"' : "") + ">" + esc(t) + "</text>");
     ty += size * 0.32;
   };
 
@@ -404,16 +411,20 @@ function grid() {
   const rows = Math.max(1, Math.floor((297 - 2 * s.my + g) / (+s.h + g)));
   return { cols, rows, per: cols * rows };
 }
-function sheetSVG(pageItems, real) {
+// clipId must be unique in the document: sheets of the preview and of the print area share it.
+function sheetSVG(pageItems, real, clipId) {
   const s = S(), W = +s.w, H = +s.h, g = +s.gap, { cols, rows } = grid();
   const totalW = cols * W + (cols - 1) * g, totalH = rows * H + (rows - 1) * g;
   const ox = Math.max(+s.mx, (210 - totalW) / 2), oy = Math.max(+s.my, (297 - totalH) / 2);
-  const o = ['<rect width="210" height="297" fill="#ffffff"/>'];
+  // Each label is clipped to its own box: text that still overflows (a word longer than the label at the
+  // smallest size) is cut instead of printing on the next label (review I3).
+  const clip = clipId || "label-clip";
+  const o = ['<rect width="210" height="297" fill="#ffffff"/>', '<defs><clipPath id="' + clip + '"><rect width="' + W + '" height="' + H + '"/></clipPath></defs>'];
   const marks = [];
   pageItems.forEach((it, i) => {
     const c = i % cols, r = Math.floor(i / cols);
     const x = ox + c * (W + g), y = oy + r * (H + g);
-    o.push('<g transform="translate(' + x + ',' + y + ')">' + buildInner(it) + "</g>");
+    o.push('<g transform="translate(' + x + ',' + y + ')" clip-path="url(#' + clip + ')">' + buildInner(it) + "</g>");
     if (s.cut) {
       [x, x + W].forEach(vx => marks.push('<line x1="' + vx + '" y1="0" x2="' + vx + '" y2="4"/><line x1="' + vx + '" y1="293" x2="' + vx + '" y2="297"/>'));
       [y, y + H].forEach(vy => marks.push('<line x1="0" y1="' + vy + '" x2="4" y2="' + vy + '"/><line x1="206" y1="' + vy + '" x2="210" y2="' + vy + '"/>'));
@@ -767,9 +778,9 @@ function render() {
   const pageList = pages();
   if (v.isRealPage) {
     setHTML($(".sheets"), PROPS.showSheetPreview === false ? "" :
-      pageList.map(p => '<div class="sheet">' + sheetSVG(p, false) + "</div>").join(""));
+      pageList.map((p, i) => '<div class="sheet">' + sheetSVG(p, false, "clip-preview-" + i) + "</div>").join(""));
   }
-  setHTML($(".print-sheets"), pageList.map(p => '<div class="print-sheet">' + sheetSVG(p, true) + "</div>").join(""));
+  setHTML($(".print-sheets"), pageList.map((p, i) => '<div class="print-sheet">' + sheetSVG(p, true, "clip-print-" + i) + "</div>").join(""));
 }
 
 // ---------- boot ----------
