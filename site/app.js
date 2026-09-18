@@ -217,7 +217,7 @@ const state = {
   ],
   sel: 0, pasteText: "", tab: "content", realView: "label", lang: detectLang(), langOpen: false,
   mx: 8, my: 10, gap: 3, cut: true,
-  fontReady: 0
+  fontChoice: "Archivo"
 };
 
 // ---------- state ----------
@@ -243,18 +243,21 @@ function setState(patch) {
 
 // ---------- helpers ----------
 const FONT_CSS = (f) => "vendor/fonts/" + f.toLowerCase().replace(/\s+/g, "-") + ".css";
+// Resolves once the family's stylesheet and its 400, 500 and 700 faces are loaded (or failed). Labels are
+// measured on a canvas: measuring before the font is there gives the fallback font's line breaks.
+// document.fonts.load() alone is not enough: before the stylesheet arrives it resolves at once.
+const fontLoads = {};
 function loadFont(f) {
-  const id = "gf-" + f.replace(/\s+/g, "-");
-  if (!document.getElementById(id)) {
-    const l = document.createElement("link");
-    l.id = id; l.rel = "stylesheet";
-    l.href = FONT_CSS(f);
-    document.head.appendChild(l);
-  }
-  if (document.fonts) {
-    Promise.all([document.fonts.load('400 16px "' + f + '"'), document.fonts.load('700 16px "' + f + '"')])
-      .then(() => setState(s => ({ fontReady: s.fontReady + 1 }))).catch(() => {});
-  }
+  if (fontLoads[f]) return fontLoads[f];
+  const l = document.createElement("link");
+  l.id = "gf-" + f.replace(/\s+/g, "-"); l.rel = "stylesheet";
+  l.href = FONT_CSS(f);
+  const sheet = new Promise(resolve => { l.onload = l.onerror = resolve; });
+  document.head.appendChild(l);
+  fontLoads[f] = sheet
+    .then(() => Promise.all(["400", "500", "700"].map(wt => document.fonts.load(wt + ' 16px "' + f + '"'))))
+    .catch(() => {});
+  return fontLoads[f];
 }
 function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
 let measureCtx = null;
@@ -569,7 +572,12 @@ const handlers = {
     const pick = { iSrc: a.iSrc, iD: a.iD, iVB: a.iVB, iUrl: a.iUrl, iName: a.iName };
     setState(s => ({ rows: s.rows.map(r => Object.assign({}, r, pick)) }));
   },
-  setFont(el) { const f = el.value; setState({ font: f }); loadFont(f); },
+  // the labels switch to the new font once it is loaded; the select shows the choice at once
+  setFont(el) {
+    const f = el.value;
+    setState({ fontChoice: f });
+    loadFont(f).then(() => { if (state.fontChoice === f) setState({ font: f }); });
+  },
   applyPreset(el) {
     const p = el.dataset.preset.split("x");
     delete drafts.w; delete drafts.h;
@@ -812,9 +820,12 @@ for (const el of $$("input[data-num]")) {
   el.setAttribute("aria-describedby", msg.id);
   el.after(msg);
 }
-$('[data-k="font"]').innerHTML = FONTS.map(f => '<option value="' + esc(f) + '">' + esc(f) + "</option>").join("");
+$('[data-k="fontChoice"]').innerHTML = FONTS.map(f => '<option value="' + esc(f) + '">' + esc(f) + "</option>").join("");
 if (PROPS.defaultFont !== state.font || PROPS.startMode !== state.mode) Object.assign(state, { font: PROPS.defaultFont, mode: PROPS.startMode });
-render();
-loadFont(state.font);
-if (state.lang !== "fr") seedDemo(state.lang);
+state.fontChoice = state.font;
+// first render once the label font is ready: no layout is ever computed with a fallback font
+loadFont(state.font).then(() => {
+  render();
+  if (state.lang !== "fr") seedDemo(state.lang);
+});
 })();
