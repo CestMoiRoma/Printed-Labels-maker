@@ -2,7 +2,7 @@
 
 The end-to-end scenario only proves the CSP if the test server sends what Cloudflare sends: these tests pin
 the parser of test/site/offline.py to Cloudflare's `_headers` grammar, the headers every served path gets,
-and the policy itself (same-origin only, no eval, no framing).
+and the policy itself (same-origin plus Google Fonts, no eval, no framing).
 """
 
 import urllib.error
@@ -55,14 +55,14 @@ def test_no_header_is_set_by_two_rules_for_the_same_path():
         assert len(names) == len(set(names)), (path, names)
 
 
-def test_the_policy_allows_the_site_origin_only():
+def test_the_policy_allows_the_site_origin_and_google_fonts_only():
     csp = csp_directives(offline.headers_for(RULES, "/")["content-security-policy"])
     assert csp == {
         "default-src": ["'none'"],
         "script-src": ["'self'"],
-        "style-src": ["'self'", "'unsafe-inline'"],
+        "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
         "img-src": ["'self'", "data:"],
-        "font-src": ["'self'"],
+        "font-src": ["'self'", "https://fonts.gstatic.com"],
         "connect-src": ["'self'"],
         "base-uri": ["'none'"],
         "form-action": ["'none'"],
