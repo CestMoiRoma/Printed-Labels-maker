@@ -17,7 +17,7 @@ VENDOR = SITE / "vendor"
 REFERENCE = REPO / "test" / "site" / "reference"
 
 # Absolute URLs allowed in the site's own files: the SVG namespace (not fetched) and the source link.
-ALLOWED_URLS = {"http://www.w3.org/2000/svg", "https://google.com"}
+ALLOWED_URLS = {"http://www.w3.org/2000/svg", "https://github.com/CestMoiRoma/Printed-Labels-maker"}
 OWN_FILES = ["index.html", "styles.css", "app.js"]
 
 
