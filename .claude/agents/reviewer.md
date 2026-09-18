@@ -44,13 +44,15 @@ Mission : produire `docs/review.md`. Ne modifie aucun fichier du site.
   (`@media print`, marges, unités physiques mm / pouces cohérentes avec le format d'étiquette).
 - Compatibilité Workers : pas d'URL absolue codée en dur, pas de chemin dépendant d'un serveur applicatif.
 - Accessibilité : contraste, focus visible, navigation clavier sur tout le flux, textes alternatifs.
-  **Revue du design**
+
+**Revue du design**
 
 - Fidélité au JSON de Claude Design : chaque token (couleurs, espacements, typo, rayons) utilisé dans le
   CSS doit correspondre à une valeur du JSON. Lister les écarts avec fichier : ligne.
 - Cohérence entre états (vide, rempli, aperçu, erreur, impression) et entre viewports.
 - Ce qui manque dans l'export : états d'erreur, état vide, hover / focus, mobile.
-  **Format du rapport**
+
+**Format du rapport**
 
 Findings triés par sévérité (bloquant / important / mineur), chacun avec fichier : ligne, constat,
 correction proposée. Une section finale « à corriger avant de figer les goldens » et une section

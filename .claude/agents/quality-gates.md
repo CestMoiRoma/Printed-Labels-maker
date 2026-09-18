@@ -60,7 +60,8 @@ test/screenshot/site/*.png    les goldens commités
   `check_json.py`, jamais réécrit. Pas de type checker s'il n'y a pas de TypeScript : retirer
   la section `[formatter.typecheck]` plutôt que de la laisser vide.
 - `treefmt.toml` : exclure explicitement le JSON de design et `test/screenshot/**`, avec la raison en commentaire.
-  **Scénario end-to-end et goldens (`test/site/screenshots.py`)**
+
+**Scénario end-to-end et goldens (`test/site/screenshots.py`)**
 
 - Passe par **chaque** écran et état de l'appli : page d'accueil, formulaire vide, formulaire rempli avec
   des données fixes, aperçu d'étiquette, aperçu impression (`page.emulate_media(media="print")`),
