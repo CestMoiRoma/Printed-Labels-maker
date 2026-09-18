@@ -1,0 +1,6 @@
+# Aggregates every test/<app>/requirements-test.txt and the lint / capture tools.
+# After any change: just ci-lock
+-r ../site/requirements-test.txt
+ruff==0.16.8
+playwright==1.63.0
+pillow==12.3.0

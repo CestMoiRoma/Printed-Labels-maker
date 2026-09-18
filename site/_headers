@@ -1,0 +1,33 @@
+# Response headers of the Cloudflare Workers static assets (wrangler.jsonc). This file is not served.
+# The end-to-end scenario serves site/ with the same headers (test/site/offline.py), so it runs under
+# this exact CSP: any violation is a console error, which fails it.
+#
+# CSP: everything is same-origin. data: images are the imported logo (FileReader) and the PNG export
+# (an SVG drawn through an <img>); downloads are blob: links, a navigation no fetch directive governs.
+# app.js writes style="" attributes in generated markup (flags, labels), hence 'unsafe-inline' for
+# styles. It is not narrowed to style-src-attr because the goldens' freeze sheet (test/ci/golden.py) is
+# an inline <style> element. Scripts: same-origin files only, no inline script, no eval.
+/*
+  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: no-referrer
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+  Strict-Transport-Security: max-age=31536000
+
+# Cache: the site's own files change with every deploy under the same names, so they are revalidated
+# on every load (ETag). Vendored files keep their names across upgrades too (mdi/mdi.js,
+# qrcode-svg/qrcode.min.js), hence a day rather than immutable. Other paths keep the default
+# (public, max-age=0, must-revalidate). No two rules set the same header: nothing gets joined.
+/
+  Cache-Control: no-cache
+/index.html
+  Cache-Control: no-cache
+/app.js
+  Cache-Control: no-cache
+/styles.css
+  Cache-Control: no-cache
+/vendor/*
+  Cache-Control: public, max-age=86400
