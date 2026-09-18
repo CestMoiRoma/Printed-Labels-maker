@@ -1,7 +1,8 @@
 /* Printed Labels Maker: screen and print styles.
    Values come from the Claude Design export (design/label-generator.dc.html); the tokens below name the
    values it repeats. Departures from the export are fixes listed in docs/review.md: informative text uses
-   --muted (4.5:1 or more on every background here) instead of the export's #8a827a and #b0a79e (I6). */
+   --muted (4.5:1 or more on every background here) instead of the export's #8a827a and #b0a79e (I6);
+   form controls are outlined with --line-control, 3:1 against white and the tinted card (M7). */
 
 :root {
   --ink: #1b1917;
@@ -14,6 +15,7 @@
   --well: #f2eeea;
   --line: #e6e1db;
   --line-field: #ddd6ce;
+  --line-control: #948c84;
   --line-soft: #f0ece7;
   --line-menu: #f4f0eb;
   --line-flag: #e0dad3;
@@ -358,7 +360,7 @@ button {
   width: 44px;
   box-sizing: border-box;
   padding: 6px 4px;
-  border: 1px solid var(--line-field);
+  border: 1px solid var(--line-control);
   border-radius: 6px;
   font-size: 12px;
   text-align: center;
@@ -433,7 +435,7 @@ button {
   width: 100%;
   box-sizing: border-box;
   padding: 8px;
-  border: 1px solid var(--line-field);
+  border: 1px solid var(--line-control);
   border-radius: 6px;
   font-family: var(--font-mono);
   font-size: 11px;
@@ -518,7 +520,7 @@ button {
   width: 100%;
   box-sizing: border-box;
   padding: 8px;
-  border: 1px solid var(--line-field);
+  border: 1px solid var(--line-control);
   border-radius: 6px;
   font-size: 13px;
   color: var(--ink);
@@ -539,7 +541,7 @@ button {
   width: 100%;
   box-sizing: border-box;
   padding: 7px 8px;
-  border: 1px solid var(--line-field);
+  border: 1px solid var(--line-control);
   border-radius: 6px;
   font-size: 13px;
   color: var(--ink);
@@ -667,7 +669,7 @@ button {
   height: 30px;
   box-sizing: border-box;
   padding: 2px;
-  border: 1px solid var(--line-field);
+  border: 1px solid var(--line-control);
   border-radius: 6px;
   background: var(--paper);
 }
