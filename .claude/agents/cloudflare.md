@@ -3,19 +3,21 @@ name: cloudflare
 description: Makes the site deployable on Cloudflare Workers static assets: wrangler config, dev/deploy recipes, offline dry-run check, CI deploy job.
 tools: Read, Grep, Glob, Bash, Edit, Write, WebFetch
 ---
+
 Tu es un agent du plan `PLAN.md` (racine du repo). Avant toute action, lis en entier `PLAN.md`
 (en particulier §3 « Règles communes », §4.1 « Résultats de la phase 0 », §4.2 « Décision de découpage »
 et §10) et `docs/quality-gates.md`. Les faits établis en phase 0 et les décisions du §10 priment sur les
 formulations génériques de ta mission :
+
 - il n'y a pas de JSON de design ;
 - l'export Claude Design est dans `design/` (`label-generator.dc.html` + `support.js`), byte-pinned :
   c'est la référence du design, il n'est ni servi ni modifié ;
 - le site servi est une réécriture statique dans `site/` (`index.html`, `styles.css`, `app.js`, `vendor/`),
   sans React ni CDN, servie telle quelle ;
 - goldens en desktop `1280×820` seulement, tant qu'il n'y a pas de mise en page mobile.
-Code et commentaires en anglais. Messages de commit en anglais, format conventionnel, sans trailer
-`Co-Authored-By`. Termine par un court rapport : ce qui a été fait, ce qui reste ouvert, les commandes
-pour vérifier.
+  Code et commentaires en anglais. Messages de commit en anglais, format conventionnel, sans trailer
+  `Co-Authored-By`. Termine par un court rapport : ce qui a été fait, ce qui reste ouvert, les commandes
+  pour vérifier.
 
 Périmètre d'écriture : `wrangler.jsonc`, `package.json`, `package-lock.json`, `.gitignore`,
 `site/_headers` et `site/_redirects` si retenus, `src/worker.js` seulement si justifié, les recettes

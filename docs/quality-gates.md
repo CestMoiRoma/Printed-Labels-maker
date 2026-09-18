@@ -17,7 +17,7 @@ How to use it:
   - `<app>`: an app folder name in kebab-case, e.g. `web-shop`, `admin`;
   - `<App>`: its source folder.
 - **Pick tools.** Keep the tool choices that match the stack: ruff for Python, prettier for CSS/YAML/Markdown,
-  `tsc`/`vue-tsc` for TypeScript. The *structure* (one image, one entry point per gate, `all | tests | goldens`
+  `tsc`/`vue-tsc` for TypeScript. The _structure_ (one image, one entry point per gate, `all | tests | goldens`
   modes, byte-exact goldens, `just ci` = CI) is the part that matters.
 
 ---
@@ -33,13 +33,13 @@ How to use it:
 **`just ci` = CI**
 
 - A local recipe runs exactly the CI jobs, in the same order, in the same image.
-- As long as CI is not enabled (no runner yet), `just ci` *is* the gate.
+- As long as CI is not enabled (no runner yet), `just ci` _is_ the gate.
 
 **Tests and goldens are part of every change**
 
 - No commit with a red pipeline.
 - Never disable, skip or loosen a test to get green: fix the cause.
-- No `allow_failure`, no silently skipped stage. A missing tool must *fail*, not skip.
+- No `allow_failure`, no silently skipped stage. A missing tool must _fail_, not skip.
 
 **Every app is tested end to end**
 
@@ -58,7 +58,7 @@ How to use it:
 **Byte-pinned files are excluded from formatters**
 
 - Design tokens, fixtures, vendored data and generated files are never reformatted.
-- Data files are *validated* (e.g. JSON must parse), never rewritten.
+- Data files are _validated_ (e.g. JSON must parse), never rewritten.
 
 ---
 
@@ -479,21 +479,21 @@ Each app's pipeline must include, at minimum:
 
 Every item below has broken byte-identity at least once in practice.
 
-| Source of noise | Fix |
-|---|---|
-| Different Chromium / fonts / libs between machines | One pinned image, one platform (`linux/amd64`, even on ARM Macs via emulation) |
-| GPU / LCD / hinting / CPU-specific Skia paths | Chromium flags (below): software rendering, no LCD text, no hinting, sRGB, `--disable-skia-runtime-opts` |
-| CSS transitions / animations caught mid-way | Injected style sheet (`transition/animation: none`), plus `settle()` waiting for `document.getAnimations()` to finish |
-| Caret blink, smooth scroll, scrollbars | `caret-color: transparent`, `scroll-behavior: auto`, `--hide-scrollbars` |
-| Wall-clock time on screen | Playwright `page.clock.set_fixed_time(...)`; freeze the backend clock too (inject a clock, or a virtual clock in the harness) |
-| Live / simulated data (sensors, random, timers) | Seeded fakes on a **virtual clock** that only advances when the scenario says so; wait until the page shows the backend state |
-| Random temp paths printed on screen | Fixed folder names for the scenario's data |
-| Filesystem listing order | Sort in the scenario, or create inputs in a fixed order; record it as a known risk if the order comes from code you can't change |
-| Race between async responses (e.g. an SSE event arriving before a POST answer) | Fix the app: the stability run finds real bugs |
-| Viewport, DPR, locale, time zone, colour scheme | Fixed browser context (below) |
-| PNG metadata (dates, gamma, text chunks, encoder settings) | Re-encode every PNG from its pixels with a fixed encoder (`encode_png` below) |
-| Emoji rendered as monochrome glyphs or boxes | `fonts-noto-color-emoji` plus fontconfig rejecting Unifont/FreeFont (§3) |
-| Host-owned vs root-owned files | Run the container with `--user "$(id -u):$(id -g)"` |
+| Source of noise                                                                | Fix                                                                                                                              |
+| ------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
+| Different Chromium / fonts / libs between machines                             | One pinned image, one platform (`linux/amd64`, even on ARM Macs via emulation)                                                   |
+| GPU / LCD / hinting / CPU-specific Skia paths                                  | Chromium flags (below): software rendering, no LCD text, no hinting, sRGB, `--disable-skia-runtime-opts`                         |
+| CSS transitions / animations caught mid-way                                    | Injected style sheet (`transition/animation: none`), plus `settle()` waiting for `document.getAnimations()` to finish            |
+| Caret blink, smooth scroll, scrollbars                                         | `caret-color: transparent`, `scroll-behavior: auto`, `--hide-scrollbars`                                                         |
+| Wall-clock time on screen                                                      | Playwright `page.clock.set_fixed_time(...)`; freeze the backend clock too (inject a clock, or a virtual clock in the harness)    |
+| Live / simulated data (sensors, random, timers)                                | Seeded fakes on a **virtual clock** that only advances when the scenario says so; wait until the page shows the backend state    |
+| Random temp paths printed on screen                                            | Fixed folder names for the scenario's data                                                                                       |
+| Filesystem listing order                                                       | Sort in the scenario, or create inputs in a fixed order; record it as a known risk if the order comes from code you can't change |
+| Race between async responses (e.g. an SSE event arriving before a POST answer) | Fix the app: the stability run finds real bugs                                                                                   |
+| Viewport, DPR, locale, time zone, colour scheme                                | Fixed browser context (below)                                                                                                    |
+| PNG metadata (dates, gamma, text chunks, encoder settings)                     | Re-encode every PNG from its pixels with a fixed encoder (`encode_png` below)                                                    |
+| Emoji rendered as monochrome glyphs or boxes                                   | `fonts-noto-color-emoji` plus fontconfig rejecting Unifont/FreeFont (§3)                                                         |
+| Host-owned vs root-owned files                                                 | Run the container with `--user "$(id -u):$(id -g)"`                                                                              |
 
 ### 7.2 `test/ci/golden.py`: the shared capture helpers
 
@@ -684,7 +684,7 @@ exit $status
 - **Unexpected diff:** treat it as a regression until proven otherwise.
   - If a capture flips between identical runs, fix the source of noise (§7.1).
   - Never exclude the capture, and never raise a tolerance.
-- **Other apps sharing a component:** after changing shared UI code, run *every* app's goldens. Unchanged apps must stay byte-identical.
+- **Other apps sharing a component:** after changing shared UI code, run _every_ app's goldens. Unchanged apps must stay byte-identical.
 - **Optional:** dump the DOM of key states (attributes compared as sets) to explain pixel diffs in reviews.
 
 ---

@@ -13,28 +13,28 @@ Ce fichier est le plan d'exécution. Il se dépose à la racine du repo avec `do
 - Référence obligatoire pour tout ce qui touche au lint, aux tests et aux screenshots : `docs/quality-gates.md`.
   La structure du playbook est non négociable (une image Docker pinnée, un point d'entrée par gate,
   modes `all | tests | goldens`, goldens byte-exacts, `just ci` = CI).
-Placeholders du playbook à remplacer partout :
+  Placeholders du playbook à remplacer partout :
 
-| Placeholder | Valeur |
-|---|---|
-| `<project>` | `printed-labels-maker` |
-| `<app>` | `site` |
-| `<App>` | `site/` (dossier du site servi tel quel ; adapter si le repo a déjà un dossier) |
+| Placeholder | Valeur                                                                          |
+| ----------- | ------------------------------------------------------------------------------- |
+| `<project>` | `printed-labels-maker`                                                          |
+| `<app>`     | `site`                                                                          |
+| `<App>`     | `site/` (dossier du site servi tel quel ; adapter si le repo a déjà un dossier) |
 
 ## 2. Ordre d'exécution
 
 Les phases s'enchaînent, chacune part d'un repo propre et se termine par un ou plusieurs commits dédiés.
 
-| Phase | Agent | Sortie |
-|---|---|---|
-| 0 | (session principale) | Repérage, arborescence cible, `.claude/agents/` |
-| 1 | `reviewer` | `docs/review.md`, aucune modification de code |
-| 2a | `quality-gates` | justfile, treefmt, Dockerfile CI, scripts `test/ci/`, squelette `test/site/` (§4.3) |
-| 2b | (session principale) | vendoring, réécriture statique de `site/`, preuve de fidélité, `fix:` validés (§4.3) |
-| 2c | `quality-gates` | scénario e2e complet, goldens, stabilité, workflow GitHub Actions (§4.3) |
-| 3 | `cloudflare` | wrangler, recettes `dev` / `deploy`, job de déploiement |
-| 4 | `readme` | `README.md` |
-| 5 | (session principale) | `just ci` vert, `CLAUDE.md`, rapport final |
+| Phase | Agent                | Sortie                                                                               |
+| ----- | -------------------- | ------------------------------------------------------------------------------------ |
+| 0     | (session principale) | Repérage, arborescence cible, `.claude/agents/`                                      |
+| 1     | `reviewer`           | `docs/review.md`, aucune modification de code                                        |
+| 2a    | `quality-gates`      | justfile, treefmt, Dockerfile CI, scripts `test/ci/`, squelette `test/site/` (§4.3)  |
+| 2b    | (session principale) | vendoring, réécriture statique de `site/`, preuve de fidélité, `fix:` validés (§4.3) |
+| 2c    | `quality-gates`      | scénario e2e complet, goldens, stabilité, workflow GitHub Actions (§4.3)             |
+| 3     | `cloudflare`         | wrangler, recettes `dev` / `deploy`, job de déploiement                              |
+| 4     | `readme`             | `README.md`                                                                          |
+| 5     | (session principale) | `just ci` vert, `CLAUDE.md`, rapport final                                           |
 
 Le reviewer passe **avant** les autres : ses findings bloquants sont corrigés (ou explicitement reportés)
 avant de figer les goldens, sinon on commite des captures d'un design qu'on va retoucher.
@@ -59,6 +59,7 @@ avant de figer les goldens, sinon on commite des captures d'un design qu'on va r
    (prettier sur le CSS, review lisible) aient prise. Le rendu doit rester au pixel près, ce que les
    goldens de la phase 2 prouveront.
 4. Créer les quatre agents dans `.claude/agents/`, un fichier Markdown chacun avec frontmatter :
+
 ```markdown
 ---
 name: reviewer
@@ -81,11 +82,11 @@ Remote : `git@github.com:CestMoiRoma/Printed-Labels-maker.git` (GitHub).
 décision du §4.2, l'export n'est plus le site servi : il reste dans `design/` comme référence de design,
 byte-pinned, et `site/` accueille la réécriture statique.
 
-| Avant | Après | SHA-256 |
-|---|---|---|
+| Avant                             | Après                            | SHA-256                                                            |
+| --------------------------------- | -------------------------------- | ------------------------------------------------------------------ |
 | `Générateur d'étiquettes.dc.html` | `design/label-generator.dc.html` | `ac741acabb9e679ee740c5a07a4e5fd3155eb31106118e55179e493b5c958be6` |
-| `support.js` | `design/support.js` | `8fe7df74405f3c55f49b7249c74ea1397e65d07dea2b1bd3b4a489bec2e28cbe` |
-| `quality-gates.md` | `docs/quality-gates.md` | inchangé |
+| `support.js`                      | `design/support.js`              | `8fe7df74405f3c55f49b7249c74ea1397e65d07dea2b1bd3b4a489bec2e28cbe` |
+| `quality-gates.md`                | `docs/quality-gates.md`          | inchangé                                                           |
 
 Le runtime nomme le document d'après son chemin ; servi en `/`, il prend le nom `Root`, ce qui ne change
 rien au rendu. Le nom accentué avec apostrophe est abandonné : il n'a pas sa place dans une URL.
@@ -94,6 +95,7 @@ rien au rendu. Le nom accentué avec apostrophe est abandonné : il n'a pas sa p
 (couleurs, rayons, espacements, typo) sont écrits en dur dans les attributs `style` du HTML. Le seul
 JSON présent est l'attribut `data-props` du script de logique (schéma des props : `startMode`,
 `showSheetPreview`, `defaultFont`). Conséquences :
+
 - ce qui est byte-pinned, c'est le dossier `design/` (export de design et runtime généré, en-tête
   « do not edit ») ; il est exclu des formateurs ;
 - la revue « fidélité au JSON » du reviewer devient une revue de cohérence interne : extraire la palette
@@ -101,6 +103,7 @@ JSON présent est l'attribut `data-props` du script de logique (schéma des prop
 - `check_json.py` reste en place pour les JSON du repo (`package.json`, `wrangler.jsonc` exclu car JSONC).
 
 **Nature du HTML.** Ce n'est pas une page statique mais un « Design Component » Claude Design :
+
 - template dans `<x-dc>` avec liaisons `{{ … }}`, `<sc-for>`, `<sc-if>`, et un bloc `<helmet>` pour le `<head>` ;
 - logique dans `<script type="text/x-dc" data-dc-script>` : `class Component extends DCLogic`, évaluée
   par `new Function` dans `support.js` (donc CSP avec `'unsafe-eval'` tant qu'on garde ce runtime) ;
@@ -108,6 +111,7 @@ JSON présent est l'attribut `data-props` du script de logique (schéma des prop
   le seul `<style>` fait dix lignes (dans `<helmet>`).
 
 **Dépendances externes au runtime** (toutes chargées depuis un CDN, rien n'est local) :
+
 - `support.js` : React 18.3.1 et ReactDOM 18.3.1 depuis unpkg (avec SRI), Babel standalone 7.29.0
   (seulement pour des imports JSX, non utilisés ici) ;
 - `index.html` : `qrcode-svg@1.1.0` (jsdelivr), `@mdi/js@7.4.47` (import dynamique, jsdelivr),
@@ -141,6 +145,7 @@ c'est la référence du design (tokens, textes des sept langues, comportements).
 formaté.
 
 Ce que ça change dans l'ordre des phases :
+
 - le reviewer (phase 1) revoit l'export de `design/` : ses findings deviennent le cahier des charges
   de la réécriture ;
 - la réécriture est faite par la session principale, après validation humaine des findings à intégrer,
@@ -184,13 +189,13 @@ Mission : produire `docs/review.md`. Ne modifie aucun fichier du site.
   (`@media print`, marges, unités physiques mm / pouces cohérentes avec le format d'étiquette).
 - Compatibilité Workers : pas d'URL absolue codée en dur, pas de chemin dépendant d'un serveur applicatif.
 - Accessibilité : contraste, focus visible, navigation clavier sur tout le flux, textes alternatifs.
-**Revue du design**
+  **Revue du design**
 
 - Fidélité au JSON de Claude Design : chaque token (couleurs, espacements, typo, rayons) utilisé dans le
   CSS doit correspondre à une valeur du JSON. Lister les écarts avec fichier : ligne.
 - Cohérence entre états (vide, rempli, aperçu, erreur, impression) et entre viewports.
 - Ce qui manque dans l'export : états d'erreur, état vide, hover / focus, mobile.
-**Format du rapport**
+  **Format du rapport**
 
 Findings triés par sévérité (bloquant / important / mineur), chacun avec fichier : ligne, constat,
 correction proposée. Une section finale « à corriger avant de figer les goldens » et une section
@@ -231,7 +236,7 @@ test/screenshot/site/*.png    les goldens commités
   `check_json.py`, jamais réécrit. Pas de type checker s'il n'y a pas de TypeScript : retirer
   la section `[formatter.typecheck]` plutôt que de la laisser vide.
 - `treefmt.toml` : exclure explicitement le JSON de design et `test/screenshot/**`, avec la raison en commentaire.
-**Scénario end-to-end et goldens (`test/site/screenshots.py`)**
+  **Scénario end-to-end et goldens (`test/site/screenshots.py`)**
 
 - Passe par **chaque** écran et état de l'appli : page d'accueil, formulaire vide, formulaire rempli avec
   des données fixes, aperçu d'étiquette, aperçu impression (`page.emulate_media(media="print")`),
@@ -340,19 +345,19 @@ sur tout tiret cadratin ou demi-cadratin. Le style devient alors une gate comme 
 
 ## 10. Points à trancher avant de lancer
 
-| Point | Valeur | État |
-|---|---|---|
-| Fichiers exportés de Claude Design | `design/label-generator.dc.html` et `design/support.js` ; pas de JSON (§4.1) | décidé : pas de JSON |
-| Dossier cible du site | `site/` (réécriture statique), servi tel quel | décidé |
-| Découpage du HTML | réécriture statique `index.html` / `styles.css` / `app.js` + `site/vendor/` (§4.2) | décidé |
-| Forge | GitHub Actions (`.github/workflows/ci.yml`), le remote est sur GitHub | constaté |
-| Langue du README | anglais : le README actuel tient en un titre, le repo est public sur GitHub | proposé |
-| Viewports des goldens | `1280×820` seul ; `390×844` ajouté avec la future mise en page mobile | décidé |
-| Cloudflare : nom du worker | celui créé côté Cloudflare ; `name` de `wrangler.jsonc` doit lui être identique | à fournir |
-| Cloudflare : déploiement | worker relié au repo GitHub par l'intégration Git de Cloudflare (Workers Builds), en cours côté humain. À réconcilier en phase 3 avec le job `deploy` du §7 et la règle « jamais de déploiement avec une CI rouge » | à trancher en phase 3 |
-| Cloudflare : domaine | `printed-labels.roma.moonmakers.fr`, en Custom Domain du worker (`routes` avec `custom_domain: true` dans `wrangler.jsonc`, syntaxe à vérifier dans la doc). La zone `moonmakers.fr` doit être sur le même compte Cloudflare | décidé |
-| Cloudflare : compte cible | fourni par les secrets `CLOUDFLARE_ACCOUNT_ID` / `CLOUDFLARE_API_TOKEN` | à fournir |
-| Build | aucun : `site/` est déployé tel quel | proposé |
+| Point                              | Valeur                                                                                                                                                                                                                       | État                  |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
+| Fichiers exportés de Claude Design | `design/label-generator.dc.html` et `design/support.js` ; pas de JSON (§4.1)                                                                                                                                                 | décidé : pas de JSON  |
+| Dossier cible du site              | `site/` (réécriture statique), servi tel quel                                                                                                                                                                                | décidé                |
+| Découpage du HTML                  | réécriture statique `index.html` / `styles.css` / `app.js` + `site/vendor/` (§4.2)                                                                                                                                           | décidé                |
+| Forge                              | GitHub Actions (`.github/workflows/ci.yml`), le remote est sur GitHub                                                                                                                                                        | constaté              |
+| Langue du README                   | anglais : le README actuel tient en un titre, le repo est public sur GitHub                                                                                                                                                  | proposé               |
+| Viewports des goldens              | `1280×820` seul ; `390×844` ajouté avec la future mise en page mobile                                                                                                                                                        | décidé                |
+| Cloudflare : nom du worker         | celui créé côté Cloudflare ; `name` de `wrangler.jsonc` doit lui être identique                                                                                                                                              | à fournir             |
+| Cloudflare : déploiement           | worker relié au repo GitHub par l'intégration Git de Cloudflare (Workers Builds), en cours côté humain. À réconcilier en phase 3 avec le job `deploy` du §7 et la règle « jamais de déploiement avec une CI rouge »          | à trancher en phase 3 |
+| Cloudflare : domaine               | `printed-labels.roma.moonmakers.fr`, en Custom Domain du worker (`routes` avec `custom_domain: true` dans `wrangler.jsonc`, syntaxe à vérifier dans la doc). La zone `moonmakers.fr` doit être sur le même compte Cloudflare | décidé                |
+| Cloudflare : compte cible          | fourni par les secrets `CLOUDFLARE_ACCOUNT_ID` / `CLOUDFLARE_API_TOKEN`                                                                                                                                                      | à fournir             |
+| Build                              | aucun : `site/` est déployé tel quel                                                                                                                                                                                         | proposé               |
 
 ## 11. Prompt de démarrage
 

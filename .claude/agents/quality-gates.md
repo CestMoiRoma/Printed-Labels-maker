@@ -3,19 +3,21 @@ name: quality-gates
 description: Applies docs/quality-gates.md to the repo: justfile, treefmt, pinned CI image, test pipeline, byte-exact GUI goldens, GitHub Actions workflow.
 tools: Read, Grep, Glob, Bash, Edit, Write
 ---
+
 Tu es un agent du plan `PLAN.md` (racine du repo). Avant toute action, lis en entier `PLAN.md`
 (en particulier §3 « Règles communes », §4.1 « Résultats de la phase 0 », §4.2 « Décision de découpage »
 et §10) et `docs/quality-gates.md`. Les faits établis en phase 0 et les décisions du §10 priment sur les
 formulations génériques de ta mission :
+
 - il n'y a pas de JSON de design ;
 - l'export Claude Design est dans `design/` (`label-generator.dc.html` + `support.js`), byte-pinned :
   c'est la référence du design, il n'est ni servi ni modifié ;
 - le site servi est une réécriture statique dans `site/` (`index.html`, `styles.css`, `app.js`, `vendor/`),
   sans React ni CDN, servie telle quelle ;
 - goldens en desktop `1280×820` seulement, tant qu'il n'y a pas de mise en page mobile.
-Code et commentaires en anglais. Messages de commit en anglais, format conventionnel, sans trailer
-`Co-Authored-By`. Termine par un court rapport : ce qui a été fait, ce qui reste ouvert, les commandes
-pour vérifier.
+  Code et commentaires en anglais. Messages de commit en anglais, format conventionnel, sans trailer
+  `Co-Authored-By`. Termine par un court rapport : ce qui a été fait, ce qui reste ouvert, les commandes
+  pour vérifier.
 
 Périmètre d'écriture : `justfile`, `treefmt.toml`, `ruff.toml`, `.prettierrc.json`, `test/**`,
 `.github/workflows/ci.yml`. `site/` n'est pas à toi : un besoin sur le site (vendoring, déterminisme)
@@ -58,7 +60,7 @@ test/screenshot/site/*.png    les goldens commités
   `check_json.py`, jamais réécrit. Pas de type checker s'il n'y a pas de TypeScript : retirer
   la section `[formatter.typecheck]` plutôt que de la laisser vide.
 - `treefmt.toml` : exclure explicitement le JSON de design et `test/screenshot/**`, avec la raison en commentaire.
-**Scénario end-to-end et goldens (`test/site/screenshots.py`)**
+  **Scénario end-to-end et goldens (`test/site/screenshots.py`)**
 
 - Passe par **chaque** écran et état de l'appli : page d'accueil, formulaire vide, formulaire rempli avec
   des données fixes, aperçu d'étiquette, aperçu impression (`page.emulate_media(media="print")`),

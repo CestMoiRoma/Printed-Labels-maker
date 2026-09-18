@@ -4,10 +4,10 @@ Revue statique de `design/label-generator.dc.html` (1008 lignes) et de `design/s
 faite le 2026-09-18. Aucun navigateur ni serveur n'a tourné : ce qui ne se prouve qu'à l'exécution est
 marqué « à vérifier par le scénario e2e (phase 2) ».
 
-| Fichier | SHA-256 (vérifié, identique au §4.1 de `PLAN.md`) |
-|---|---|
+| Fichier                          | SHA-256 (vérifié, identique au §4.1 de `PLAN.md`)                  |
+| -------------------------------- | ------------------------------------------------------------------ |
 | `design/label-generator.dc.html` | `ac741acabb9e679ee740c5a07a4e5fd3155eb31106118e55179e493b5c958be6` |
-| `design/support.js` | `8fe7df74405f3c55f49b7249c74ea1397e65d07dea2b1bd3b4a489bec2e28cbe` |
+| `design/support.js`              | `8fe7df74405f3c55f49b7249c74ea1397e65d07dea2b1bd3b4a489bec2e28cbe` |
 
 Cette revue est le cahier des charges de la réécriture statique (`PLAN.md` §4.2). Chaque finding indique :
 
@@ -26,25 +26,25 @@ interne des tokens (finding M17 et annexe A).
 
 ## 0. Faits de la phase 0 : vérification
 
-| Fait annoncé | Verdict | Preuve |
-|---|---|---|
-| Aucune media query d'écran, barre latérale fixe 340 px | Confirmé | seules media queries : `html:21` et `support.js:119`, toutes deux `print` ; `html:29` `width:340px; flex:0 0 340px` |
-| Tout vient de CDN | Confirmé | React/ReactDOM/Babel unpkg `support.js:1143-1148` ; qrcode-svg `html:14` ; Google Fonts `html:12-13` et `html:561` ; `@mdi/js` `html:829` ; Material Symbols `html:843` |
-| 24 familles de polices chargées à la demande | Confirmé | `html:369` (24 entrées), `loadFont` `html:556-568` |
-| Lien « Code source » vers https://google.com | Confirmé | `html:323` |
-| `@page` du helmet contre `@page { margin: 0.5cm }` du runtime | Confirmé, et résolu en faveur du helmet | `BASE_CSS` est inséré en tête du `<head>` (`support.js:1851-1853`, `prepend`), le `<style>` du helmet est ajouté à la fin au rendu (`support.js:1476-1483`). Même spécificité, l'ordre gagne : marge effective `0`, `size: A4` (`html:16`). Fragile, voir I13 |
-| `new Function` impose `'unsafe-eval'` | Confirmé | `support.js:842-851` (logique du composant) ; `support.js:1218` (x-import, non utilisé ici) |
-| Langue via `navigator.language` | Confirmé, précisé | `html:518-522` : `navigator.languages[0]`, puis `navigator.language`, puis `"fr"` ; code inconnu → `"en"` |
-| Démo FR datée « 09/2026 », autres langues sans date ? | **Infirmé en partie** | les lignes FR portent `date: "09/2026"` (`html:537-539`). Les tuples `demo` des 7 langues n'ont que 4 champs (`html:393`…`507`), mais `seedDemo` fusionne par-dessus la ligne existante (`html:764`, `Object.assign({}, s.rows[i], …)`) : la date « 09/2026 » est **conservée** dans toutes les langues |
-| Champs sans label associé | Confirmé | voir I7 |
-| Boutons icône seule (⧉ ×) avec `title` seulement | Confirmé | `html:91-92`, voir M3 |
-| Onglets sans sémantique ARIA | Confirmé | `html:109-113`, `html:346-349`, voir M4 |
-| Menu de langue sans clavier / Échap | Confirmé | `html:38-73`, `html:767`, voir M5 |
-| `hasIcon` basé sur `!!act.iD` : l'image importée n'apparaît pas dans l'aperçu latéral | Confirmé | `html:978` contre `html:588`, voir M1 |
-| Export PNG / image importée / polices non embarquées | Confirmé pour les polices ; image importée à vérifier | voir I4, I5 |
-| Tailles hors gamme et champs numériques vides (`""`) | Confirmé, avec crash | voir B4 |
-| Échecs de chargement des icônes Material avalés | Confirmé | `html:843-851`, voir I10 |
-| Bruit `console.info` du runtime | **Non reproduit statiquement** | les deux seuls `console.info` (`support.js:1198`, `support.js:1231`) sont dans le chargeur `x-import`, que ce document n'utilise pas (aucune balise `<x-import>` dans `html`). Le build React est `production.min` : pas d'avertissement de dev. Si du bruit a été observé, il vient d'ailleurs (erreurs d'attributs SVG, voir B4) : à vérifier par le scénario e2e |
+| Fait annoncé                                                                          | Verdict                                               | Preuve                                                                                                                                                                                                                                                                                                                                                              |
+| ------------------------------------------------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Aucune media query d'écran, barre latérale fixe 340 px                                | Confirmé                                              | seules media queries : `html:21` et `support.js:119`, toutes deux `print` ; `html:29` `width:340px; flex:0 0 340px`                                                                                                                                                                                                                                                 |
+| Tout vient de CDN                                                                     | Confirmé                                              | React/ReactDOM/Babel unpkg `support.js:1143-1148` ; qrcode-svg `html:14` ; Google Fonts `html:12-13` et `html:561` ; `@mdi/js` `html:829` ; Material Symbols `html:843`                                                                                                                                                                                             |
+| 24 familles de polices chargées à la demande                                          | Confirmé                                              | `html:369` (24 entrées), `loadFont` `html:556-568`                                                                                                                                                                                                                                                                                                                  |
+| Lien « Code source » vers https://google.com                                          | Confirmé                                              | `html:323`                                                                                                                                                                                                                                                                                                                                                          |
+| `@page` du helmet contre `@page { margin: 0.5cm }` du runtime                         | Confirmé, et résolu en faveur du helmet               | `BASE_CSS` est inséré en tête du `<head>` (`support.js:1851-1853`, `prepend`), le `<style>` du helmet est ajouté à la fin au rendu (`support.js:1476-1483`). Même spécificité, l'ordre gagne : marge effective `0`, `size: A4` (`html:16`). Fragile, voir I13                                                                                                       |
+| `new Function` impose `'unsafe-eval'`                                                 | Confirmé                                              | `support.js:842-851` (logique du composant) ; `support.js:1218` (x-import, non utilisé ici)                                                                                                                                                                                                                                                                         |
+| Langue via `navigator.language`                                                       | Confirmé, précisé                                     | `html:518-522` : `navigator.languages[0]`, puis `navigator.language`, puis `"fr"` ; code inconnu → `"en"`                                                                                                                                                                                                                                                           |
+| Démo FR datée « 09/2026 », autres langues sans date ?                                 | **Infirmé en partie**                                 | les lignes FR portent `date: "09/2026"` (`html:537-539`). Les tuples `demo` des 7 langues n'ont que 4 champs (`html:393`…`507`), mais `seedDemo` fusionne par-dessus la ligne existante (`html:764`, `Object.assign({}, s.rows[i], …)`) : la date « 09/2026 » est **conservée** dans toutes les langues                                                             |
+| Champs sans label associé                                                             | Confirmé                                              | voir I7                                                                                                                                                                                                                                                                                                                                                             |
+| Boutons icône seule (⧉ ×) avec `title` seulement                                      | Confirmé                                              | `html:91-92`, voir M3                                                                                                                                                                                                                                                                                                                                               |
+| Onglets sans sémantique ARIA                                                          | Confirmé                                              | `html:109-113`, `html:346-349`, voir M4                                                                                                                                                                                                                                                                                                                             |
+| Menu de langue sans clavier / Échap                                                   | Confirmé                                              | `html:38-73`, `html:767`, voir M5                                                                                                                                                                                                                                                                                                                                   |
+| `hasIcon` basé sur `!!act.iD` : l'image importée n'apparaît pas dans l'aperçu latéral | Confirmé                                              | `html:978` contre `html:588`, voir M1                                                                                                                                                                                                                                                                                                                               |
+| Export PNG / image importée / polices non embarquées                                  | Confirmé pour les polices ; image importée à vérifier | voir I4, I5                                                                                                                                                                                                                                                                                                                                                         |
+| Tailles hors gamme et champs numériques vides (`""`)                                  | Confirmé, avec crash                                  | voir B4                                                                                                                                                                                                                                                                                                                                                             |
+| Échecs de chargement des icônes Material avalés                                       | Confirmé                                              | `html:843-851`, voir I10                                                                                                                                                                                                                                                                                                                                            |
+| Bruit `console.info` du runtime                                                       | **Non reproduit statiquement**                        | les deux seuls `console.info` (`support.js:1198`, `support.js:1231`) sont dans le chargeur `x-import`, que ce document n'utilise pas (aucune balise `<x-import>` dans `html`). Le build React est `production.min` : pas d'avertissement de dev. Si du bruit a été observé, il vient d'ailleurs (erreurs d'attributs SVG, voir B4) : à vérifier par le scénario e2e |
 
 ---
 
@@ -102,16 +102,16 @@ interne des tokens (finding M17 et annexe A).
 - **Correction** : séparer le texte saisi de la dernière valeur valide ; calculer toujours sur une valeur bornée ;
   afficher l'erreur sous le champ (`aria-invalid`, `aria-describedby`). Bornes proposées, à valider :
 
-  | Champ | Borne proposée |
-  |---|---|
-  | `w`, `h` | 10 à 210 − 2·mx (resp. 297 − 2·my) |
-  | `pad` | 0 à min(w, h) / 2 − 1 |
-  | `bw` | 0 à 5 ; `br` 0 à min(w, h) / 2 ; `divW` 0 à 2 |
-  | `titlePt`, `subPt`, `bodyPt` | 4 à 72 |
-  | `colW` | 4 à w − 2·pad − 12 (déjà bornée au calcul, `html:619`) ; `gapCol` 0 à 20 |
-  | `iconSize`, `iconSizeSolo` | 1 à 100 (voir M10 pour 0) |
-  | `mx`, `my` | 0 à 50 ; `gap` 0 à 20 |
-  | exemplaires `n` | 1 à 999 |
+  | Champ                        | Borne proposée                                                           |
+  | ---------------------------- | ------------------------------------------------------------------------ |
+  | `w`, `h`                     | 10 à 210 − 2·mx (resp. 297 − 2·my)                                       |
+  | `pad`                        | 0 à min(w, h) / 2 − 1                                                    |
+  | `bw`                         | 0 à 5 ; `br` 0 à min(w, h) / 2 ; `divW` 0 à 2                            |
+  | `titlePt`, `subPt`, `bodyPt` | 4 à 72                                                                   |
+  | `colW`                       | 4 à w − 2·pad − 12 (déjà bornée au calcul, `html:619`) ; `gapCol` 0 à 20 |
+  | `iconSize`, `iconSizeSolo`   | 1 à 100 (voir M10 pour 0)                                                |
+  | `mx`, `my`                   | 0 à 50 ; `gap` 0 à 20                                                    |
+  | exemplaires `n`              | 1 à 999                                                                  |
 
 - **Réécriture** : décision (bornes, textes d'erreur dans les 7 langues). **Goldens** : oui, un état
   « valeur invalide » à capturer.
@@ -183,18 +183,19 @@ interne des tokens (finding M17 et annexe A).
 
 - **Où** (ratios WCAG calculés, oklch converti en sRGB) :
 
-  | Couleur de texte | Fond | Ratio | Usages (taille) |
-  |---|---|---|---|
-  | `#b0a79e` | `#fff` | 2,37 | `countsLine` `html:81` (10 px), version `html:322` (10 px) |
-  | `#b0a79e` | `#f7f4f1` | ~2,1 | « A4 — n page(s) » `html:356` (10 px) |
-  | `#8a827a` | `#fff` | 3,78 | titres de section `html:80`, `175`, `202`, `225`, `253`, `292` (10 px), sous-ligne des étiquettes `html:88` (9 px), format d'import `html:102` (9 px), `html:142` (9 px), `fillLine` `html:300` (11 px), `qrNote` `html:281` |
-  | `#8a827a` | `oklch(0.98 0.012 300)` | 3,56 | `selHint` `html:122` (10,5 px), `#n` `html:120` |
-  | `#8a827a` | `oklch(0.97 0.03 300)` | 3,42 | sous-ligne de l'étiquette sélectionnée `html:88` |
-  | `#8a827a` | `#f7f4f1` | 3,45 | `editLine` `html:340`, « Taille réelle » `html:345` |
+  | Couleur de texte | Fond                    | Ratio | Usages (taille)                                                                                                                                                                                                              |
+  | ---------------- | ----------------------- | ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  | `#b0a79e`        | `#fff`                  | 2,37  | `countsLine` `html:81` (10 px), version `html:322` (10 px)                                                                                                                                                                   |
+  | `#b0a79e`        | `#f7f4f1`               | ~2,1  | « A4 — n page(s) » `html:356` (10 px)                                                                                                                                                                                        |
+  | `#8a827a`        | `#fff`                  | 3,78  | titres de section `html:80`, `175`, `202`, `225`, `253`, `292` (10 px), sous-ligne des étiquettes `html:88` (9 px), format d'import `html:102` (9 px), `html:142` (9 px), `fillLine` `html:300` (11 px), `qrNote` `html:281` |
+  | `#8a827a`        | `oklch(0.98 0.012 300)` | 3,56  | `selHint` `html:122` (10,5 px), `#n` `html:120`                                                                                                                                                                              |
+  | `#8a827a`        | `oklch(0.97 0.03 300)`  | 3,42  | sous-ligne de l'étiquette sélectionnée `html:88`                                                                                                                                                                             |
+  | `#8a827a`        | `#f7f4f1`               | 3,45  | `editLine` `html:340`, « Taille réelle » `html:345`                                                                                                                                                                          |
 
   Tous ces textes font moins de 18,66 px gras : le seuil AA est 4,5:1. Les autres couples passent
   (`#6b645d` sur `#fff` 5,82 ; sur `#f2eeea` 5,05 ; accent `oklch(0.52 0.14 300)` sur blanc 5,85 ; blanc sur
   accent 5,85).
+
 - **Correction** : `#b0a79e` → `#6b645d` (ou un nouveau `#7a736c`, ≈ 4,6:1 sur blanc, à vérifier) ;
   `#8a827a` → `#6b645d` pour tout texte porteur d'information.
 - **Réécriture** : décision (palette). **Goldens** : oui, à trancher **avant** de figer.
@@ -310,45 +311,53 @@ interne des tokens (finding M17 et annexe A).
 ## 3. Findings mineurs
 
 ### M1 · L'image importée n'apparaît pas dans l'aperçu latéral
+
 `html:978` (`hasIcon: !!act.iD`) et `html:139-141` (seul un `<path>` est prévu) contre `html:588`
 (`hasIcon()` qui compte l'import). Seul le nom du fichier s'affiche (`html:983`). Correction : `hasIcon` =
 `this.hasIcon(act)` et un `<img src=iUrl>` 20×20 pour l'import. Réécriture : décision (pixels de l'état
 « image importée »). Goldens : oui si le scénario importe une image.
 
 ### M2 · Le glyphe ⧉ n'existe pas dans Public Sans
+
 `html:91`. U+29C9 est absent de Public Sans et de JetBrains Mono : il est rendu par une police de repli du
 système (DejaVu, Noto Sans Math…). Rendu différent d'une machine à l'autre, et golden dépendant des polices de
 l'image CI. Correction : icône SVG vendorisée (mdi `content-copy`, 13 px). Réécriture : décision. Goldens :
 oui, à trancher avant de figer.
 
 ### M3 · Boutons icône seule : noms ambigus
+
 `html:91-92` : le `title` donne un nom accessible (« Dupliquer », « Supprimer »), mais identique pour chaque
 ligne, et invisible au clavier et au toucher. Correction : `aria-label` avec le titre de la ligne
 (« Supprimer Câbles & chargeurs »). Réécriture : naturel. Goldens : non.
 
 ### M4 · Onglets et bascules sans sémantique ; sélection signalée par la couleur seule
+
 `html:109-113` et `html:346-349` sont des `<nav>` (landmarks de navigation) alors que ce sont des onglets
 (`role="tablist"`, `role="tab"`, `aria-selected`, `aria-controls`) ; deux `<nav>` sans `aria-label`.
 La ligne sélectionnée (`html:86`, `html:975-976`) et la langue courante (`html:917`) n'ont ni `aria-pressed`
 ni `aria-current`. Réécriture : naturel. Goldens : non.
 
 ### M5 · Menu de langue : ni Échap, ni clic extérieur, ni ARIA
+
 `html:38`, `html:54-73`, `html:767-772`. Le menu ne se ferme qu'en choisissant une langue ou en recliquant le
 bouton ; pas d'`aria-expanded`, `aria-haspopup`, ni de nom explicite (le bouton se lit « FR »). Correction :
 Échap et clic extérieur ferment et rendent le focus au bouton ; `aria-expanded` ; `aria-label` « Langue :
 Français ». Réécriture : naturel. Goldens : non.
 
 ### M6 · Une seule balise de titre
+
 Seul `html:34` est un `<h1>` ; les titres de section (`html:80`, `119`, `175`, `202`, `225`, `253`, `292`,
 `345`) sont des `<div>`. Correction : `<h2>` avec les mêmes styles (reset `margin`, `font-weight` explicite).
 Réécriture : naturel si le style est remis à l'identique. Goldens : non.
 
 ### M7 · Contraste des bordures de champ
+
 `#ddd6ce` sur `#fff` : 1,44:1 (49 occurrences, `html:90`, `123`, …) ; `#e6e1db` 1,30:1 (lignes non
 sélectionnées `html:976`) ; `#c9c1b8` 1,74:1 (`html:97`). WCAG 1.4.11 demande 3:1 pour la limite d'un
 contrôle. Réécriture : décision (palette). Goldens : oui.
 
 ### M8 · Le centrage vertical est calculé avec d'autres interlignes que le rendu
+
 `html:659-662` estime la hauteur avec 1,2 (titre), 1,25 (sous-titre), 1,32 (liste) et `fS·1,1` (pied) ;
 `put()` (`html:681-685`) avance toujours de `0,88 + 0,32 = 1,2 × taille`. La hauteur estimée dépasse la
 hauteur réelle : le bloc est trop haut (non centré) et l'auto-fit laisse du vide. À reproduire à
@@ -356,6 +365,7 @@ l'identique pour la réécriture fidèle ; correction (mêmes coefficients des d
 Réécriture : décision. Goldens : oui.
 
 ### M9 · Les espaces volontaires disparaissent
+
 Pied : `[code, date].join("   ")` (`html:648`) ; liste en ligne : `join("  ·  ")` (`html:656`). `wrap()`
 recoupe aux espaces et recolle avec un seul (`html:576-583`) et le SVG replie les blancs (pas de
 `xml:space`). Rendu réel : « B-014 09/2026 » et « USB-C, · HDMI » avec possible retour à la ligne juste
@@ -363,26 +373,31 @@ avant ou après « · ». Correction : `<tspan dx>` pour l'écart du pied ; coup
 Réécriture : décision. Goldens : oui.
 
 ### M10 · Une taille 0 vaut « maximum »
+
 `html:632` et `html:637` (`+s.iconSize || 99`, `+s.iconSizeSolo || 99`), `html:619` (`+s.colW || 20`) : les
 champs acceptent `min="0"` (`html:256`, `262`, `265`) mais 0 donne la taille maximale. Correction : 0 masque
 l'icône, ou borne minimale 1 (B4). Réécriture : décision. Goldens : non.
 
 ### M11 · Supprimer une ligne au-dessus de la sélection change d'étiquette sélectionnée
+
 `html:789-796` : `sel` est seulement borné, pas décrémenté quand `i < sel`. Exemple : 4 lignes, `sel = 2`,
 suppression de la ligne 0 → la sélection passe de la 3ᵉ étiquette d'origine à la 4ᵉ. Réécriture : décision
 (correctif évident). Goldens : non.
 
 ### M12 · Le nombre d'exemplaires ne peut pas être vidé
+
 `html:776-779` : `""` devient 1 immédiatement (champ contrôlé), taper « 5 » donne « 15 ». Correction :
 tolérer le champ vide pendant la saisie, valider au `change`/`blur`. Réécriture : décision. Goldens : non.
 
 ### M13 · Import collé : séparateurs en conflit, colonne cachée, sans confirmation
+
 `html:801` coupe sur `|`, `;` et tabulation, alors que `;` sépare aussi les éléments du contenu
 (`html:585`) : un contenu « vis; écrous » décale les colonnes. Une 6ᵉ colonne `qrText` est lue mais absente
 du format affiché (`html:377`). « Remplacer la liste » (`html:804`) écrase tout sans confirmation ni
 annulation et repasse en mode « batch » sans le dire. Réécriture : décision. Goldens : non.
 
 ### M14 · Textes et formats
+
 - « Upload » non traduit en fr, de, it, pt, nl (`html:381`, `438`, `457`, `476`, `495` ; seul es a « Subir »).
 - L'anglais est présenté « English (US) » avec drapeau US (`html:511`) mais écrit en anglais britannique
   (« millimetres », « Centred », « colours », `html:394-411`), et la feuille reste A4.
@@ -395,6 +410,7 @@ annulation et repasse en mode « batch » sans le dire. Réécriture : décision
 Réécriture : décision. Goldens : oui pour « Upload » (visible dans l'onglet Contenu, état par défaut).
 
 ### M15 · Langue et état non persistés ; flash de la démo française
+
 `html:518-522` : repli `"fr"` si `navigator` n'a pas de langue mais `"en"` pour un code inconnu ; `html:905`
 retombe sur `DICT.fr` et `SOURCE.en`. Le choix de langue et toutes les étiquettes sont perdus au
 rechargement (aucun stockage). Pour une langue autre que fr, le premier rendu affiche la démo française puis
@@ -403,6 +419,7 @@ rechargement (aucun stockage). Pour une langue autre que fr, le premier rendu af
 (persistance). Goldens : non (locale `fr-FR`).
 
 ### M16 · Code et CSS morts
+
 - État et valeurs jamais lus : `repeat` (`html:535`), `perPage` (`html:965`), `rowCount` (`html:969`),
   `totalCount` (`html:970`), `sizeLabel` (`html:984`), `zoomLabel` (`html:989`).
 - `a { color }` et `a:hover` (`html:18-19`) sont écrasés par le `style` en ligne du seul lien (`html:323`) :
@@ -415,7 +432,9 @@ rechargement (aucun stockage). Pour une langue autre que fr, le premier rendu af
 Réécriture : naturel (ne pas reproduire). Goldens : non.
 
 ### M17 · Tokens : valeurs isolées et quasi-doublons
+
 Détail et comptes en annexe A. À trancher (fusion = pixels) :
+
 - blancs écrits `#fff` (56) et `#ffffff` (8) ;
 - sept gris chauds de bordure/fond proches : `#ddd6ce`, `#e0dad3`, `#e6e1db`, `#ece7e1`, `#f0ece7`,
   `#f2eeea`, `#f4f0eb` (dont trois à une seule occurrence) ;
@@ -430,6 +449,7 @@ Détail et comptes en annexe A. À trancher (fusion = pixels) :
 Réécriture : décision (fusion) ; en réécriture fidèle, reproduire tel quel via des variables CSS nommées.
 
 ### M18 · Incohérences de composants
+
 - Champs texte : `padding:8px` dans l'onglet Contenu (`html:123-131`) contre `7px 8px` partout ailleurs
   (`html:155`, `178`…) : deux hauteurs de champ.
 - Contrôles segmentés : rayon 9 px (`html:109`) contre 8 px (`html:346`) pour le même composant.
@@ -441,46 +461,55 @@ Réécriture : décision (fusion) ; en réécriture fidèle, reproduire tel quel
 Réécriture : décision. Goldens : oui si corrigé.
 
 ### M19 · Barre latérale et en-tête non collants
+
 `html:29` (`max-height:100vh` sans `position:sticky`), `html:328`. En vue « Page entière » avec plusieurs
 pages, faire défiler emporte la barre latérale et les boutons d'export hors de l'écran. Réécriture :
 décision. Goldens : non (capture en haut de page).
 
 ### M20 · « Taille réelle » n'est pas la taille réelle
+
 `html:988` et `html:352` : des `mm` CSS (96 px par pouce), donc la taille physique dépend de l'écran.
 Correction : libellé « Taille réelle (approx.) » ou calibrage, à décider. Goldens : oui si le libellé change.
 
 ### M21 · QR : lisibilité non contrôlée
+
 `html:602` : couleur = encre `fg` (une encre claire sur fond sombre donne un QR inversé, mal lu par beaucoup
 de lecteurs) ; aucune alerte quand le module devient trop petit (70×37 : cellule de 12 mm pour un texte
 long) ; si la bibliothèque manque, le QR disparaît sans message alors que la case est cochée (`html:600`,
 `html:617`). Réécriture : naturel pour la bibliothèque ; décision pour les alertes.
 
 ### M22 · Chaînes injectées sans échappement dans du `innerHTML`
+
 `html:595` (`d` de l'icône, venu d'un attribut `data-d` rempli depuis le CDN), `html:593` (`iVB`),
 `html:591` (`href` de l'image). Surface XSS si la source d'icônes est compromise. Correction : échapper avec
 `esc()` comme le texte (`html:569`). Réécriture : naturel. Goldens : non.
 
 ### M23 · Import d'image non contrôlé
+
 `html:860-866` : ni taille maximale ni vérification du type réel ; la data URL est recopiée dans chaque
 étiquette de l'aperçu **et** des planches d'impression (`html:591`). Une photo de 10 Mo × 100 exemplaires
 sature la mémoire. Correction : limite (ex. 2 Mo), réduction à 600 px, message d'erreur. Réécriture :
 décision.
 
 ### M24 · `height="auto"` sur le SVG de planche (à vérifier)
+
 `html:732`. Certains Chromium journalisent `Error: <svg> attribute height: Expected length, "auto"` : à
 vérifier par le scénario e2e (vue « Page entière »). Correction sans impact pixel : omettre `height`,
 `width="100%"` et le `viewBox` suffisent. Réécriture : naturel.
 
 ### M25 · Pas de favicon (à vérifier)
+
 `html:3-7`. Une requête `/favicon.ico` en 404 peut apparaître en erreur console. Correction : favicon dans
 `site/` ou `<link rel="icon" href="data:,">`. Réécriture : naturel.
 
 ### M26 · Marges « minimales » et un seul écart
+
 `html:719` : la grille est centrée, `mx`/`my` ne sont qu'un minimum ; `html:712-713` : un seul `gap` pour les
 deux axes. Impossible de caler la grille sur une planche d'étiquettes prédécoupées (pas horizontal et
 vertical différents, décalage exact). Réécriture : décision (fonction). Goldens : non tant que c'est inchangé.
 
 ### M27 · Le runtime garde les nœuds de blancs contenant une espace
+
 `support.js:572` supprime les nœuds texte blancs sans espace (sauts de ligne seuls) mais garde ceux qui
 contiennent l'indentation. La réécriture statique garde tout. Sans effet dans les conteneurs flex et grid ;
 à surveiller dans les contextes en ligne (`html:281` « QR code <span> », `html:149` le label d'import).
@@ -565,35 +594,35 @@ Comptes = occurrences dans le template (`html:1-366`) et dans la logique (`html:
 
 ### Couleurs d'interface
 
-| Valeur | Template | Logique | Rôle |
-|---|---|---|---|
-| `#fff` | 53 | 3 | fonds de champs, boutons, cartes |
-| `#ffffff` | 1 | 7 | fond de l'aside (`html:29`), onglet actif, planche SVG |
-| `#f7f4f1` | 2 | 0 | fond de page (`body`, conteneur écran) |
-| `#fdfcfb` | 2 | 0 | fond de l'en-tête, bouton « Ajouter » |
-| `#f2eeea` | 2 | 0 | fond des contrôles segmentés |
-| `#1b1917` | 31 | 2 | texte principal, encre et bordure d'étiquette par défaut |
-| `#3a342f` | 7 | 0 | texte de boutons et d'icônes |
-| `#4a443e` | 16 | 0 | texte de boutons secondaires, libellés de cases |
-| `#6b645d` | 28 | 5 | texte secondaire, libellés, onglet inactif |
-| `#8a827a` | 15 | 0 | titres de section, aides |
-| `#b0a79e` | 3 | 0 | compteurs, version, pages |
-| `#ddd6ce` | 49 | 0 | bordure standard des contrôles |
-| `#e6e1db` | 4 | 2 | bordure de l'aside, de l'en-tête, des cartes ; ligne non sélectionnée |
-| `#e0dad3` | 4 | 0 | contour des drapeaux |
-| `#f0ece7` | 2 | 0 | séparateurs (`details`, pied de l'aside) |
-| `#f4f0eb` | 1 | 0 | séparateur du menu de langue |
-| `#ece7e1` | 1 | 0 | bordure des cases d'icône |
-| `#c9c1b8` | 1 | 0 | bordure pointillée « Ajouter » |
-| `oklch(0.52 0.14 300)` ≈ `#7652ac` | 9 | 1 | accent : kicker, lien, cases, bouton Imprimer, bordure de ligne sélectionnée |
-| `oklch(0.48 0.14 300)` ≈ `#6b46a0` | 1 | 0 | kicker « Étiquette sélectionnée » |
-| `oklch(0.45 0.14 300)` ≈ `#623e96` | 0 | 5 | texte de l'onglet actif (2 contrôles segmentés) |
-| `oklch(0.42 0.14 300)` ≈ `#5a358c` | 1 | 0 | `a:hover` (mort, M16) |
-| `oklch(0.97 0.03 300)` ≈ `#f8f1ff` | 0 | 2 | fond de ligne et de langue sélectionnées |
-| `oklch(0.98 0.012 300)` ≈ `#f9f7ff` | 1 | 0 | fond de la carte « Étiquette sélectionnée » |
-| `oklch(0.92 0.03 300)` ≈ `#e7e1f6` | 2 | 0 | bordure et séparateur de cette carte |
-| `rgba(0,0,0,0.04)` / `0.06` / `0.1` | 1 / 0 / 1 | 0 / 1 / 0 | ombres : carte d'aperçu / pages de planche / menu de langue |
-| `#111` | 0 | 1 | traits de coupe (SVG, `stroke-width 0.12`) |
+| Valeur                              | Template  | Logique   | Rôle                                                                         |
+| ----------------------------------- | --------- | --------- | ---------------------------------------------------------------------------- |
+| `#fff`                              | 53        | 3         | fonds de champs, boutons, cartes                                             |
+| `#ffffff`                           | 1         | 7         | fond de l'aside (`html:29`), onglet actif, planche SVG                       |
+| `#f7f4f1`                           | 2         | 0         | fond de page (`body`, conteneur écran)                                       |
+| `#fdfcfb`                           | 2         | 0         | fond de l'en-tête, bouton « Ajouter »                                        |
+| `#f2eeea`                           | 2         | 0         | fond des contrôles segmentés                                                 |
+| `#1b1917`                           | 31        | 2         | texte principal, encre et bordure d'étiquette par défaut                     |
+| `#3a342f`                           | 7         | 0         | texte de boutons et d'icônes                                                 |
+| `#4a443e`                           | 16        | 0         | texte de boutons secondaires, libellés de cases                              |
+| `#6b645d`                           | 28        | 5         | texte secondaire, libellés, onglet inactif                                   |
+| `#8a827a`                           | 15        | 0         | titres de section, aides                                                     |
+| `#b0a79e`                           | 3         | 0         | compteurs, version, pages                                                    |
+| `#ddd6ce`                           | 49        | 0         | bordure standard des contrôles                                               |
+| `#e6e1db`                           | 4         | 2         | bordure de l'aside, de l'en-tête, des cartes ; ligne non sélectionnée        |
+| `#e0dad3`                           | 4         | 0         | contour des drapeaux                                                         |
+| `#f0ece7`                           | 2         | 0         | séparateurs (`details`, pied de l'aside)                                     |
+| `#f4f0eb`                           | 1         | 0         | séparateur du menu de langue                                                 |
+| `#ece7e1`                           | 1         | 0         | bordure des cases d'icône                                                    |
+| `#c9c1b8`                           | 1         | 0         | bordure pointillée « Ajouter »                                               |
+| `oklch(0.52 0.14 300)` ≈ `#7652ac`  | 9         | 1         | accent : kicker, lien, cases, bouton Imprimer, bordure de ligne sélectionnée |
+| `oklch(0.48 0.14 300)` ≈ `#6b46a0`  | 1         | 0         | kicker « Étiquette sélectionnée »                                            |
+| `oklch(0.45 0.14 300)` ≈ `#623e96`  | 0         | 5         | texte de l'onglet actif (2 contrôles segmentés)                              |
+| `oklch(0.42 0.14 300)` ≈ `#5a358c`  | 1         | 0         | `a:hover` (mort, M16)                                                        |
+| `oklch(0.97 0.03 300)` ≈ `#f8f1ff`  | 0         | 2         | fond de ligne et de langue sélectionnées                                     |
+| `oklch(0.98 0.012 300)` ≈ `#f9f7ff` | 1         | 0         | fond de la carte « Étiquette sélectionnée »                                  |
+| `oklch(0.92 0.03 300)` ≈ `#e7e1f6`  | 2         | 0         | bordure et séparateur de cette carte                                         |
+| `rgba(0,0,0,0.04)` / `0.06` / `0.1` | 1 / 0 / 1 | 0 / 1 / 0 | ombres : carte d'aperçu / pages de planche / menu de langue                  |
+| `#111`                              | 0         | 1         | traits de coupe (SVG, `stroke-width 0.12`)                                   |
 
 Drapeaux (`html:48`, `66`, `510-516`, `916`) : `#0055A4 #FFFFFF #EF4135` (fr, en ligne) ; US : 7 bandes
 `#B22234`/`#FFFFFF` et canton `#3C3B6E` 8×7 px ; es `#AA151B #F1BF00 #AA151B` (colonne) ; de `#000000 #DD0000
@@ -635,20 +664,20 @@ Défauts d'étiquette (`html:529-532`) : bordure `#1b1917`, fond `#ffffff`, encr
 
 ## Annexe B · États de l'interface à reproduire
 
-| Zone | États | Source |
-|---|---|---|
-| Langue | fermé / ouvert ; langue courante surlignée `oklch(0.97 0.03 300)` | `html:38-73`, `917` |
-| Liste d'étiquettes | ligne sélectionnée (fond et bordure accent) / non ; titre vide → « (sans titre) » ; défilement au-delà de 220 px | `html:83-95`, `973-976` |
-| Import collé | `details` fermé (défaut) / ouvert | `html:99-106` |
-| Onglets | Contenu (défaut) / Style / Impression ; actif fond `#ffffff` texte `oklch(0.45…)`, inactif transparent `#6b645d` | `html:109-113`, `955-963` |
-| Contenu | champ « Contenu du QR » visible seulement si QR coché ; source d'icône aucune / MDI / Material / import ; grille de recherche visible pour MDI et Material ; icône affichée à côté de « Logo / picto » si icône à chemin (M1) | `html:130-165` |
-| Style | tailles, préréglages 90×50, 70×37, 105×48, 50×50 ; cases séparateurs, auto-fit, QR | `html:171-287` |
-| Impression | mode « batch » (défaut) / « single » avec la phrase `fillLine` | `html:289-319` |
-| Aperçu d'édition | étiquette seule / avec icône / avec QR / icône + QR ; auto-fit actif ou non | `html:340-341`, `608-693` |
-| Taille réelle | « Par étiquette » (défaut) / « Page entière » (liste des pages, masquable par la prop `showSheetPreview`) | `html:343-359`, `990` |
-| Impression navigateur | écran masqué, planches `[data-print]` visibles | `html:21-24`, `364` |
-| Erreurs | aucun état d'erreur, de chargement ni de résultat vide dans l'export (voir B4, I10) | — |
-| Survol / focus | aucun style propre ; anneau de focus natif du navigateur conservé partout (aucun `outline:none`) : la réécriture ne doit pas en ajouter | — |
+| Zone                  | États                                                                                                                                                                                                                         | Source                    |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
+| Langue                | fermé / ouvert ; langue courante surlignée `oklch(0.97 0.03 300)`                                                                                                                                                             | `html:38-73`, `917`       |
+| Liste d'étiquettes    | ligne sélectionnée (fond et bordure accent) / non ; titre vide → « (sans titre) » ; défilement au-delà de 220 px                                                                                                              | `html:83-95`, `973-976`   |
+| Import collé          | `details` fermé (défaut) / ouvert                                                                                                                                                                                             | `html:99-106`             |
+| Onglets               | Contenu (défaut) / Style / Impression ; actif fond `#ffffff` texte `oklch(0.45…)`, inactif transparent `#6b645d`                                                                                                              | `html:109-113`, `955-963` |
+| Contenu               | champ « Contenu du QR » visible seulement si QR coché ; source d'icône aucune / MDI / Material / import ; grille de recherche visible pour MDI et Material ; icône affichée à côté de « Logo / picto » si icône à chemin (M1) | `html:130-165`            |
+| Style                 | tailles, préréglages 90×50, 70×37, 105×48, 50×50 ; cases séparateurs, auto-fit, QR                                                                                                                                            | `html:171-287`            |
+| Impression            | mode « batch » (défaut) / « single » avec la phrase `fillLine`                                                                                                                                                                | `html:289-319`            |
+| Aperçu d'édition      | étiquette seule / avec icône / avec QR / icône + QR ; auto-fit actif ou non                                                                                                                                                   | `html:340-341`, `608-693` |
+| Taille réelle         | « Par étiquette » (défaut) / « Page entière » (liste des pages, masquable par la prop `showSheetPreview`)                                                                                                                     | `html:343-359`, `990`     |
+| Impression navigateur | écran masqué, planches `[data-print]` visibles                                                                                                                                                                                | `html:21-24`, `364`       |
+| Erreurs               | aucun état d'erreur, de chargement ni de résultat vide dans l'export (voir B4, I10)                                                                                                                                           | —                         |
+| Survol / focus        | aucun style propre ; anneau de focus natif du navigateur conservé partout (aucun `outline:none`) : la réécriture ne doit pas en ajouter                                                                                       | —                         |
 
 État initial (`html:528-544`) : `w 90, h 50, pad 5, align left, bw 0.4, br 3, borderColor #1b1917, bg #ffffff,
 fg #1b1917, font Archivo, titlePt 15, subPt 9, bodyPt 8, listStyle lines, iconSize 14, iconSizeSolo 26,
@@ -704,7 +733,7 @@ source d'icône « aucun ».
 ### Étiquette (`buildInner`, `html:608-693`)
 
 - Cadre : `<rect x=y=bw/2 width=max(0,W−bw) height=max(0,H−bw) rx=br fill=bg>`, `stroke=borderColor
-  stroke-width=bw` si `bw > 0`, sinon `stroke="none"`.
+stroke-width=bw` si `bw > 0`, sinon `stroke="none"`.
 - `avail = H − 2·pad`. `qrText = qrText || code || title`. `hasQR = qr && qrText && bibliothèque chargée`.
   Colonne si icône ou QR : `colW = max(4, min(colW || 20, W − 2·pad − 12))`, `gapCol = max(0, gapCol || 0)`.
 - Séparateur vertical en `pad + colW + gapCol/2`, de `pad` à `H − pad`, `stroke=fg`, `stroke-width=divW`,
@@ -734,7 +763,7 @@ source d'icône « aucun ».
   (pied : `", monospace"` et `letter-spacing="0.04"`) ; titre 700 sans opacité, sous-titre 400 `opacity 0.72`,
   liste 400 `0.9`, pied 500 `0.65` ; `fill=fg` ; texte échappé par `esc()` (`& < > "`).
 - Icône à chemin : `<g transform="translate(x,y) scale(taille / max(vbW, vbH)) translate(−vbX, −vbY)"
-  fill=fg><path d/></g>`. Import : `<image x y width height preserveAspectRatio="xMidYMid meet" href=dataURL>`.
+fill=fg><path d/></g>`. Import : `<image x y width height preserveAspectRatio="xMidYMid meet" href=dataURL>`.
 - `labelSVG` : `xmlns`, `width="{w}mm" height="{h}mm"` (ou `100%`), `viewBox="0 0 w h"`.
 
 ### QR (`html:599-606`)
