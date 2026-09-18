@@ -587,6 +587,13 @@ button {
   color: var(--ink-2);
 }
 
+.logo-img {
+  width: 20px;
+  height: 20px;
+  display: block;
+  object-fit: contain;
+}
+
 .logo-src {
   font-family: var(--font-mono);
   font-size: 9px;

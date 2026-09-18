@@ -643,7 +643,9 @@ function viewValues() {
     version: VERSION,
     iconSourceLabel: act.iSrc === "none" || !act.iSrc ? T.srcNone : act.iSrc === "upload" ? (act.iName || T.srcFile) : act.iSrc + (act.iName ? " · " + act.iName : ""),
     qr: s.qr,
+    // an imported image shows as a thumbnail, a picked icon as its path (review M1)
     hasIcon: !!act.iD,
+    hasUpload: act.iSrc === "upload" && !!act.iUrl,
     showIconSearch: act.iSrc === "mdi" || act.iSrc === "material",
     iconStatus: s.searching ? T.searching : s.results.length ? "" : T.noResults,
     hasIconStatus: s.searching || !s.results.length,
@@ -760,6 +762,9 @@ function render() {
   const icon = $(".logo-icon");
   icon.setAttribute("viewBox", v.act.iVB || "0 0 24 24");
   icon.firstElementChild.setAttribute("d", v.act.iD || "");
+  const thumb = $(".logo-img");
+  if (v.hasUpload && thumb.getAttribute("src") !== v.act.iUrl) thumb.setAttribute("src", v.act.iUrl);
+  if (!v.hasUpload) thumb.removeAttribute("src");
   renderIconGrid();
 
   const preview = $(".label-preview");
