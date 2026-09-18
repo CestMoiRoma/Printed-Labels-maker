@@ -167,13 +167,13 @@ const newRow = (o) => Object.assign({ title: "", subtitle: "", contents: "", cod
 // ---------- strings added or corrected since the export (docs/review.md) ----------
 // The block above stays byte-identical to the export; every change to its texts is listed here.
 const DICT_FIXES = {
-  fr: { rangeFmt: "Entre {min} et {max}", searching: "Chargement…", noResults: "Aucun picto ne correspond." },
-  en: { rangeFmt: "Between {min} and {max}", searching: "Loading…", noResults: "No icon matches." },
-  es: { rangeFmt: "Entre {min} y {max}", searching: "Cargando…", noResults: "Ningún icono coincide." },
-  de: { rangeFmt: "Zwischen {min} und {max}", searching: "Wird geladen…", noResults: "Kein Symbol gefunden." },
-  it: { rangeFmt: "Tra {min} e {max}", searching: "Caricamento…", noResults: "Nessuna icona corrisponde." },
-  pt: { rangeFmt: "Entre {min} e {max}", searching: "A carregar…", noResults: "Nenhum ícone corresponde." },
-  nl: { rangeFmt: "Tussen {min} en {max}", searching: "Laden…", noResults: "Geen pictogram gevonden." }
+  fr: { rangeFmt: "Entre {min} et {max}", searching: "Chargement…", noResults: "Aucun picto ne correspond.", upload: "Importer" },
+  en: { rangeFmt: "Between {min} and {max}", searching: "Loading…", noResults: "No icon matches.", upload: "Upload" },
+  es: { rangeFmt: "Entre {min} y {max}", searching: "Cargando…", noResults: "Ningún icono coincide.", upload: "Subir" },
+  de: { rangeFmt: "Zwischen {min} und {max}", searching: "Wird geladen…", noResults: "Kein Symbol gefunden.", upload: "Hochladen" },
+  it: { rangeFmt: "Tra {min} e {max}", searching: "Caricamento…", noResults: "Nessuna icona corrisponde.", upload: "Carica" },
+  pt: { rangeFmt: "Entre {min} e {max}", searching: "A carregar…", noResults: "Nenhum ícone corresponde.", upload: "Carregar" },
+  nl: { rangeFmt: "Tussen {min} en {max}", searching: "Laden…", noResults: "Geen pictogram gevonden.", upload: "Uploaden" }
 };
 for (const code in DICT_FIXES) Object.assign(DICT[code], DICT_FIXES[code]);
 
@@ -631,7 +631,8 @@ function viewValues() {
   const scale = Math.min(540 / Math.max(1, +s.w), 340 / Math.max(1, +s.h));
   const act = activeItem(), si = selIndex();
   const T = Object.assign({ sourceCode: SOURCE[s.lang] || SOURCE.en }, DICT[s.lang] || DICT.fr);
-  const zoom = "×" + (Math.round(scale / 3.7795 * 100) / 100).toFixed(2);
+  // decimal separator of the current language: ×1,59 in French (review M14)
+  const zoom = "×" + new Intl.NumberFormat(s.lang, { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(Math.round(scale / 3.7795 * 100) / 100);
   return {
     T, g, scale, act, si,
     countsLine: fmt(T.countsFmt, { n: s.rows.length, m: total }),
