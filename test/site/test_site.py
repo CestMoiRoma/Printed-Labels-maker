@@ -1,6 +1,7 @@
 """Structural guards on site/, the folder served as is (tests) and deployed as is (wrangler).
 
-- every asset the HTML references exists, and every site file is referenced (no orphan);
+- every asset the HTML references exists, and every site file is referenced (no orphan), the Cloudflare
+  configuration file _headers apart (not an asset, see test_headers.py);
 - no URL outside the allow-list: the site loads nothing from a CDN;
 - site/vendor/ holds exactly the files of its manifest, byte for byte (tools/vendor.py);
 - the vendored fonts, icons and libraries cover what app.js asks for.
@@ -19,6 +20,9 @@ REFERENCE = REPO / "test" / "site" / "reference"
 # Absolute URLs allowed in the site's own files: the SVG namespace (not fetched) and the source link.
 ALLOWED_URLS = {"http://www.w3.org/2000/svg", "https://github.com/CestMoiRoma/Printed-Labels-maker"}
 OWN_FILES = ["index.html", "styles.css", "app.js"]
+# Cloudflare configuration read at deploy time, never served (wrangler leaves it out of the upload);
+# checked by test_headers.py.
+CONFIG_FILES = ["_headers"]
 
 
 def manifest(path):
@@ -31,7 +35,7 @@ def own_text():
 
 def test_site_holds_only_its_own_files_and_vendor():
     top = sorted(p.name for p in SITE.iterdir() if not p.name.startswith("."))
-    assert top == sorted(OWN_FILES + ["vendor"])
+    assert top == sorted(OWN_FILES + CONFIG_FILES + ["vendor"])
 
 
 def test_html_references_exist():

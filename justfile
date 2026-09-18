@@ -53,6 +53,32 @@ ci: ci-image
     just _in-ci test/site/run-tests.sh goldens
     test/ci/check-goldens.sh
 
+# Cloudflare (wrangler.jsonc). Native on the host, the exception the playbook allows for builds and deploys:
+# the pinned wrangler of package-lock.json is installed in node_modules/ first.
+
+# Local server with the production routing and site/_headers (wrangler dev)
+dev:
+    npm ci --no-audit --no-fund
+    npx wrangler dev
+
+# Production deploys come from Cloudflare Workers Builds on every push to main. This recipe is the fallback:
+# it refuses to run off main, with local changes, or when HEAD is not origin/main (commits CI never saw).
+# Manual deploy, fallback of Workers Builds (wrangler deploy)
+deploy:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    branch="$(git rev-parse --abbrev-ref HEAD)"
+    if [ "$branch" != main ]; then echo "just deploy: only from main (current branch: $branch)" >&2; exit 1; fi
+    if [ -n "$(git status --porcelain --untracked-files=all)" ]; then
+      echo "just deploy: the worktree is not clean, commit or stash first" >&2; git status --short >&2; exit 1
+    fi
+    git fetch --quiet origin main
+    if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+      echo "just deploy: HEAD is not origin/main, deploy only what was pushed and passed CI" >&2; exit 1
+    fi
+    npm ci --no-audit --no-fund
+    npx wrangler deploy
+
 _gui-goldens DIR: ci-image
     just _in-ci test/{{DIR}}/run-tests.sh goldens
 

@@ -32,7 +32,9 @@ options = ["prettier"]
 includes = ["*.css", "*.yml", "*.yaml", "*.md"]
 excludes = []
 
-[formatter.json]                 # every JSON must parse; checked, never rewritten
+# Every JSON must parse; checked, never rewritten. wrangler.jsonc is JSONC (comments, trailing commas),
+# which *.json does not match: wrangler's offline dry-run validates it (test/site/run-tests.sh tests).
+[formatter.json]
 command = "python3"
 options = ["test/ci/check_json.py"]
 includes = ["*.json"]

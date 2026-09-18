@@ -1,1 +1,5 @@
 .explore/
+# wrangler (just dev, just deploy): local state, local secrets, host-installed packages
+.wrangler/
+.dev.vars
+node_modules/
