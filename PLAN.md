@@ -29,7 +29,9 @@ Les phases s'enchaînent, chacune part d'un repo propre et se termine par un ou 
 |---|---|---|
 | 0 | (session principale) | Repérage, arborescence cible, `.claude/agents/` |
 | 1 | `reviewer` | `docs/review.md`, aucune modification de code |
-| 2 | `quality-gates` | justfile, treefmt, Dockerfile CI, pipeline, goldens, CI |
+| 2a | `quality-gates` | justfile, treefmt, Dockerfile CI, scripts `test/ci/`, squelette `test/site/` (§4.3) |
+| 2b | (session principale) | vendoring, réécriture statique de `site/`, preuve de fidélité, `fix:` validés (§4.3) |
+| 2c | `quality-gates` | scénario e2e complet, goldens, stabilité, workflow GitHub Actions (§4.3) |
 | 3 | `cloudflare` | wrangler, recettes `dev` / `deploy`, job de déploiement |
 | 4 | `readme` | `README.md` |
 | 5 | (session principale) | `just ci` vert, `CLAUDE.md`, rapport final |
@@ -145,6 +147,29 @@ Ce que ça change dans l'ordre des phases :
   en commits `feat:` (réécriture fidèle) puis `fix:` (corrections validées), avant que les goldens soient figés ;
 - la preuve de fidélité au pixel entre l'export et la réécriture : voir le rapport de la phase 1,
   qui propose la méthode.
+
+### 4.3 Décisions après la phase 1 (2026-09-18)
+
+La revue est dans `docs/review.md`. Décisions humaines :
+
+- **Ordre** : outillage, puis réécriture prouvée fidèle, puis corrections, puis goldens. La phase 2 est
+  coupée en trois :
+  - **2a, agent `quality-gates`** : tout l'outillage du §6 sauf le scénario complet et les goldens
+    (justfile, treefmt, ruff, prettier, Dockerfile pinné, requirements + lock, scripts `test/ci/`,
+    `golden.py`, `test/site/run-tests.sh` et des tests pytest qui passent sur le repo tel qu'il est).
+    `just lint` vert à la fin ;
+  - **2b, session principale** : `site/vendor/` ; réécriture statique fidèle en un commit `feat:`,
+    prouvée par la méthode du §6 de la revue (export servi hors ligne via `page.route`, comparaison au
+    pixel près, octets des SVG exportés, pages PDF, textes des 7 langues) ; puis un commit `fix:` par
+    correction validée ci-dessous ;
+  - **2c, agent `quality-gates`** : scénario e2e sur tous les états de l'annexe B, goldens desktop,
+    `just gui-goldens-stability site 3`, workflow `.github/workflows/ci.yml`.
+- **Corrections à faire avant les goldens** : les 10 points du §4 de la revue, plus :
+  - **B3** : le lien « Code source » pointe vers `https://github.com/CestMoiRoma/Printed-Labels-maker` ;
+  - **I6** : palette AA, tout texte porteur d'information en `#b0a79e` ou `#8a827a` passe en `#6b645d` ;
+  - **B4** : bornes du tableau de la revue, telles que proposées.
+- **Corrections avant déploiement** : le §5 de la revue, traité en phase 5 (ou plus tôt si c'est gratuit
+  pendant la réécriture, sans changer le rendu prouvé par le commit `feat:`).
 
 ## 5. Phase 1 : agent `reviewer` (code + design)
 
