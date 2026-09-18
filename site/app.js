@@ -375,7 +375,8 @@ function sheetSVG(pageItems, real) {
     }
   });
   if (marks.length) o.push('<g stroke="#111" stroke-width="0.12">' + marks.join("") + "</g>");
-  const dim = real ? 'width="210mm" height="297mm"' : 'width="100%" height="auto"';
+  // no height on the preview: "auto" is not a valid SVG length, the viewBox gives the ratio
+  const dim = real ? 'width="210mm" height="297mm"' : 'width="100%"';
   return '<svg xmlns="http://www.w3.org/2000/svg" ' + dim + ' viewBox="0 0 210 297">' + o.join("") + "</svg>";
 }
 function pages() {
