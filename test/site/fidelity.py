@@ -11,6 +11,10 @@ state it compares:
 The site must also log no console error and no page error (the export logs some while booting, they are
 reported, not fatal). Each differing state writes export / site / diff PNGs to OUT_DIR. Exit 1 on any
 difference. docs/review.md section 6 describes the method.
+
+It proved commit 26dce88 (the faithful rewrite: 20 states identical). The fix: commits after it change
+the rendering on purpose (docs/review.md section 4), so today it reports those differences: it is a
+one-off proof, not a gate. Re-run it against a new Claude Design export to see what the design changed.
 """
 
 import io
@@ -83,7 +87,7 @@ def scenario(page):
     page.locator('select[data-k="listStyle"]').select_option("inline")
     yield "09-style-edited", "export"
 
-    page.locator('select[data-k="font"]').select_option("Bitter")
+    page.locator('select[data-k="font"], select[data-k="fontChoice"]').select_option("Bitter")
     ready(page, "Bitter")
     yield "10-font-bitter", "export"
 
