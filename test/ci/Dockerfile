@@ -1,5 +1,6 @@
 # The one pinned image: lint, tests and GUI goldens, locally (just ...) and in CI.
-# Build context: test/  (docker build --platform linux/amd64 -f test/ci/Dockerfile test)
+# Build context: test/, plus the repository root as the named context "repo" for package.json and its lock:
+#   docker build --platform linux/amd64 --build-context repo=. -f test/ci/Dockerfile test
 # Base: node:22-bookworm-slim, linux/amd64 manifest (node is needed by prettier, and by wrangler in phase 3).
 FROM node:22-bookworm-slim@sha256:4d676821dff059fd00d277ee4261ef34ea712317fed0737c03941481b5760c96
 
@@ -42,5 +43,14 @@ RUN pip install --no-cache-dir -r /tmp/ci/requirements.lock \
 # Playwright's deps pull GNU Unifont / FreeFont, which fontconfig then prefers for emoji: reject them
 COPY ci/fonts.conf /etc/fonts/conf.d/99-screenshots.conf
 RUN fc-cache -f
+
+# Wrangler, for the offline check of wrangler.jsonc (wrangler deploy --dry-run in test/site/run-tests.sh),
+# pinned by the repository's package.json and package-lock.json: npm ci fails the build if the lock is
+# incomplete or out of step with package.json. Installed outside /repo, on PATH. Nothing phones home:
+# no telemetry, no error reports, and no banner (its update check queries the npm registry).
+COPY --from=repo package.json package-lock.json /opt/wrangler/
+RUN cd /opt/wrangler && npm ci --no-audit --no-fund --loglevel=error && npm cache clean --force
+ENV PATH=/opt/wrangler/node_modules/.bin:$PATH \
+    WRANGLER_SEND_METRICS=false WRANGLER_SEND_ERROR_REPORTS=false WRANGLER_HIDE_BANNER=true
 
 WORKDIR /repo

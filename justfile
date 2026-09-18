@@ -11,7 +11,8 @@ ci-image:
     #!/usr/bin/env bash
     set -euo pipefail
     if [ -n "${CI_IMAGE:-}" ]; then docker pull --quiet --platform {{ci_platform}} "$CI_IMAGE" >/dev/null
-    else docker build --quiet --platform {{ci_platform}} -t {{ci_image}} -f test/ci/Dockerfile test >/dev/null; fi
+    else docker build --quiet --platform {{ci_platform}} --build-context repo=. -t {{ci_image}} \
+      -f test/ci/Dockerfile test >/dev/null; fi
 
 # Regenerate test/ci/requirements.lock after any requirements change
 ci-lock:

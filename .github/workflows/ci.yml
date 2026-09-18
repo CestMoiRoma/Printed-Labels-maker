@@ -8,14 +8,18 @@
 # pending pipelines; until then `just ci` is the gate. The first run on a hosted runner is the first proof of
 # byte-identity on that CPU (docs/quality-gates.md section 8, last point).
 #
+# Triggers: pushes to dev and pull requests into main (PLAN.md 4.4). main only receives merges of a green
+# dev and is deployed by Cloudflare Workers Builds, so this workflow does not run on main itself.
+#
 # Third-party actions are pinned by full commit SHA, the release tag in a comment.
 
 name: ci
 
 on:
   push:
-    branches: [main]
+    branches: [dev]
   pull_request:
+    branches: [main]
   workflow_dispatch:
 
 concurrency:
@@ -55,6 +59,8 @@ jobs:
       - uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
         with:
           context: test
+          # the repository root, for package.json and package-lock.json (the image's pinned wrangler)
+          build-contexts: repo=.
           file: test/ci/Dockerfile
           platforms: linux/amd64
           push: true
@@ -131,8 +137,5 @@ jobs:
           name: goldens-site
           path: test/screenshot/site/
 
-  # ---------------------------------------------------------------------------------------------------------
-  # Phase 3 (PLAN.md section 7): the `deploy` job attaches here, after goldens-site and never before:
-  #   needs: [goldens-site], on the main branch only, cloudflare/wrangler-action pinned by SHA,
-  #   secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID. Not written in phase 2.
-  # ---------------------------------------------------------------------------------------------------------
+  # No deploy job: Cloudflare Workers Builds deploys main with wrangler.jsonc (PLAN.md 4.4). Only a dev whose
+  # pipeline is green is merged into main, so production never ships a red pipeline.
