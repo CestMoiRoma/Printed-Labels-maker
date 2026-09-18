@@ -1,14 +1,13 @@
 /* Printed Labels Maker: screen and print styles.
-   Every value comes from the Claude Design export (design/label-generator.dc.html); the tokens below
-   name the values it repeats. */
+   Values come from the Claude Design export (design/label-generator.dc.html); the tokens below name the
+   values it repeats. Departures from the export are fixes listed in docs/review.md: informative text uses
+   --muted (4.5:1 or more on every background here) instead of the export's #8a827a and #b0a79e (I6). */
 
 :root {
   --ink: #1b1917;
   --ink-2: #3a342f;
   --ink-3: #4a443e;
   --muted: #6b645d;
-  --faint: #8a827a;
-  --fainter: #b0a79e;
   --page: #f7f4f1;
   --paper: #ffffff;
   --paper-warm: #fdfcfb;
@@ -140,7 +139,7 @@ button {
   font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--faint);
+  color: var(--muted);
 }
 
 .caption-accent {
@@ -180,30 +179,30 @@ button {
 .page-info {
   font-family: var(--font-mono);
   font-size: 10px;
-  color: var(--fainter);
+  color: var(--muted);
 }
 
 .sel-no {
   font-family: var(--font-mono);
   font-size: 10px;
-  color: var(--faint);
+  color: var(--muted);
 }
 
 .sel-hint {
   font-size: 10.5px;
   line-height: 1.4;
-  color: var(--faint);
+  color: var(--muted);
 }
 
 .fill-line {
   font-size: 11px;
   line-height: 1.45;
-  color: var(--faint);
+  color: var(--muted);
 }
 
 .qr-note {
   font-size: 10.5px;
-  color: var(--faint);
+  color: var(--muted);
 }
 
 /* ---------- brand and language ---------- */
@@ -349,7 +348,7 @@ button {
 .row-sub {
   font-family: var(--font-mono);
   font-size: 9px;
-  color: var(--faint);
+  color: var(--muted);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -427,7 +426,7 @@ button {
   font-family: var(--font-mono);
   font-size: 9px;
   line-height: 1.5;
-  color: var(--faint);
+  color: var(--muted);
 }
 
 .import-text {
@@ -582,7 +581,7 @@ button {
 .logo-src {
   font-family: var(--font-mono);
   font-size: 9px;
-  color: var(--faint);
+  color: var(--muted);
   max-width: 120px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -715,7 +714,7 @@ button {
   gap: 8px;
   font-family: var(--font-mono);
   font-size: 10px;
-  color: var(--fainter);
+  color: var(--muted);
 }
 
 .source-link {
