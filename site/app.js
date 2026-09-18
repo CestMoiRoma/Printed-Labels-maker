@@ -167,13 +167,13 @@ const newRow = (o) => Object.assign({ title: "", subtitle: "", contents: "", cod
 // ---------- strings added or corrected since the export (docs/review.md) ----------
 // The block above stays byte-identical to the export; every change to its texts is listed here.
 const DICT_FIXES = {
-  fr: { rangeFmt: "Entre {min} et {max}" },
-  en: { rangeFmt: "Between {min} and {max}" },
-  es: { rangeFmt: "Entre {min} y {max}" },
-  de: { rangeFmt: "Zwischen {min} und {max}" },
-  it: { rangeFmt: "Tra {min} e {max}" },
-  pt: { rangeFmt: "Entre {min} e {max}" },
-  nl: { rangeFmt: "Tussen {min} en {max}" }
+  fr: { rangeFmt: "Entre {min} et {max}", searching: "Chargement…", noResults: "Aucun picto ne correspond." },
+  en: { rangeFmt: "Between {min} and {max}", searching: "Loading…", noResults: "No icon matches." },
+  es: { rangeFmt: "Entre {min} y {max}", searching: "Cargando…", noResults: "Ningún icono coincide." },
+  de: { rangeFmt: "Zwischen {min} und {max}", searching: "Wird geladen…", noResults: "Kein Symbol gefunden." },
+  it: { rangeFmt: "Tra {min} e {max}", searching: "Caricamento…", noResults: "Nessuna icona corrisponde." },
+  pt: { rangeFmt: "Entre {min} e {max}", searching: "A carregar…", noResults: "Nenhum ícone corresponde." },
+  nl: { rangeFmt: "Tussen {min} en {max}", searching: "Laden…", noResults: "Geen pictogram gevonden." }
 };
 for (const code in DICT_FIXES) Object.assign(DICT[code], DICT_FIXES[code]);
 
@@ -207,7 +207,7 @@ const state = {
   bw: 0.4, br: 3, borderColor: "#1b1917", bg: "#ffffff", fg: "#1b1917",
   font: "Archivo", titlePt: 15, subPt: 9, bodyPt: 8, listStyle: "lines",
   iconSize: 14, iconSizeSolo: 26, colW: 20, gapCol: 3, divider: true, divW: 0.3, autoFit: true,
-  iconQuery: "", mdi: null, results: [],
+  iconQuery: "", mdi: null, results: [], searching: false,
   qr: false,
   mode: "batch", repeat: 10,
   rows: [
@@ -449,26 +449,34 @@ function seedDemo(lang) {
     return { rows: demo.map((d, i) => Object.assign({}, s.rows[i], { title: d[0], subtitle: d[1], contents: d[2], code: d[3] })) };
   });
 }
+// Only the answer to the latest search is shown: each keystroke starts a search, and an earlier, slower
+// one used to overwrite the results of the last (review I10).
+let searchSeq = 0;
 async function runSearch(q, src) {
+  const seq = ++searchSeq;
+  const show = (results) => { if (seq === searchSeq) setState({ results, searching: false }); };
   q = String(q || "").trim().toLowerCase();
   if (src === "mdi") {
     let mdi = state.mdi;
     if (!mdi) {
+      setState({ searching: true });
       try {
         const m = await import(new URL("vendor/mdi/mdi.js", document.baseURI).href);
         mdi = Object.keys(m).filter(k => k.startsWith("mdi")).map(k => ({ name: k.slice(3).replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase(), d: m[k], vb: "0 0 24 24" }));
         setState({ mdi });
-      } catch (err) { setState({ results: [] }); return; }
+      } catch (err) { show([]); return; }
     }
-    setState({ results: (q ? mdi.filter(i => i.name.includes(q)) : mdi).slice(0, 56) });
+    show((q ? mdi.filter(i => i.name.includes(q)) : mdi).slice(0, 56));
     return;
   }
   if (src === "material") {
+    setState({ searching: true });
     const names = (q ? MAT.filter(n => n.includes(q)) : MAT).slice(0, 42);
     const out = await Promise.all(names.map(async n => {
       if (materialCache[n]) return materialCache[n];
       try {
         const r = await fetch("vendor/material-symbols/" + n + ".svg");
+        if (!r.ok) return null;
         const txt = await r.text();
         const doc = new DOMParser().parseFromString(txt, "image/svg+xml");
         const vb = doc.documentElement.getAttribute("viewBox") || "0 -960 960 960";
@@ -478,7 +486,7 @@ async function runSearch(q, src) {
         return item;
       } catch (e) { return null; }
     }));
-    setState({ results: out.filter(x => x && x.d) });
+    show(out.filter(x => x && x.d));
   }
 }
 const materialCache = {};
@@ -558,7 +566,7 @@ const handlers = {
   },
   setIconSource(el) {
     const src = el.dataset.src;
-    if (src === "none") { patchRow({ iSrc: "none", iD: "", iUrl: "", iName: "" }); setState({ results: [] }); return; }
+    if (src === "none") { searchSeq++; patchRow({ iSrc: "none", iD: "", iUrl: "", iName: "" }); setState({ results: [], searching: false }); return; }
     patchRow({ iSrc: src });
     runSearch(state.iconQuery, src);
   },
@@ -625,6 +633,8 @@ function viewValues() {
     qr: s.qr,
     hasIcon: !!act.iD,
     showIconSearch: act.iSrc === "mdi" || act.iSrc === "material",
+    iconStatus: s.searching ? T.searching : s.results.length ? "" : T.noResults,
+    hasIconStatus: s.searching || !s.results.length,
     isSingle: s.mode === "single",
     isRealLabel: s.realView === "label",
     isRealPage: s.realView === "page",

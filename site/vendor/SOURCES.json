@@ -700,6 +700,10 @@
       "sha256": "7228e987f17ccf171f15a63b414f9f1690408fc924ce4e450af9990ccf5bbb3a",
       "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/content_paste.svg"
     },
+    "material-symbols/cut.svg": {
+      "sha256": "88a5b639a9629bbc2495820c58ac8c954f421d844dc7d921f351327823e3fa7c",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400@0.47.4/outlined/content_cut.svg"
+    },
     "material-symbols/delete.svg": {
       "sha256": "0b62a0f6843ab1154d9ab343caaee4078a0b7df982aeb02fb3c82f68110370b5",
       "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/delete.svg"
@@ -936,6 +940,10 @@
       "sha256": "16d1939243544647111a38825545b0bb0b80351ba859cf5b73f78ee1a04d2d35",
       "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/print.svg"
     },
+    "material-symbols/push_pin.svg": {
+      "sha256": "09add14029b27e20fc2916df26a1dbc21d33f54f7fba3e5dcc34a454cc22d8ae",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400@0.47.4/outlined/keep.svg"
+    },
     "material-symbols/qr_code.svg": {
       "sha256": "886b6306a1e5893a6996e75a7371ee9cfbd4d97adc19bf37e90fcaccb9d74727",
       "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/qr_code.svg"
@@ -1003,6 +1011,10 @@
     "material-symbols/shopping_bag.svg": {
       "sha256": "20376d28ac67e29f51769c6224755a4304a7149385456c6dda39975ad81ae2ab",
       "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/shopping_bag.svg"
+    },
+    "material-symbols/smartphone.svg": {
+      "sha256": "bedbce3316e8b5fdc82edad6fd5f5d3207077cc868e2442bc707e07f358c2d17",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400@0.47.4/outlined/mobile.svg"
     },
     "material-symbols/soap.svg": {
       "sha256": "a6f06a20b75dfa26409de8f508b376a04975251aefa87493466dbb7d97c2cd39",
@@ -1127,11 +1139,7 @@
   },
   "meta": {
     "material-symbols": {
-      "missing": [
-        "cut",
-        "smartphone",
-        "push_pin"
-      ],
+      "missing": [],
       "version": "0.47.4"
     }
   }

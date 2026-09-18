@@ -34,6 +34,8 @@ CHROME_UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gec
 MATERIAL_VERSION = "0.47.4"
 MATERIAL_URL = "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/{name}.svg"
 MATERIAL_PINNED = "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400@{version}/outlined/{name}.svg"
+# MAT names renamed upstream since the export was designed: the file is saved under the MAT name.
+MATERIAL_RENAMED = {"cut": "content_cut", "smartphone": "mobile", "push_pin": "keep"}
 
 SCRIPTS = {
     "qrcode-svg/qrcode.min.js": "https://cdn.jsdelivr.net/npm/qrcode-svg@1.1.0/lib/qrcode.min.js",
@@ -112,7 +114,8 @@ def run_fetch():
 
     missing = []
     for name in constants["MAT"]:
-        pinned = MATERIAL_PINNED.format(version=MATERIAL_VERSION, name=name)
+        upstream = MATERIAL_RENAMED.get(name, name)
+        pinned = MATERIAL_PINNED.format(version=MATERIAL_VERSION, name=upstream)
         try:
             data = fetch(pinned)
         except urllib.error.HTTPError as exc:
@@ -120,7 +123,9 @@ def run_fetch():
                 raise
             missing.append(name)
             continue
-        write(SITE_VENDOR, "material-symbols/" + name + ".svg", data, site_manifest, MATERIAL_URL.format(name=name))
+        # a renamed icon records its real source: the design export's URL for the old name would 404
+        source = pinned if upstream != name else MATERIAL_URL.format(name=name)
+        write(SITE_VENDOR, "material-symbols/" + name + ".svg", data, site_manifest, source)
 
     vendor_css(UI_FONTS_URL, "fonts/ui.css", site_manifest)
     for family in constants["FONTS"]:
