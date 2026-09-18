@@ -325,6 +325,7 @@ sur tout tiret cadratin ou demi-cadratin. Le style devient alors une gate comme 
 | Viewports des goldens | `1280×820` seul ; `390×844` ajouté avec la future mise en page mobile | décidé |
 | Cloudflare : nom du worker | celui créé côté Cloudflare ; `name` de `wrangler.jsonc` doit lui être identique | à fournir |
 | Cloudflare : déploiement | worker relié au repo GitHub par l'intégration Git de Cloudflare (Workers Builds), en cours côté humain. À réconcilier en phase 3 avec le job `deploy` du §7 et la règle « jamais de déploiement avec une CI rouge » | à trancher en phase 3 |
+| Cloudflare : domaine | `printed-labels.roma.moonmakers.fr`, en Custom Domain du worker (`routes` avec `custom_domain: true` dans `wrangler.jsonc`, syntaxe à vérifier dans la doc). La zone `moonmakers.fr` doit être sur le même compte Cloudflare | décidé |
 | Cloudflare : compte cible | fourni par les secrets `CLOUDFLARE_ACCOUNT_ID` / `CLOUDFLARE_API_TOKEN` | à fournir |
 | Build | aucun : `site/` est déployé tel quel | proposé |
 
