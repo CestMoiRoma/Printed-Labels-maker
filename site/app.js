@@ -291,10 +291,12 @@ function iconMarkup(it, x, y, size) {
   }
   return "";
 }
+// xmlDeclaration: false: the library's <?xml?> prolog would land inside the label's <g>, making the exported
+// SVG ill-formed and the PNG export fail to load it.
 function qrMarkup(text, size, x, y) {
   if (!window.QRCode || !text) return "";
   try {
-    const q = new window.QRCode({ content: String(text), padding: 0, width: 100, height: 100, color: state.fg, background: "transparent", ecl: "M", join: true, container: "svg-viewbox" });
+    const q = new window.QRCode({ content: String(text), padding: 0, width: 100, height: 100, color: state.fg, background: "transparent", ecl: "M", join: true, container: "svg-viewbox", xmlDeclaration: false });
     const inner = q.svg().replace(/<svg[^>]*>/, "").replace(/<\/svg>/, "");
     return '<g transform="translate(' + x + ',' + y + ') scale(' + (size / 100) + ')">' + inner + "</g>";
   } catch (e) { return ""; }

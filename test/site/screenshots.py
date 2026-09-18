@@ -376,6 +376,12 @@ class Scenario:
         expect(page.locator(".label-preview svg > g")).to_have_count(2)
         expect(page.locator(".label-preview svg > line")).to_have_count(2)
         self.shot("icon-and-qr", sidebar="bottom")
+        # with an icon and a QR code the exports stay well-formed and the PNG renders
+        label = self.download("SVG (1 étiquette)", "etiquette-70x37mm.svg", b"<svg")
+        assert ElementTree.fromstring(label).get("width") == "70mm"
+        ElementTree.fromstring(self.download("SVG planche", "planche-a4.svg", b"<svg"))
+        png = self.download("PNG 300 dpi", "etiquette-70x37mm@300dpi.png", b"\x89PNG\r\n\x1a\n")
+        assert struct.unpack(">II", png[16:24]) == (827, 437)
 
         # downloads of the selected label and of the first sheet
         label = self.download("SVG (1 étiquette)", "etiquette-70x37mm.svg", b"<svg")
