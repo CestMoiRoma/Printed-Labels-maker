@@ -1,0 +1,135 @@
+# CI: the mirror of `just ci`. Same pinned image, same order:
+#   image -> lint -> test-site (run-tests.sh tests) -> goldens-site (run-tests.sh goldens + check-goldens.sh site)
+# Every job but `image` runs directly in the image built by `image` (no Docker-in-Docker). No job may fail
+# silently: no continue-on-error anywhere. Keep this file and the `ci` recipe of the justfile in sync.
+#
+# No kill switch: the jobs run on GitHub-hosted runners. The goldens are byte-identical there and under
+# amd64 emulation on a developer Mac (proven by the first hosted run, 2026-09-18).
+#
+# Triggers: pushes to dev and pull requests into main. main only receives merges of a green
+# dev and is deployed by Cloudflare Workers Builds, so this workflow does not run on main itself.
+#
+# Third-party actions are pinned by full commit SHA, the release tag in a comment.
+
+name: ci
+
+on:
+  push:
+    branches: [dev]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  image:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      image: ${{ steps.name.outputs.image }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - id: name
+        # the registry path must be lowercase, the owner name may not be
+        run: |
+          repo="ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/printed-labels-maker-ci"
+          echo "repo=$repo" >> "$GITHUB_OUTPUT"
+          echo "image=$repo:$GITHUB_SHA" >> "$GITHUB_OUTPUT"
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+      - uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: test
+          # the repository root, for package.json and package-lock.json (the image's pinned wrangler)
+          build-contexts: repo=.
+          file: test/ci/Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: ${{ steps.name.outputs.image }}
+          # registry layer cache: read and written by this job only, so parallel jobs never race
+          cache-from: type=registry,ref=${{ steps.name.outputs.repo }}:buildcache
+          cache-to: type=registry,ref=${{ steps.name.outputs.repo }}:buildcache,mode=max
+
+  lint:
+    needs: image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    container:
+      image: ${{ needs.image.outputs.image }}
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      # the checkout belongs to the runner user, the container runs as root: git refuses it otherwise
+      - run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - run: REPO="$GITHUB_WORKSPACE" test/ci/lint.sh
+
+  test-site:
+    needs: [image, lint]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    container:
+      image: ${{ needs.image.outputs.image }}
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - run: |
+          mkdir -p test-reports
+          REPO="$GITHUB_WORKSPACE" PYTEST_JUNIT_DIR="$GITHUB_WORKSPACE/test-reports" \
+            test/site/run-tests.sh tests 2>&1 | tee test-reports/site.log
+      - if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: test-reports-site
+          path: test-reports/
+          if-no-files-found: error
+
+  goldens-site:
+    needs: [image, test-site]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    container:
+      image: ${{ needs.image.outputs.image }}
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      # check-goldens.sh compares test/screenshot/site with HEAD through git status
+      - run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - run: REPO="$GITHUB_WORKSPACE" test/site/run-tests.sh goldens
+      - run: test/ci/check-goldens.sh site
+      - if: failure()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: goldens-site
+          path: test/screenshot/site/
+
+  # No deploy job: Cloudflare Workers Builds deploys main with wrangler.jsonc. Only a dev whose
+  # pipeline is green is merged into main, so production never ships a red pipeline.

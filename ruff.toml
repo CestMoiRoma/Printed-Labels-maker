@@ -1,0 +1,9 @@
+line-length = 120
+target-version = "py311"
+extend-exclude = []            # vendored / data folders
+
+[lint]
+select = ["E", "W", "F", "B"]  # pycodestyle, pyflakes, bugbear; widen later, one rule set at a time
+ignore = [
+  "E501",                      # the formatter wraps code; long strings and comments remain
+]

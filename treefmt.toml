@@ -1,0 +1,41 @@
+# The single lint / format entry point.
+#   just lint   checks every formatter and linter, modifies nothing (CI job "lint")
+#   just fmt    applies the formatters
+
+excludes = [
+  ".git/**", "**/node_modules/**", "**/dist/**", "**/build/**", "**/__pycache__/**",
+  "**/.venv/**", "**/.ruff_cache/**", "test-reports/**",
+  "site/vendor/**",              # vendored third-party files, kept byte for byte as published upstream
+  "test/screenshot/**",          # goldens
+  "package-lock.json",           # generated
+]
+on-unmatched = "debug"
+
+[formatter.ruff-format]
+command = "test/ci/format.sh"
+options = ["ruff-format"]
+includes = ["*.py"]
+priority = 1
+
+[formatter.ruff-check]           # lint only, never fixes by itself
+command = "ruff"
+options = ["check", "--no-fix", "--output-format=concise"]
+includes = ["*.py"]
+priority = 2
+
+# HTML stays out: reformatting it can change the rendered text (whitespace between inline elements).
+# JavaScript has no formatter in the playbook: site/app.js is reviewed as written.
+[formatter.prettier]
+command = "test/ci/format.sh"
+options = ["prettier"]
+includes = ["*.css", "*.yml", "*.yaml", "*.md"]
+excludes = []
+
+# Every JSON must parse; checked, never rewritten. wrangler.jsonc is JSONC (comments, trailing commas),
+# which *.json does not match: wrangler's offline dry-run validates it (test/site/run-tests.sh tests).
+[formatter.json]
+command = "python3"
+options = ["test/ci/check_json.py"]
+includes = ["*.json"]
+
+# No [formatter.typecheck]: the repository has no TypeScript.

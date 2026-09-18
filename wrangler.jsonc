@@ -1,0 +1,36 @@
+// Cloudflare Worker serving site/ as static assets, with no Worker script.
+// Production deploys come from Cloudflare Workers Builds on the main branch (`npx wrangler deploy` with this
+// file); `just deploy` is the manual fallback. `just ci` validates this file offline with
+// `wrangler deploy --dry-run` (test/site/run-tests.sh, tests mode).
+// JSONC: checked by wrangler's dry-run, not by test/ci/check_json.py (treefmt matches *.json only).
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "printed-labels-maker",
+  "compatibility_date": "2026-09-18",
+
+  // No "main": the site needs no server logic. Security and cache headers come from site/_headers,
+  // which Workers static assets apply to every asset response (the file itself is not served).
+  "assets": {
+    // The exact folder the end-to-end scenario serves (test/site/screenshots.py): no build step.
+    "directory": "./site",
+    // "none" (the default, written out on purpose): an unknown path gets a 404 with an empty body.
+    // "single-page-application" would answer every unknown path, a mistyped vendor/*.js included, with
+    // index.html and a 200: the site has no client-side routes, so that would only hide broken links.
+    // "404-page" needs a 404.html, which the site does not have; without one it behaves like "none".
+    "not_found_handling": "none",
+  },
+
+  // Custom Domain: Cloudflare creates the DNS record and the certificate on deploy. The zone
+  // moonmakers.fr must be active on the same account, with no existing record on this hostname.
+  "routes": [
+    {
+      "pattern": "printed-labels.roma.moonmakers.fr",
+      "custom_domain": true,
+    },
+  ],
+  // The Custom Domain is the one production URL: no copy of the site on *.workers.dev. Preview URLs stay
+  // on, so a version uploaded from another branch (Workers Builds, `wrangler versions upload`) can be
+  // opened before it reaches production.
+  "workers_dev": false,
+  "preview_urls": true,
+}
