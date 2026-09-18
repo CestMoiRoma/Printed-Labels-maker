@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="vendor/fonts/ui.css">
+<link rel="stylesheet" href="styles.css">
+<script src="vendor/qrcode-svg/qrcode.min.js"></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<div class="screen" data-screen="1">
+
+  <aside class="sidebar">
+
+    <div class="brand">
+      <div class="brand-text">
+        <div class="kicker"><span data-t="kicker"></span></div>
+        <h1 class="app-title"><span data-t="appTitle"></span></h1>
+        <p class="app-sub"><span data-t="appSub"></span></p>
+      </div>
+      <div class="lang">
+        <button type="button" class="lang-btn" data-action="toggleLang"></button>
+        <div class="lang-menu" hidden></div>
+      </div>
+    </div>
+
+
+    <section class="stack">
+      <div class="sec-head">
+        <div class="caption"><span data-t="labels"></span></div>
+        <div class="counts"><span data-bind="countsLine"></span></div>
+      </div>
+      <div class="rows"></div>
+      <div class="add-row">
+        <button type="button" class="add-btn" data-action="addRow"><span data-t="addLabel"></span></button>
+      </div>
+      <details class="import">
+        <summary><span data-t="importSummary"></span></summary>
+        <div class="import-body">
+          <div class="import-format"><span data-t="importFormat"></span></div>
+          <textarea class="import-text" data-k="pasteText" data-on="setField" rows="4" data-ph="importPh"></textarea>
+          <button type="button" class="import-btn" data-action="importPaste"><span data-t="importBtn"></span></button>
+        </div>
+      </details>
+    </section>
+
+    <nav class="tabs">
+      <button type="button" class="tab" data-tab="content" data-action="setTab"><span data-t="tab1"></span></button>
+      <button type="button" class="tab" data-tab="style" data-action="setTab"><span data-t="tab2"></span></button>
+      <button type="button" class="tab" data-tab="print" data-action="setTab"><span data-t="tab3"></span></button>
+    </nav>
+
+    <div class="panel" data-panel="content">
+    <section class="selected-card">
+      <div class="sec-head">
+        <div class="caption caption-accent"><span data-t="selected"></span></div>
+        <div class="sel-no">#<span data-bind="selNo"></span></div>
+      </div>
+      <div class="sel-hint"><span data-t="selHint"></span></div>
+      <input type="text" class="field field-strong" data-ph="phTitle" data-k="title" data-on="setContent">
+      <input type="text" class="field" data-ph="phSub" data-k="subtitle" data-on="setContent">
+      <textarea class="field field-area" data-ph="phContents" data-k="contents" data-on="setContent" rows="3"></textarea>
+      <div class="grid-2">
+        <input type="text" class="field" data-ph="phCode" data-k="code" data-on="setContent">
+        <input type="text" class="field" data-ph="phDate" data-k="date" data-on="setContent">
+      </div>
+      <input type="text" class="field" data-ph="phQr" data-k="qrText" data-on="setContent" data-if="qr">
+
+      <div class="card-rule"></div>
+
+      <div class="logo-head">
+        <div class="logo-title"><span data-t="logo"></span></div>
+        <div class="logo-now">
+          <svg class="logo-icon" data-if="hasIcon"><path fill="currentColor"></path></svg>
+          <div class="logo-src"><span data-bind="iconSourceLabel"></span></div>
+        </div>
+      </div>
+      <div class="chips">
+        <button type="button" class="chip" data-src="none" data-action="setIconSource"><span data-t="none"></span></button>
+        <button type="button" class="chip" data-src="mdi" data-action="setIconSource">MDI</button>
+        <button type="button" class="chip" data-src="material" data-action="setIconSource">Material</button>
+        <label class="chip"><span data-t="upload"></span>
+          <input type="file" class="upload-input" accept="image/svg+xml,image/png,image/jpeg" data-on="onUpload">
+        </label>
+      </div>
+      <div class="icon-search" data-if="showIconSearch">
+        <input type="text" class="field field-search" data-ph="searchPh" data-k="iconQuery" data-on="setIconQuery">
+        <div class="icon-grid"></div>
+      </div>
+      <button type="button" class="apply-all" data-action="applyIconToAll"><span data-t="applyAll"></span></button>
+    </section>
+
+    </div>
+
+    <div class="panel" data-panel="style">
+
+    <section class="stack">
+      <div class="caption"><span data-t="sizeHdr"></span></div>
+      <div class="grid-2">
+        <label class="fld"><span data-t="w"></span>
+          <input type="number" step="1" class="num" data-k="w" data-num="1" data-on="setField">
+        </label>
+        <label class="fld"><span data-t="h"></span>
+          <input type="number" step="1" class="num" data-k="h" data-num="1" data-on="setField">
+        </label>
+        <label class="fld"><span data-t="pad"></span>
+          <input type="number" step="0.5" class="num" data-k="pad" data-num="1" data-on="setField">
+        </label>
+        <label class="fld"><span data-t="align"></span>
+          <select class="num" data-k="align" data-on="setField">
+            <option value="left" data-t="left"></option>
+            <option value="center" data-t="center"></option>
+          </select>
+        </label>
+      </div>
+      <div class="presets">
+        <button type="button" class="preset" data-preset="90x50" data-action="applyPreset">90×50</button>
+        <button type="button" class="preset" data-preset="70x37" data-action="applyPreset">70×37</button>
+        <button type="button" class="preset" data-preset="105x48" data-action="applyPreset">105×48</button>
+        <button type="button" class="preset" data-preset="50x50" data-action="applyPreset">50×50</button>
+      </div>
+    </section>
+
+    <section class="stack">
+      <div class="caption"><span data-t="borderHdr"></span></div>
+      <div class="grid-2">
+        <label class="fld"><span data-t="bw"></span>
+          <input type="number" step="0.1" min="0" class="num" data-k="bw" data-num="1" data-on="setField">
+        </label>
+        <label class="fld"><span data-t="br"></span>
+          <input type="number" step="0.5" min="0" class="num" data-k="br" data-num="1" data-on="setField">
+        </label>
+      </div>
+      <div class="grid-colors">
+        <label class="fld"><span data-t="border"></span>
+          <input type="color" class="swatch" data-k="borderColor" data-on="setField">
+        </label>
+        <label class="fld"><span data-t="bg"></span>
+          <input type="color" class="swatch" data-k="bg" data-on="setField">
+        </label>
+        <label class="fld"><span data-t="ink"></span>
+          <input type="color" class="swatch" data-k="fg" data-on="setField">
+        </label>
+      </div>
+    </section>
+
+    <section class="stack">
+      <div class="caption"><span data-t="typoHdr"></span></div>
+      <label class="fld"><span data-t="font"></span>
+        <select class="num" data-k="font" data-on="setFont"></select>
+      </label>
+      <div class="grid-typo">
+        <label class="fld"><span data-t="titlePt"></span>
+          <input type="number" step="0.5" class="num" data-k="titlePt" data-num="1" data-on="setField">
+        </label>
+        <label class="fld"><span data-t="subPt"></span>
+          <input type="number" step="0.5" class="num" data-k="subPt" data-num="1" data-on="setField">
+        </label>
+        <label class="fld"><span data-t="bodyPt"></span>
+          <input type="number" step="0.5" class="num" data-k="bodyPt" data-num="1" data-on="setField">
+        </label>
+      </div>
+      <label class="fld"><span data-t="listStyle"></span>
+        <select class="num" data-k="listStyle" data-on="setField">
+          <option value="lines" data-t="optLines"></option>
+          <option value="inline" data-t="optInline"></option>
+        </select>
+      </label>
+    </section>
+
+    <section class="stack">
+      <div class="caption"><span data-t="colHdr"></span></div>
+      <div class="grid-2">
+        <label class="fld"><span data-t="colW"></span>
+          <input type="number" step="1" min="4" class="num" data-k="colW" data-num="1" data-on="setField">
+        </label>
+        <label class="fld"><span data-t="gapCol"></span>
+          <input type="number" step="0.5" min="0" class="num" data-k="gapCol" data-num="1" data-on="setField">
+        </label>
+        <label class="fld"><span data-t="iconSolo"></span>
+          <input type="number" step="1" min="0" class="num" data-k="iconSizeSolo" data-num="1" data-on="setField">
+        </label>
+        <label class="fld"><span data-t="iconQR"></span>
+          <input type="number" step="1" min="0" class="num" data-k="iconSize" data-num="1" data-on="setField">
+        </label>
+        <label class="fld"><span data-t="divW"></span>
+          <input type="number" step="0.1" min="0" class="num" data-k="divW" data-num="1" data-on="setField">
+        </label>
+      </div>
+      <label class="check">
+        <input type="checkbox" class="chk" data-k="divider" data-bool="1" data-on="setField">
+        <span data-t="chkDiv"></span>
+      </label>
+      <label class="check">
+        <input type="checkbox" class="chk" data-k="autoFit" data-bool="1" data-on="setField">
+        <span data-t="chkFit"></span>
+      </label>
+      <label class="check">
+        <input type="checkbox" class="chk" data-k="qr" data-bool="1" data-on="setField">
+        QR code <span class="qr-note"><span data-t="qrNote"></span></span>
+      </label>
+
+    </section>
+
+    </div>
+
+    <div class="panel" data-panel="print">
+    <section class="stack">
+      <div class="caption"><span data-t="printHdr"></span></div>
+      <label class="fld"><span data-t="modeLbl"></span>
+        <select class="num" data-k="mode" data-on="setField">
+          <option value="batch" data-t="modeAll"></option>
+          <option value="single" data-t="modeOne"></option>
+        </select>
+      </label>
+      <div class="fill-line" data-if="isSingle"><span data-bind="fillLine"></span></div>
+      <div class="grid-print">
+        <label class="fld"><span data-t="mx"></span>
+          <input type="number" step="1" min="0" class="num" data-k="mx" data-num="1" data-on="setField">
+        </label>
+        <label class="fld"><span data-t="my"></span>
+          <input type="number" step="1" min="0" class="num" data-k="my" data-num="1" data-on="setField">
+        </label>
+        <label class="fld"><span data-t="gap"></span>
+          <input type="number" step="0.5" min="0" class="num" data-k="gap" data-num="1" data-on="setField">
+        </label>
+      </div>
+      <label class="check">
+        <input type="checkbox" class="chk" data-k="cut" data-bool="1" data-on="setField">
+        <span data-t="cut"></span>
+      </label>
+    </section>
+    </div>
+
+    <footer class="side-foot">
+      <span>v<span data-bind="version"></span></span>
+      <a href="https://google.com" target="_blank" rel="noopener" class="source-link"><span data-t="sourceCode"></span></a>
+    </footer>
+  </aside>
+
+  <main class="main">
+    <header class="toolbar">
+      <div class="grid-info"><span data-bind="gridInfo"></span></div>
+      <div class="actions">
+        <button type="button" class="btn" data-action="exportSVG"><span data-t="btnSvg"></span></button>
+        <button type="button" class="btn" data-action="exportPNG">PNG 300 dpi</button>
+        <button type="button" class="btn" data-action="exportSheetSVG"><span data-t="btnSheet"></span></button>
+        <button type="button" class="btn btn-primary" data-action="doPrint"><span data-t="btnPrint"></span></button>
+      </div>
+    </header>
+
+    <div class="canvas">
+      <div class="preview-block">
+        <div class="caption"><span data-bind="editLine"></span></div>
+        <div class="preview-card"><div class="label-preview"></div></div>
+      </div>
+      <div class="real-block">
+        <div class="real-head">
+          <div class="caption"><span data-t="realHdr"></span></div>
+          <nav class="seg">
+            <button type="button" class="seg-btn" data-v="label" data-action="setRealView"><span data-t="byLabel"></span></button>
+            <button type="button" class="seg-btn" data-v="page" data-action="setRealView"><span data-t="fullPage"></span></button>
+          </nav>
+        </div>
+        <div class="real-label" data-if="isRealLabel"><div class="label-real"></div></div>
+        <div class="real-page" data-if="isRealPage">
+          <div class="page-info">A4 — <span data-bind="pageInfo"></span></div>
+          <div class="sheets"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<div class="print-root" data-print="1"><div class="print-sheets"></div></div>
+</body>
+</html>
