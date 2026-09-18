@@ -895,8 +895,12 @@ button {
 
 /* ---------- print ---------- */
 
+/* One A4 page per sheet, nothing else (review I13): a single @page rule (above), a white page behind the
+   sheets, exact colours for the sheets only, and no page break after the last sheet. */
 .print-root {
   display: none;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
 }
 
 .print-sheet {
@@ -906,12 +910,15 @@ button {
   break-after: page;
 }
 
+.print-sheet:last-child {
+  break-after: auto;
+}
+
 @media print {
-  *,
-  *::before,
-  *::after {
-    print-color-adjust: exact;
-    -webkit-print-color-adjust: exact;
+  html,
+  body {
+    height: auto;
+    background: #fff;
   }
 
   [data-screen] {
