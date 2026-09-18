@@ -88,7 +88,12 @@ button {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  max-height: 100vh;
+  /* Pinned to the viewport: scrolling the preview never moves it */
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  box-sizing: border-box;
+  height: 100vh;
   overflow-y: auto;
 }
 
