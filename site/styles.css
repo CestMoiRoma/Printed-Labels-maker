@@ -357,6 +357,12 @@ button {
   white-space: nowrap;
 }
 
+/* the controls keep their width whatever the title length (the export let them shrink) */
+.row-copies,
+.row-btn {
+  flex: 0 0 auto;
+}
+
 .row-copies {
   width: 44px;
   box-sizing: border-box;
