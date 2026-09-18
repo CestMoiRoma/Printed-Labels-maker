@@ -3,7 +3,7 @@
 Usage: fidelity.py EXPORT_HTML OUT_DIR
   EXPORT_HTML  a Claude Design export (*.dc.html), with its support.js next to it, inside the repo
 
-Plays the same scenario on the export (run offline: CDN requests are answered from the vendored files) and
+Plays the same scenario on the export (CDN scripts answered from the vendored files, fonts from Google) and
 on site/index.html, in the same deterministic browser (test/ci/golden.py). For every state it compares:
   - full-page screenshots, pixel for pixel, no tolerance;
   - the downloaded "SVG (1 label)" and "SVG sheet" files, byte for byte (in the states that export);

@@ -241,7 +241,9 @@ function setState(patch) {
 }
 
 // ---------- helpers ----------
-const FONT_CSS = (f) => "vendor/fonts/" + f.toLowerCase().replace(/\s+/g, "-") + ".css";
+// Label fonts come straight from Google Fonts (site/_headers allows its two origins). `just local` serves the
+// site with this origin rewritten to downloaded copies (tools/local.py), to run it offline.
+const FONT_CSS = (f) => "https://fonts.googleapis.com/css2?family=" + f.replace(/\s+/g, "+") + ":wght@400;500;700&display=swap";
 // Resolves once the family's stylesheet and its 400, 500 and 700 faces are loaded (or failed). Labels are
 // measured on a canvas: measuring before the font is there gives the fallback font's line breaks.
 // document.fonts.load() alone is not enough: before the stylesheet arrives it resolves at once.

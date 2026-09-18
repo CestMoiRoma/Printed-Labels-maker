@@ -7,6 +7,7 @@ excludes = [
   "**/.venv/**", "**/.ruff_cache/**", "test-reports/**",
   "site/vendor/**",              # vendored third-party files, kept byte for byte as published upstream
   "test/screenshot/**",          # goldens
+  "local/**",                    # just local: downloaded fonts, git-ignored
   "package-lock.json",           # generated
 ]
 on-unmatched = "debug"

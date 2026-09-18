@@ -2,9 +2,9 @@
 
 - every asset the HTML references exists, and every site file is referenced (no orphan), the Cloudflare
   configuration file _headers apart (not an asset, see test_headers.py);
-- no URL outside the allow-list: the site loads nothing from a CDN;
+- no URL outside the allow-list: the site loads nothing from a CDN but its fonts (Google Fonts);
 - site/vendor/ holds exactly the files of its manifest, byte for byte (tools/vendor.py);
-- the vendored fonts, icons and libraries cover what app.js asks for.
+- the vendored icons and libraries cover what app.js asks for, and no font is vendored.
 """
 
 import hashlib
@@ -17,8 +17,22 @@ SITE = REPO / "site"
 VENDOR = SITE / "vendor"
 REFERENCE = REPO / "test" / "site" / "reference"
 
-# Absolute URLs allowed in the site's own files: the SVG namespace (not fetched) and the source link.
-ALLOWED_URLS = {"http://www.w3.org/2000/svg", "https://github.com/CestMoiRoma/Printed-Labels-maker"}
+# Google Fonts stylesheets: the interface font (index.html) and a label font as loadFont() builds it
+# (FONT_CSS in app.js).
+UI_FONTS_URL = (
+    "https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700"
+    "&family=JetBrains+Mono:wght@400;500&display=swap"
+)
+FONT_CSS_PREFIX = "https://fonts.googleapis.com/css2?family="
+FONT_CSS_SUFFIX = ":wght@400;500;700&display=swap"
+# Absolute URLs allowed in the site's own files: the SVG namespace (not fetched), the source link and the
+# Google Fonts stylesheets.
+ALLOWED_URLS = {
+    "http://www.w3.org/2000/svg",
+    "https://github.com/CestMoiRoma/Printed-Labels-maker",
+    UI_FONTS_URL,
+    FONT_CSS_PREFIX,
+}
 OWN_FILES = ["index.html", "styles.css", "app.js"]
 # Cloudflare configuration read at deploy time, never served (wrangler leaves it out of the upload);
 # checked by test_headers.py.
@@ -41,9 +55,10 @@ def test_site_holds_only_its_own_files_and_vendor():
 def test_html_references_exist():
     html = own_text()["index.html"]
     refs = re.findall(r'(?<![\w-])(?:src|href)="([^"#:]+)"', html)
-    assert sorted(refs) == ["app.js", "styles.css", "vendor/fonts/ui.css", "vendor/qrcode-svg/qrcode.min.js"]
+    assert sorted(refs) == ["app.js", "styles.css", "vendor/qrcode-svg/qrcode.min.js"]
     for ref in refs:
         assert (SITE / ref).is_file(), ref
+    assert '<link rel="stylesheet" href="' + UI_FONTS_URL + '">' in html
 
 
 def test_no_url_outside_the_allow_list():
@@ -70,19 +85,9 @@ def test_vendored_files_cover_what_the_app_loads():
     files = set(manifest(VENDOR / "SOURCES.json")["files"])
     missing_icons = set(manifest(VENDOR / "SOURCES.json")["meta"]["material-symbols"]["missing"])
     assert "vendor/mdi/mdi.js" in app and "mdi/mdi.js" in files
-    for family in fonts:
-        assert "fonts/" + family.lower().replace(" ", "-") + ".css" in files, family
+    # fonts come from Google Fonts, never from the site
+    assert not any(rel.startswith("fonts/") for rel in files)
+    assert '"' + FONT_CSS_PREFIX + '"' in app and '"' + FONT_CSS_SUFFIX + '"' in app
+    assert fonts and all(re.fullmatch(r"[A-Z][A-Za-z ]+", family) for family in fonts), fonts
     for name in icons:
         assert name in missing_icons or "material-symbols/" + name + ".svg" in files, name
-
-
-def test_every_vendored_font_file_is_used_by_a_stylesheet():
-    files = manifest(VENDOR / "SOURCES.json")["files"]
-    used = set()
-    for rel in files:
-        if rel.endswith(".css"):
-            folder = rel.rsplit("/", 1)[0]
-            css = (VENDOR / rel).read_text(encoding="utf-8")
-            assert "https://" not in css, rel
-            used |= {folder + "/" + u for u in re.findall(r"url\(([^)]+)\)", css)}
-    assert used == {rel for rel in files if rel.endswith(".woff2")}

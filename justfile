@@ -58,6 +58,10 @@ ci: ci-image
     just _in-ci test/site/run-tests.sh goldens
     test/ci/check-goldens.sh
 
+# Run the site offline on PORT: fonts downloaded once to local/fonts (git-ignored), Google Fonts pointed at them
+local PORT="8000":
+    python3 tools/local.py {{PORT}}
+
 # Cloudflare (wrangler.jsonc). Native on the host, the exception the playbook allows for builds and deploys:
 # the pinned wrangler of package-lock.json is installed in node_modules/ first.
 

@@ -1,9 +1,10 @@
-"""Serve a folder locally and answer every CDN request from the vendored files: nothing leaves the machine.
+"""Serve a folder locally and answer every CDN request from the vendored files: only Google Fonts is reached.
 
-Shared by the end-to-end scenario and the fidelity harness. The design export requests its libraries and
-fonts from unpkg, jsdelivr and Google Fonts; `route_offline` answers those URLs from `site/vendor/` and
-`test/site/reference/vendor/` (the manifests map each source URL to its local file). Any other external
-request is aborted and recorded, so a new dependency fails the run instead of silently hitting the network.
+Shared by the end-to-end scenario and the fidelity harness. The design export requests its libraries from
+unpkg and jsdelivr; `route_offline` answers those URLs from `site/vendor/` and `test/site/reference/vendor/`
+(the manifests map each source URL to its local file). Fonts, the site's and the export's, are loaded from
+Google Fonts for real, as in production. Any other external request is aborted and recorded, so a new
+dependency fails the run instead of silently hitting the network.
 
 `serve` applies the served folder's Cloudflare `_headers` file (site/_headers) to every response, so the
 scenario runs under the production headers, Content-Security-Policy included.
@@ -22,7 +23,9 @@ REPO = Path(__file__).resolve().parents[2]
 SITE_VENDOR = REPO / "site" / "vendor"
 REF_VENDOR = REPO / "test" / "site" / "reference" / "vendor"
 
-CONTENT_TYPES = {".js": "text/javascript", ".css": "text/css", ".svg": "image/svg+xml", ".woff2": "font/woff2"}
+CONTENT_TYPES = {".js": "text/javascript", ".css": "text/css", ".svg": "image/svg+xml"}
+# Loaded from the network: the fonts are not vendored (index.html, loadFont in app.js).
+GOOGLE_FONTS_HOSTS = ("fonts.googleapis.com", "fonts.gstatic.com")
 
 HEADERS_FILE = "_headers"
 # Limits of the Cloudflare parser (wrangler's parseHeaders): over them, lines or rules are dropped.
@@ -151,13 +154,10 @@ def route_offline(context, blocked):
     def handle(route):
         url = route.request.url
         host = urlsplit(url).hostname
-        if host in ("127.0.0.1", "localhost") or url.startswith(("data:", "blob:")):
+        if host in ("127.0.0.1", "localhost", *GOOGLE_FONTS_HOSTS) or url.startswith(("data:", "blob:")):
             route.continue_()
             return
         path = mapping.get(url)
-        if path is None and host == "fonts.googleapis.com" and not urlsplit(url).path.startswith("/css"):
-            # woff2 files referenced relatively from a vendored stylesheet served under that origin
-            path = SITE_VENDOR / "fonts" / urlsplit(url).path.lstrip("/")
         headers = {"access-control-allow-origin": "*"}
         if path is not None and path.is_file():
             content_type = (

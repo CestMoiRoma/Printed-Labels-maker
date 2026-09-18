@@ -11,10 +11,10 @@ date), pick an icon, set the size, and the page lays them out on A4 with crop
 marks. Print it, or save it as a PDF from the print dialog, cut along the marks,
 done.
 
-Everything happens in the browser. There is no account and no server code, and
-the page never talks to anything but its own files: fonts, icons and the QR
-generator are all copies kept in this repository. The flip side is that nothing
-is saved either. Reload the page and the list is gone, so if you have forty
+Everything happens in the browser. There is no account and no server code. The
+icons and the QR generator are copies kept in this repository, and the fonts
+come from Google Fonts. Nothing you type is sent anywhere, but nothing is saved
+either. Reload the page and the list is gone, so if you have forty
 labels to make, keep them in a text file and paste them in (see below).
 
 ## What it does
@@ -71,19 +71,31 @@ and records its source URL and SHA-256 in `site/vendor/SOURCES.json`.
 `tools/vendor.py --check` verifies the files on disk against that list without
 touching the network.
 
+Fonts are the exception: the page loads them straight from Google Fonts, both
+the interface font and the 24 label fonts, so the list can grow without the
+repository growing with it.
+
 The site is hosted on Cloudflare Workers as static assets, configured in
 `wrangler.jsonc`. There is no Worker script: Cloudflare serves the files and adds
 the headers from `site/_headers`, which include a Content Security Policy strict
-enough that a request to another origin would simply be blocked.
+enough that a request to any origin other than the site and Google Fonts would
+simply be blocked.
 
 ## Working on it
 
-You need [just](https://github.com/casey/just), Docker, and Node 22 for the
-local server. Run `just` on its own to see every recipe.
+You need [just](https://github.com/casey/just), Docker, Python 3 and Node 22.
+Run `just` on its own to see every recipe.
 
 ```sh
+just local                   # the site on http://127.0.0.1:8000/, works offline
 just dev                     # local server with the production headers (wrangler dev)
 ```
+
+`just local` downloads every font once into `local/fonts/`, which git ignores,
+then serves `site/` with the Google Fonts links pointed at that folder. After the
+first run it needs no network at all, which is handy on a train. The rewrite
+happens in the local server (`tools/local.py`), so the site itself has no
+offline mode to keep in step. Delete `local/fonts/` to fetch the fonts again.
 
 Lint, tests and screenshots all run inside one pinned Docker image, the same
 one CI uses, so a result on a laptop means the same thing as a result on GitHub.
@@ -101,7 +113,11 @@ just ci                      # exactly what CI runs, in the same order
 every screen: importing a list, editing rows, the three tabs, fonts, icon
 search, QR, the print modes, a couple of languages. Each step checks what it
 expects to see before it takes a picture, and any console error or request
-leaving the machine fails the run.
+to somewhere other than Google Fonts fails the run.
+
+The fonts come from Google during the tests too. If Google ships a new version
+of one, the screenshots can change without any change here: regenerate them and
+check the diff is only the font.
 
 The pictures are committed under `test/screenshot/site/` and CI fails if a run
 produces different bytes. So a change that moves a single pixel shows up in

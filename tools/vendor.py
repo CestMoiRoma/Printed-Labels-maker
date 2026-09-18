@@ -5,13 +5,14 @@ Usage: tools/vendor.py            fetch everything, write the files and the mani
        tools/vendor.py --check    verify the files on disk against the manifests (no network)
 
 Outputs:
-  site/vendor/                    files served by the site (QR generator, icons, fonts)
+  site/vendor/                    files served by the site (QR generator, icons)
   site/vendor/SOURCES.json        local path -> source URL (as the Claude Design export requested it) + SHA-256
   test/site/reference/vendor/     React UMD builds, only needed to run a Claude Design export offline (fidelity.py)
   test/site/reference/SOURCES.json
 
 A Claude Design export loads these from CDNs; the static site and the fidelity harness load them from
-here, so nothing is fetched from the network at runtime.
+here. Fonts are not vendored: the site loads them from Google Fonts (tools/local.py downloads a copy to run
+the site offline).
 Native host tool (a build step): stdlib only.
 """
 
@@ -29,8 +30,6 @@ SITE_VENDOR = ROOT / "site" / "vendor"
 REF_VENDOR = ROOT / "test" / "site" / "reference" / "vendor"
 APP = ROOT / "site" / "app.js"
 
-# A current Chrome user agent: Google Fonts serves woff2 with unicode-range subsets for it.
-CHROME_UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36"
 MATERIAL_VERSION = "0.47.4"
 MATERIAL_URL = "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/{name}.svg"
 MATERIAL_PINNED = "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400@{version}/outlined/{name}.svg"
@@ -45,33 +44,16 @@ REFERENCE_SCRIPTS = {
     "react.production.min.js": "https://unpkg.com/react@18.3.1/umd/react.production.min.js",
     "react-dom.production.min.js": "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js",
 }
-UI_FONTS_URL = (
-    "https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700"
-    "&family=JetBrains+Mono:wght@400;500&display=swap"
-)
 
 
-def label_font_url(family):
-    """The exact stylesheet URL loadFont() of the Claude Design export built (the site keeps its lists)."""
-    return "https://fonts.googleapis.com/css2?family=" + family.replace(" ", "+") + ":wght@400;500;700&display=swap"
+def app_icons():
+    """The MAT array, read from site/app.js so the list never drifts."""
+    match = re.search(r"const MAT = (\[.*?\]);", APP.read_text(encoding="utf-8"))
+    return json.loads(match.group(1))
 
 
-def slug(family):
-    return family.lower().replace(" ", "-")
-
-
-def app_constants():
-    """FONTS and MAT arrays, read from site/app.js so the lists never drift."""
-    text = APP.read_text(encoding="utf-8")
-    out = {}
-    for name in ("FONTS", "MAT"):
-        match = re.search(r"const " + name + r" = (\[.*?\]);", text)
-        out[name] = json.loads(match.group(1))
-    return out
-
-
-def fetch(url, user_agent=None):
-    request = urllib.request.Request(url, headers={"User-Agent": user_agent or "printed-labels-maker-vendor"})
+def fetch(url):
+    request = urllib.request.Request(url, headers={"User-Agent": "printed-labels-maker-vendor"})
     with urllib.request.urlopen(request, timeout=60) as response:
         return response.read()
 
@@ -87,24 +69,7 @@ def write(base, rel, data, manifest, url):
     manifest[rel] = {"url": url, "sha256": sha256(data)}
 
 
-def vendor_css(css_url, rel_css, manifest):
-    """Save a Google Fonts stylesheet with its woff2 files next to it, URLs made relative."""
-    css = fetch(css_url, CHROME_UA).decode("utf-8")
-    folder = Path(rel_css).stem
-
-    def localize(match):
-        font_url = match.group(1)
-        rel_font = folder + "/" + font_url.rsplit("/", 1)[1]
-        if "fonts/" + rel_font not in manifest:
-            write(SITE_VENDOR, "fonts/" + rel_font, fetch(font_url, CHROME_UA), manifest, font_url)
-        return "url(" + rel_font + ")"
-
-    css = re.sub(r"url\((https://fonts\.gstatic\.com/[^)]+)\)", localize, css)
-    write(SITE_VENDOR, rel_css, css.encode("utf-8"), manifest, css_url)
-
-
 def run_fetch():
-    constants = app_constants()
     site_manifest, ref_manifest = {}, {}
 
     for rel, url in SCRIPTS.items():
@@ -113,7 +78,7 @@ def run_fetch():
         write(REF_VENDOR, rel, fetch(url), ref_manifest, url)
 
     missing = []
-    for name in constants["MAT"]:
+    for name in app_icons():
         upstream = MATERIAL_RENAMED.get(name, name)
         pinned = MATERIAL_PINNED.format(version=MATERIAL_VERSION, name=upstream)
         try:
@@ -126,10 +91,6 @@ def run_fetch():
         # a renamed icon records its real source: the design export's URL for the old name would 404
         source = pinned if upstream != name else MATERIAL_URL.format(name=name)
         write(SITE_VENDOR, "material-symbols/" + name + ".svg", data, site_manifest, source)
-
-    vendor_css(UI_FONTS_URL, "fonts/ui.css", site_manifest)
-    for family in constants["FONTS"]:
-        vendor_css(label_font_url(family), "fonts/" + slug(family) + ".css", site_manifest)
 
     meta = {"material-symbols": {"version": MATERIAL_VERSION, "missing": missing}}
     dump(SITE_VENDOR / "SOURCES.json", {"meta": meta, "files": site_manifest})

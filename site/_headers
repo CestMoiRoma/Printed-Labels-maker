@@ -2,13 +2,15 @@
 # The end-to-end scenario serves site/ with the same headers (test/site/offline.py), so it runs under
 # this exact CSP: any violation is a console error, which fails it.
 #
-# CSP: everything is same-origin. data: images are the imported logo (FileReader) and the PNG export
+# CSP: everything is same-origin but the fonts, loaded from Google Fonts (the interface font by index.html,
+# the label fonts by loadFont in app.js): the stylesheets from fonts.googleapis.com, the woff2 files they
+# point to from fonts.gstatic.com. data: images are the imported logo (FileReader) and the PNG export
 # (an SVG drawn through an <img>); downloads are blob: links, a navigation no fetch directive governs.
 # app.js writes style="" attributes in generated markup (flags, labels), hence 'unsafe-inline' for
 # styles. It is not narrowed to style-src-attr because the goldens' freeze sheet (test/ci/golden.py) is
 # an inline <style> element. Scripts: same-origin files only, no inline script, no eval.
 /*
-  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: no-referrer

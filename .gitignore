@@ -3,3 +3,5 @@
 .wrangler/
 .dev.vars
 node_modules/
+# just local: fonts downloaded from Google Fonts to run the site offline (tools/local.py)
+local/

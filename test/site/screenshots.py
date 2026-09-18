@@ -5,7 +5,8 @@ deterministic Chromium of test/ci/golden.py through every screen and state:
 language menu, pasted import, row list edits, the three tabs, presets, QR, auto-fit, fonts, numeric errors,
 icon search (loading, results, empty), image import, print modes, full-page view, print media, PDF and
 downloads, and two more languages. Each step asserts behaviour (verbatim texts, visible elements, counts)
-before its capture. Any page error, console error, request leaving the machine or missing element fails.
+before its capture. Any page error, console error, external request (Google Fonts apart) or missing element
+fails.
 
 Captures are desktop viewport screenshots (1280x820) named NN-state.png in scenario order. Before every
 capture the focus is dropped and every scroll position is set: document, main area, fields and icon grid at
@@ -521,7 +522,7 @@ def main(out_dir):
     finally:
         server.shutdown()
         for url in blocked:
-            print(f"blocked request (the site must load nothing external): {url}")
+            print(f"blocked request (the site loads nothing external but Google Fonts): {url}")
         for error in errors:
             print(error)
     if scenario is not None:
