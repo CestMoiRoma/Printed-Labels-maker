@@ -1,0 +1,1138 @@
+{
+  "files": {
+    "fonts/archivo.css": {
+      "sha256": "9878c3604e90319a4d426abc18e263dd6880203452e8f21449f92f7185fd7bf8",
+      "url": "https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&display=swap"
+    },
+    "fonts/archivo/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLySOxK-vA.woff2": {
+      "sha256": "5a621c5598a31392555104ccdc41a46c3104f1cc22666024a8afb881ca9adaab",
+      "url": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLySOxK-vA.woff2"
+    },
+    "fonts/archivo/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLyTOxK-vA.woff2": {
+      "sha256": "ff4f17d21930e36d6d93baba663e624cb767afc3feebf7adaebd82242638de05",
+      "url": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLyTOxK-vA.woff2"
+    },
+    "fonts/archivo/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2": {
+      "sha256": "8f704806dbedeaaeca334b11ec348bc3ac3a439d6431544b3afb54f534ee4967",
+      "url": "https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2"
+    },
+    "fonts/barlow.css": {
+      "sha256": "3a65c4d6780d65569557952958527f4f71c154ee8f214df0107cdbd4384dc17d",
+      "url": "https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&display=swap"
+    },
+    "fonts/barlow/7cHpv4kjgoGqM7E_A8s52Hs.woff2": {
+      "sha256": "fef1e3c39d06f701c21120978484610a6848dc357d1ec603421927d709016b10",
+      "url": "https://fonts.gstatic.com/s/barlow/v13/7cHpv4kjgoGqM7E_A8s52Hs.woff2"
+    },
+    "fonts/barlow/7cHpv4kjgoGqM7E_Ass52Hs.woff2": {
+      "sha256": "122b24bc2a90b0abe189f5229768bf2e9ba641324fe2459b48850079625934f1",
+      "url": "https://fonts.gstatic.com/s/barlow/v13/7cHpv4kjgoGqM7E_Ass52Hs.woff2"
+    },
+    "fonts/barlow/7cHpv4kjgoGqM7E_DMs5.woff2": {
+      "sha256": "b0a8ad37ac45f5fb22ced461576db72e44e295107aad7a9c8a7a4bad728fd03b",
+      "url": "https://fonts.gstatic.com/s/barlow/v13/7cHpv4kjgoGqM7E_DMs5.woff2"
+    },
+    "fonts/barlow/7cHqv4kjgoGqM7E3_-gs51os.woff2": {
+      "sha256": "cd759df8ef9efc98fee14307b4eb5ba27f08b1f8f2f3ad2872432e25c89907a8",
+      "url": "https://fonts.gstatic.com/s/barlow/v13/7cHqv4kjgoGqM7E3_-gs51os.woff2"
+    },
+    "fonts/barlow/7cHqv4kjgoGqM7E3_-gs6FospT4.woff2": {
+      "sha256": "ba426fe513fa9e7e053ae6cf15132bb0ee3a076c634d0a02a0d221c66d74ea5e",
+      "url": "https://fonts.gstatic.com/s/barlow/v13/7cHqv4kjgoGqM7E3_-gs6FospT4.woff2"
+    },
+    "fonts/barlow/7cHqv4kjgoGqM7E3_-gs6VospT4.woff2": {
+      "sha256": "3facdf66b60778c7e64693013be7799e6686b2488dad65525b4036e211ab03e0",
+      "url": "https://fonts.gstatic.com/s/barlow/v13/7cHqv4kjgoGqM7E3_-gs6VospT4.woff2"
+    },
+    "fonts/barlow/7cHqv4kjgoGqM7E3t-4s51os.woff2": {
+      "sha256": "2d797dd8b35dcb3413e1af9d7052b3f4f8c341a147cdcb01f4f06af80db53289",
+      "url": "https://fonts.gstatic.com/s/barlow/v13/7cHqv4kjgoGqM7E3t-4s51os.woff2"
+    },
+    "fonts/barlow/7cHqv4kjgoGqM7E3t-4s6FospT4.woff2": {
+      "sha256": "73b48c8588dc2bf62ee6c47f6e5d3074dd4098e1cc3f9082752f0d5776097d66",
+      "url": "https://fonts.gstatic.com/s/barlow/v13/7cHqv4kjgoGqM7E3t-4s6FospT4.woff2"
+    },
+    "fonts/barlow/7cHqv4kjgoGqM7E3t-4s6VospT4.woff2": {
+      "sha256": "88c786d5fa8700a201615bc7b8ede09d209ec5d08cc3dd0a30ea1c4baff3476f",
+      "url": "https://fonts.gstatic.com/s/barlow/v13/7cHqv4kjgoGqM7E3t-4s6VospT4.woff2"
+    },
+    "fonts/bebas-neue.css": {
+      "sha256": "2f2524503d326773eb2d13bcf284410ef8c23d7bfe2225e1296bbaef31028366",
+      "url": "https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@400;500;700&display=swap"
+    },
+    "fonts/bebas-neue/JTUSjIg69CK48gW7PXoo9Wdhyzbi.woff2": {
+      "sha256": "16c95ce45a2922f52551d38d565d14c92cf257b8f219c89613407d81fdd21a39",
+      "url": "https://fonts.gstatic.com/s/bebasneue/v16/JTUSjIg69CK48gW7PXoo9Wdhyzbi.woff2"
+    },
+    "fonts/bebas-neue/JTUSjIg69CK48gW7PXoo9Wlhyw.woff2": {
+      "sha256": "a7c90c89240c134f7fdd33d40c000ec90b79d675ea53e8cc5a6d423c073de412",
+      "url": "https://fonts.gstatic.com/s/bebasneue/v16/JTUSjIg69CK48gW7PXoo9Wlhyw.woff2"
+    },
+    "fonts/bitter.css": {
+      "sha256": "5fd9daefd968baea273340fa0076506c4a609b82822053792301877be7af529c",
+      "url": "https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;700&display=swap"
+    },
+    "fonts/bitter/rax8HiqOu8IVPmn7cIxpPDk.woff2": {
+      "sha256": "677a15528f70117202aadce77d5935dfb211ee355685361a608f891f02719bc7",
+      "url": "https://fonts.gstatic.com/s/bitter/v42/rax8HiqOu8IVPmn7cIxpPDk.woff2"
+    },
+    "fonts/bitter/rax8HiqOu8IVPmn7cYxpPDk.woff2": {
+      "sha256": "8c1f1559771de47e1f30a87c2bf501d46f42fabc4d93361f4401de05d8e6efa6",
+      "url": "https://fonts.gstatic.com/s/bitter/v42/rax8HiqOu8IVPmn7cYxpPDk.woff2"
+    },
+    "fonts/bitter/rax8HiqOu8IVPmn7coxpPDk.woff2": {
+      "sha256": "c69d2bda962f308bc4c8d02844aa09b56bc40a70d643f24cf372889a925e76d4",
+      "url": "https://fonts.gstatic.com/s/bitter/v42/rax8HiqOu8IVPmn7coxpPDk.woff2"
+    },
+    "fonts/bitter/rax8HiqOu8IVPmn7e4xpPDk.woff2": {
+      "sha256": "7dc895ee73b3edc380c4406a0422db3a8d00ae676bc2bb5939d40e8986c85c14",
+      "url": "https://fonts.gstatic.com/s/bitter/v42/rax8HiqOu8IVPmn7e4xpPDk.woff2"
+    },
+    "fonts/bitter/rax8HiqOu8IVPmn7f4xp.woff2": {
+      "sha256": "0efe0fbe6068354f3fad5a88bf31384051206652468eaa22232119354e7ea423",
+      "url": "https://fonts.gstatic.com/s/bitter/v42/rax8HiqOu8IVPmn7f4xp.woff2"
+    },
+    "fonts/cabin.css": {
+      "sha256": "dd449dc7b05e59c04760f30d60c772e0d5b136cfee85ca9c9778d7185c67d2c7",
+      "url": "https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;700&display=swap"
+    },
+    "fonts/cabin/u-4i0qWljRw-PfU81xCKCpdpbgZJl6Xvp9nsBXw.woff2": {
+      "sha256": "ec264e73a67355ac50685bd34a62852d8db06bfb03aeca9e88119ef1b9dea72e",
+      "url": "https://fonts.gstatic.com/s/cabin/v35/u-4i0qWljRw-PfU81xCKCpdpbgZJl6Xvp9nsBXw.woff2"
+    },
+    "fonts/cabin/u-4i0qWljRw-PfU81xCKCpdpbgZJl6XvptnsBXw.woff2": {
+      "sha256": "c1b511c31241a9193668530a61fe232496f5a324cbe431a44f5b6cc6b2fdda1e",
+      "url": "https://fonts.gstatic.com/s/cabin/v35/u-4i0qWljRw-PfU81xCKCpdpbgZJl6XvptnsBXw.woff2"
+    },
+    "fonts/cabin/u-4i0qWljRw-PfU81xCKCpdpbgZJl6Xvqdns.woff2": {
+      "sha256": "f51448b0b7f024d139fb7598d21b4e06e8174268ac93fc26cc2d4196144cb672",
+      "url": "https://fonts.gstatic.com/s/cabin/v35/u-4i0qWljRw-PfU81xCKCpdpbgZJl6Xvqdns.woff2"
+    },
+    "fonts/dm-sans.css": {
+      "sha256": "09b9aa170756482e61fd68c9215fd67e2545c50089c1e5bb8f68e2bed00420cf",
+      "url": "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
+    },
+    "fonts/dm-sans/rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu0-K4.woff2": {
+      "sha256": "9fea608a947e67020c33cad9a6fe3d60c54119dfb8cff87768a8117a15ed7543",
+      "url": "https://fonts.gstatic.com/s/dmsans/v17/rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu0-K4.woff2"
+    },
+    "fonts/dm-sans/rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu6-K6h9Q.woff2": {
+      "sha256": "a5d38fe99f930275684999b462c7123faa063d9e44e73b4b241723d884aa0f49",
+      "url": "https://fonts.gstatic.com/s/dmsans/v17/rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu6-K6h9Q.woff2"
+    },
+    "fonts/fraunces.css": {
+      "sha256": "503282cdd5eef166607d4f7beeba02873a86934c2d693d65c3d616dc2fa5ea36",
+      "url": "https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;700&display=swap"
+    },
+    "fonts/fraunces/6NUu8FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0K7iN7hzFUPJH58nib14c0qv86Rg.woff2": {
+      "sha256": "ce7b18aac7371cde4a740e54e252e9f02de67ff2ed444b18d1d04e66f50edeb0",
+      "url": "https://fonts.gstatic.com/s/fraunces/v38/6NUu8FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0K7iN7hzFUPJH58nib14c0qv86Rg.woff2"
+    },
+    "fonts/fraunces/6NUu8FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0K7iN7hzFUPJH58nib14c1qv86Rg.woff2": {
+      "sha256": "a21ecfbf41fbc393e24ef9b7e38532a27e8da5e0a074aa7d66802d1b5ccec2f0",
+      "url": "https://fonts.gstatic.com/s/fraunces/v38/6NUu8FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0K7iN7hzFUPJH58nib14c1qv86Rg.woff2"
+    },
+    "fonts/fraunces/6NUu8FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0K7iN7hzFUPJH58nib14c7qv8.woff2": {
+      "sha256": "7f9d191d999336d3b9790afa72e1358e50a13b06d4f289341e92a311967a80f9",
+      "url": "https://fonts.gstatic.com/s/fraunces/v38/6NUu8FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0K7iN7hzFUPJH58nib14c7qv8.woff2"
+    },
+    "fonts/ibm-plex-mono.css": {
+      "sha256": "94569a6e224ca130f63fb773311fbc5219c6c27cdcba81ed8f31727b8c0b1c39",
+      "url": "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap"
+    },
+    "fonts/ibm-plex-mono/-F63fjptAgt5VM-kVkqdyU8n1i8q1w.woff2": {
+      "sha256": "08949f728dc52d528e69b1667d15c89a5686a4ee9a296ff90983985f99c380f7",
+      "url": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F63fjptAgt5VM-kVkqdyU8n1i8q1w.woff2"
+    },
+    "fonts/ibm-plex-mono/-F63fjptAgt5VM-kVkqdyU8n1iAq129k.woff2": {
+      "sha256": "62632b6375305e70ddcafdd895218e6ae41a184fcd280a69c739460604ca00a9",
+      "url": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F63fjptAgt5VM-kVkqdyU8n1iAq129k.woff2"
+    },
+    "fonts/ibm-plex-mono/-F63fjptAgt5VM-kVkqdyU8n1iEq129k.woff2": {
+      "sha256": "6bc0f226a5b7884a8170e3f62c63d7675609d4631bdc5931b5cdab81821f00eb",
+      "url": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F63fjptAgt5VM-kVkqdyU8n1iEq129k.woff2"
+    },
+    "fonts/ibm-plex-mono/-F63fjptAgt5VM-kVkqdyU8n1iIq129k.woff2": {
+      "sha256": "f8c22ec1804bd6966b70f43ac7c327025645b4c09597117fca2a5a6c750106fe",
+      "url": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F63fjptAgt5VM-kVkqdyU8n1iIq129k.woff2"
+    },
+    "fonts/ibm-plex-mono/-F63fjptAgt5VM-kVkqdyU8n1isq129k.woff2": {
+      "sha256": "7635422bd10ddbbcb0e0caa1154b928298f5c8319b8c00b30978d4395f4783ce",
+      "url": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F63fjptAgt5VM-kVkqdyU8n1isq129k.woff2"
+    },
+    "fonts/ibm-plex-mono/-F6qfjptAgt5VM-kVkqdyU8n3pQPwl1FgtIU.woff2": {
+      "sha256": "31fbbf2279dd1bdfb9176a5d61dd85d77206ccba92a43ea5665210ee4ef9b6fa",
+      "url": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F6qfjptAgt5VM-kVkqdyU8n3pQPwl1FgtIU.woff2"
+    },
+    "fonts/ibm-plex-mono/-F6qfjptAgt5VM-kVkqdyU8n3pQPwl5FgtIU.woff2": {
+      "sha256": "5b9b81f54dd69635c7adcaacd4c4545a73fe4809c528e22734b238a83a74135f",
+      "url": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F6qfjptAgt5VM-kVkqdyU8n3pQPwl5FgtIU.woff2"
+    },
+    "fonts/ibm-plex-mono/-F6qfjptAgt5VM-kVkqdyU8n3pQPwl9FgtIU.woff2": {
+      "sha256": "6de519604eba816d624fbe830bff8123d8e8fd4921d60182b442adc8e9d66c19",
+      "url": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F6qfjptAgt5VM-kVkqdyU8n3pQPwl9FgtIU.woff2"
+    },
+    "fonts/ibm-plex-mono/-F6qfjptAgt5VM-kVkqdyU8n3pQPwlBFgg.woff2": {
+      "sha256": "4f84d86cfd060f4ded334358ff8a4c81d4db2ed5addd568359d693f44a87765a",
+      "url": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F6qfjptAgt5VM-kVkqdyU8n3pQPwlBFgg.woff2"
+    },
+    "fonts/ibm-plex-mono/-F6qfjptAgt5VM-kVkqdyU8n3pQPwlRFgtIU.woff2": {
+      "sha256": "104701bedfa06b56abba3e273f3ed74d7235d02c00ddc6ca942d65e2940fe6fe",
+      "url": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F6qfjptAgt5VM-kVkqdyU8n3pQPwlRFgtIU.woff2"
+    },
+    "fonts/ibm-plex-mono/-F6qfjptAgt5VM-kVkqdyU8n3twJwl1FgtIU.woff2": {
+      "sha256": "3febe5c7f22e4b07b4552738673c3dbe8bced2dc5f48b866edf7ccd9552d109a",
+      "url": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F6qfjptAgt5VM-kVkqdyU8n3twJwl1FgtIU.woff2"
+    },
+    "fonts/ibm-plex-mono/-F6qfjptAgt5VM-kVkqdyU8n3twJwl5FgtIU.woff2": {
+      "sha256": "6bb06407c97584b0867a959e05e8874693bfeb8c317de190811c51598f2d99ea",
+      "url": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F6qfjptAgt5VM-kVkqdyU8n3twJwl5FgtIU.woff2"
+    },
+    "fonts/ibm-plex-mono/-F6qfjptAgt5VM-kVkqdyU8n3twJwl9FgtIU.woff2": {
+      "sha256": "781633d95de88040fb77141d1e65d928c87c0144691fbc74da5a64d137a7e910",
+      "url": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F6qfjptAgt5VM-kVkqdyU8n3twJwl9FgtIU.woff2"
+    },
+    "fonts/ibm-plex-mono/-F6qfjptAgt5VM-kVkqdyU8n3twJwlBFgg.woff2": {
+      "sha256": "01d285447409c8a588692162439a038b8cbd7871309ee20267b0d2d91c6e8e22",
+      "url": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F6qfjptAgt5VM-kVkqdyU8n3twJwlBFgg.woff2"
+    },
+    "fonts/ibm-plex-mono/-F6qfjptAgt5VM-kVkqdyU8n3twJwlRFgtIU.woff2": {
+      "sha256": "1d89462e86cb8e87e7e9d6f6635605bd7c3081baca6caaecee84916bf7b60edc",
+      "url": "https://fonts.gstatic.com/s/ibmplexmono/v20/-F6qfjptAgt5VM-kVkqdyU8n3twJwlRFgtIU.woff2"
+    },
+    "fonts/ibm-plex-sans.css": {
+      "sha256": "b9803e4908dc997961177ee6831b622e4fc69692a4869f2e74bc5ee0a915440b",
+      "url": "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap"
+    },
+    "fonts/ibm-plex-sans/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxQKYbABA.woff2": {
+      "sha256": "d160e20920ae4d6556518d352d3af27a74e9b0de3d8fe17b1c1044fc75aa2f81",
+      "url": "https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxQKYbABA.woff2"
+    },
+    "fonts/ibm-plex-sans/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxRKYbABA.woff2": {
+      "sha256": "73e7f7b1c980416ae0c2461268b14c7cfcce0668e683dc43fbb11a82a227b9f2",
+      "url": "https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxRKYbABA.woff2"
+    },
+    "fonts/ibm-plex-sans/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxTKYbABA.woff2": {
+      "sha256": "7d0037a170882a49e65a45c38ef195237bb07b1cc791d078379f0ac0d7ae1935",
+      "url": "https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxTKYbABA.woff2"
+    },
+    "fonts/ibm-plex-sans/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxaKYbABA.woff2": {
+      "sha256": "9409ee21811f0f5272b7e1d828fe8838005b0573481ef906e7e55b63f6610ab0",
+      "url": "https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxaKYbABA.woff2"
+    },
+    "fonts/ibm-plex-sans/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxdKYbABA.woff2": {
+      "sha256": "f598dd0700f155e2facfaa8ecfacace397d4c2c153e9ce37ab7ad310e8505bc2",
+      "url": "https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxdKYbABA.woff2"
+    },
+    "fonts/ibm-plex-sans/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxeKYY.woff2": {
+      "sha256": "e2291e842cf5af167122a22881a740c7f2dda7716f1e8cd76680264f4a859470",
+      "url": "https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxeKYY.woff2"
+    },
+    "fonts/jetbrains-mono.css": {
+      "sha256": "0cfd083b220a2ac053d2e5a299d14aaafb9531c9eab9df4c0d5a78d3aadfe604",
+      "url": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap"
+    },
+    "fonts/jetbrains-mono/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx3cwhsk.woff2": {
+      "sha256": "62213be8a78b42f1e29d1452d91e2f8b3e745572a9dd98d3941e39fa00b37d76",
+      "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx3cwhsk.woff2"
+    },
+    "fonts/jetbrains-mono/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx7cwhsk.woff2": {
+      "sha256": "db5ff4db83e580426280e9337a58dc57d3a83784a1b03ad80914651594441d52",
+      "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx7cwhsk.woff2"
+    },
+    "fonts/jetbrains-mono/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2": {
+      "sha256": "83c005d49d8a6a50474c73a5a36ac0468076e9c4a29da7bdb14995d80560a5be",
+      "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2"
+    },
+    "fonts/jetbrains-mono/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxPcwhsk.woff2": {
+      "sha256": "0a557721b1f8b36d3f3f84442689a71ca4a744300abcb46a1953f51bfc663b66",
+      "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxPcwhsk.woff2"
+    },
+    "fonts/jetbrains-mono/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxTcwhsk.woff2": {
+      "sha256": "e17cfd15fb96909d64095015f958207063a0c07191da3512df7d560a781aebdf",
+      "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxTcwhsk.woff2"
+    },
+    "fonts/jetbrains-mono/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx_cwhsk.woff2": {
+      "sha256": "c89b9cc0bc6262bd4f8d8494b6961601f3aefa829d08c2e3635f4d501d3a47c2",
+      "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx_cwhsk.woff2"
+    },
+    "fonts/karla.css": {
+      "sha256": "06308ca5148c3191481e31e8037697007a2bccf99578cfcedd88be68add5b6e8",
+      "url": "https://fonts.googleapis.com/css2?family=Karla:wght@400;500;700&display=swap"
+    },
+    "fonts/karla/qkB9XvYC6trAT55ZBi1ueQVIjQTD-JrIH2G7nytkHRyQ8p4wUje6bg.woff2": {
+      "sha256": "3b1eb09a53fd7b26c107b099b3da5fb2ac90b77297cb3ad713a7b40438ae718b",
+      "url": "https://fonts.gstatic.com/s/karla/v33/qkB9XvYC6trAT55ZBi1ueQVIjQTD-JrIH2G7nytkHRyQ8p4wUje6bg.woff2"
+    },
+    "fonts/karla/qkB9XvYC6trAT55ZBi1ueQVIjQTD-JrIH2G7nytkHRyQ8p4wUjm6bnEr.woff2": {
+      "sha256": "86844b3e23c7d2a62485d23d6ea6e5cedf49d913884dfa64a7028ad2e1064dfe",
+      "url": "https://fonts.gstatic.com/s/karla/v33/qkB9XvYC6trAT55ZBi1ueQVIjQTD-JrIH2G7nytkHRyQ8p4wUjm6bnEr.woff2"
+    },
+    "fonts/libre-franklin.css": {
+      "sha256": "36c2298bd063bff61af32931af5d8922b69d2da63f3b9b2e6163ee51837d8b40",
+      "url": "https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;700&display=swap"
+    },
+    "fonts/libre-franklin/jizDREVItHgc8qDIbSTKq4XkRiUQ2zcLig.woff2": {
+      "sha256": "d5af21ee1adfce9900639b3a5dbd9ff051eeda61cb8b9076ecfb31e59ccc7156",
+      "url": "https://fonts.gstatic.com/s/librefranklin/v20/jizDREVItHgc8qDIbSTKq4XkRiUQ2zcLig.woff2"
+    },
+    "fonts/libre-franklin/jizDREVItHgc8qDIbSTKq4XkRiUR2zcLig.woff2": {
+      "sha256": "61216d8e3efe8c5a26861f8b92dc9a922645c662da95c37bf787a4a774a5c8d5",
+      "url": "https://fonts.gstatic.com/s/librefranklin/v20/jizDREVItHgc8qDIbSTKq4XkRiUR2zcLig.woff2"
+    },
+    "fonts/libre-franklin/jizDREVItHgc8qDIbSTKq4XkRiUS2zcLig.woff2": {
+      "sha256": "b5495470aaa69262bec2dcab60746d2d270a0acfd8d116f5a4e794a0be883526",
+      "url": "https://fonts.gstatic.com/s/librefranklin/v20/jizDREVItHgc8qDIbSTKq4XkRiUS2zcLig.woff2"
+    },
+    "fonts/libre-franklin/jizDREVItHgc8qDIbSTKq4XkRiUb2zcLig.woff2": {
+      "sha256": "8c049f5036f70f6fece472f0bb4498743489f9f35066b6369e69bbe662605368",
+      "url": "https://fonts.gstatic.com/s/librefranklin/v20/jizDREVItHgc8qDIbSTKq4XkRiUb2zcLig.woff2"
+    },
+    "fonts/libre-franklin/jizDREVItHgc8qDIbSTKq4XkRiUf2zc.woff2": {
+      "sha256": "52e605852c72cc2df1473df1fb7f26a3a0be58e31835bc8f33f29b1918c82cbd",
+      "url": "https://fonts.gstatic.com/s/librefranklin/v20/jizDREVItHgc8qDIbSTKq4XkRiUf2zc.woff2"
+    },
+    "fonts/lora.css": {
+      "sha256": "3e9e876a42ae193898788d89bae6514f5c46a123ed0f36beba5abf6a26fb4e48",
+      "url": "https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&display=swap"
+    },
+    "fonts/lora/0QIvMX1D_JOuM2T7I-NP.woff2": {
+      "sha256": "2df52199eac56e2ec7a735e609bb151bdab79422c3e73948f4b6580c66bb5a50",
+      "url": "https://fonts.gstatic.com/s/lora/v37/0QIvMX1D_JOuM2T7I-NP.woff2"
+    },
+    "fonts/lora/0QIvMX1D_JOuM3b7I-NP.woff2": {
+      "sha256": "a8c4cb778ab6202d22bdea2ccc8d7e7caf802cfe0a7ce37df7b212f82341468f",
+      "url": "https://fonts.gstatic.com/s/lora/v37/0QIvMX1D_JOuM3b7I-NP.woff2"
+    },
+    "fonts/lora/0QIvMX1D_JOuMw77I-NP.woff2": {
+      "sha256": "c57d9ca3bd42e6bc093badc7744dd2059a78f66a3a4dc6ca40574480c870f553",
+      "url": "https://fonts.gstatic.com/s/lora/v37/0QIvMX1D_JOuMw77I-NP.woff2"
+    },
+    "fonts/lora/0QIvMX1D_JOuMwT7I-NP.woff2": {
+      "sha256": "2a2d9c22c9863086a23f5013fede1428585321812b25f2662542c39d02967c5e",
+      "url": "https://fonts.gstatic.com/s/lora/v37/0QIvMX1D_JOuMwT7I-NP.woff2"
+    },
+    "fonts/lora/0QIvMX1D_JOuMwX7I-NP.woff2": {
+      "sha256": "98c22de85f6e83bcd6ae1a443e12e256fbc8de7142bec4f76b059f8ff9c2797e",
+      "url": "https://fonts.gstatic.com/s/lora/v37/0QIvMX1D_JOuMwX7I-NP.woff2"
+    },
+    "fonts/lora/0QIvMX1D_JOuMwf7I-NP.woff2": {
+      "sha256": "0e523e4bc3c6308f002a3208ea2990cb4f64282d4fbb67c12f5726d13b66eef6",
+      "url": "https://fonts.gstatic.com/s/lora/v37/0QIvMX1D_JOuMwf7I-NP.woff2"
+    },
+    "fonts/lora/0QIvMX1D_JOuMwr7Iw.woff2": {
+      "sha256": "ddb8c66035104e233fc024669183aad3738b6daa16deee2ebb1241bd0f98ace1",
+      "url": "https://fonts.gstatic.com/s/lora/v37/0QIvMX1D_JOuMwr7Iw.woff2"
+    },
+    "fonts/manrope.css": {
+      "sha256": "39c2ef23c753c11d93b77dd41f21be0314af14896bbccdae6e382d1374e40678",
+      "url": "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap"
+    },
+    "fonts/manrope/xn7gYHE41ni1AdIRggOxSuXd.woff2": {
+      "sha256": "c268b459a9329e59fecf39a17618efd44c71735532048d60b12aab76a8c14914",
+      "url": "https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggOxSuXd.woff2"
+    },
+    "fonts/manrope/xn7gYHE41ni1AdIRggSxSuXd.woff2": {
+      "sha256": "2fb2e8cbfd52ae46179a8b6024eb162f1f9c6de3d22d6e3a30d8f395de7220be",
+      "url": "https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggSxSuXd.woff2"
+    },
+    "fonts/manrope/xn7gYHE41ni1AdIRggexSg.woff2": {
+      "sha256": "a30ddcd349703aff7464c34bef3fffdff405ee50c113440d7c8693c02d210972",
+      "url": "https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggexSg.woff2"
+    },
+    "fonts/manrope/xn7gYHE41ni1AdIRggixSuXd.woff2": {
+      "sha256": "6bbb044ab420e07edb0a3042d2eb314b85e83a0182e945a15ab3b9092668dfd5",
+      "url": "https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggixSuXd.woff2"
+    },
+    "fonts/manrope/xn7gYHE41ni1AdIRggmxSuXd.woff2": {
+      "sha256": "3911b66d9f2e005a4b989223405d0e5032619c668597ba467cc76a23c8fffcfb",
+      "url": "https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggmxSuXd.woff2"
+    },
+    "fonts/manrope/xn7gYHE41ni1AdIRggqxSuXd.woff2": {
+      "sha256": "de37de877dc17e4577341fa68bb5cb526b53d54cb29721e674208546a3c7849d",
+      "url": "https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggqxSuXd.woff2"
+    },
+    "fonts/nunito-sans.css": {
+      "sha256": "12d7ff5f3bebd47c2c2c36996f6484080daeac6104bb3fcffd6033885d464d51",
+      "url": "https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;700&display=swap"
+    },
+    "fonts/nunito-sans/pe0TMImSLYBIv1o4X1M8ce2xCx3yop4tQpF_MeTm0lfGWVpNn64CL7U8upHZIbMV51Q42ptCp7t1R-s.woff2": {
+      "sha256": "29e3890496844a9ea81975c52771c587c872b4eb317026422d1995b88d21b57d",
+      "url": "https://fonts.gstatic.com/s/nunitosans/v19/pe0TMImSLYBIv1o4X1M8ce2xCx3yop4tQpF_MeTm0lfGWVpNn64CL7U8upHZIbMV51Q42ptCp7t1R-s.woff2"
+    },
+    "fonts/nunito-sans/pe0TMImSLYBIv1o4X1M8ce2xCx3yop4tQpF_MeTm0lfGWVpNn64CL7U8upHZIbMV51Q42ptCp7t4R-tCKQ.woff2": {
+      "sha256": "8a8e11bad67c3ae75ba03c969fbe5742b8bf088f1b2ca2dd04610a352475ee37",
+      "url": "https://fonts.gstatic.com/s/nunitosans/v19/pe0TMImSLYBIv1o4X1M8ce2xCx3yop4tQpF_MeTm0lfGWVpNn64CL7U8upHZIbMV51Q42ptCp7t4R-tCKQ.woff2"
+    },
+    "fonts/nunito-sans/pe0TMImSLYBIv1o4X1M8ce2xCx3yop4tQpF_MeTm0lfGWVpNn64CL7U8upHZIbMV51Q42ptCp7t6R-tCKQ.woff2": {
+      "sha256": "05ad6c0ccbb6fc76af1914c0cc9572479659333cc00c236619df61222c48a886",
+      "url": "https://fonts.gstatic.com/s/nunitosans/v19/pe0TMImSLYBIv1o4X1M8ce2xCx3yop4tQpF_MeTm0lfGWVpNn64CL7U8upHZIbMV51Q42ptCp7t6R-tCKQ.woff2"
+    },
+    "fonts/nunito-sans/pe0TMImSLYBIv1o4X1M8ce2xCx3yop4tQpF_MeTm0lfGWVpNn64CL7U8upHZIbMV51Q42ptCp7t7R-tCKQ.woff2": {
+      "sha256": "c648ee5bfda70d44b9fb628f4114d1cc4f984d050cbb4881052237ede3638a2e",
+      "url": "https://fonts.gstatic.com/s/nunitosans/v19/pe0TMImSLYBIv1o4X1M8ce2xCx3yop4tQpF_MeTm0lfGWVpNn64CL7U8upHZIbMV51Q42ptCp7t7R-tCKQ.woff2"
+    },
+    "fonts/nunito-sans/pe0TMImSLYBIv1o4X1M8ce2xCx3yop4tQpF_MeTm0lfGWVpNn64CL7U8upHZIbMV51Q42ptCp7txR-tCKQ.woff2": {
+      "sha256": "d3fe75d4c86f6df84f37c76ad44fa21c45778d7e14160b0294f92ec248fa144a",
+      "url": "https://fonts.gstatic.com/s/nunitosans/v19/pe0TMImSLYBIv1o4X1M8ce2xCx3yop4tQpF_MeTm0lfGWVpNn64CL7U8upHZIbMV51Q42ptCp7txR-tCKQ.woff2"
+    },
+    "fonts/oswald.css": {
+      "sha256": "10974da7cfbb227022c8f5b6541de7f1069189e3d2921ccf982598ee5760e79c",
+      "url": "https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap"
+    },
+    "fonts/oswald/TK3IWkUHHAIjg75cFRf3bXL8LICs1_Fv40pKlN4NNSeSASz7FmlSHYjedg.woff2": {
+      "sha256": "95c3d8d1db01b5ecd85b0d90aa81d39d24231f74de28c7418cfd8c08261fe929",
+      "url": "https://fonts.gstatic.com/s/oswald/v57/TK3IWkUHHAIjg75cFRf3bXL8LICs1_Fv40pKlN4NNSeSASz7FmlSHYjedg.woff2"
+    },
+    "fonts/oswald/TK3IWkUHHAIjg75cFRf3bXL8LICs1_Fv40pKlN4NNSeSASz7FmlWHYg.woff2": {
+      "sha256": "571f3457dab507b6f2ce5394d593ca015251b69fea81ab7a546bd2368e9fc3ed",
+      "url": "https://fonts.gstatic.com/s/oswald/v57/TK3IWkUHHAIjg75cFRf3bXL8LICs1_Fv40pKlN4NNSeSASz7FmlWHYg.woff2"
+    },
+    "fonts/oswald/TK3IWkUHHAIjg75cFRf3bXL8LICs1_Fv40pKlN4NNSeSASz7FmlYHYjedg.woff2": {
+      "sha256": "99016932b273efa7d55b3a0ae9fe4babc6dbdcd7539f58a742697054f89b1142",
+      "url": "https://fonts.gstatic.com/s/oswald/v57/TK3IWkUHHAIjg75cFRf3bXL8LICs1_Fv40pKlN4NNSeSASz7FmlYHYjedg.woff2"
+    },
+    "fonts/oswald/TK3IWkUHHAIjg75cFRf3bXL8LICs1_Fv40pKlN4NNSeSASz7FmlZHYjedg.woff2": {
+      "sha256": "0e6ae07493c5ebae5e815123be8fe99b34f7b13dac4a0907e072e244dd7edcdd",
+      "url": "https://fonts.gstatic.com/s/oswald/v57/TK3IWkUHHAIjg75cFRf3bXL8LICs1_Fv40pKlN4NNSeSASz7FmlZHYjedg.woff2"
+    },
+    "fonts/oswald/TK3IWkUHHAIjg75cFRf3bXL8LICs1_Fv40pKlN4NNSeSASz7FmlbHYjedg.woff2": {
+      "sha256": "fd48ff70d399cc905ec878993b1a72b6c0a4863c46118ec413e01e1fdc3127c3",
+      "url": "https://fonts.gstatic.com/s/oswald/v57/TK3IWkUHHAIjg75cFRf3bXL8LICs1_Fv40pKlN4NNSeSASz7FmlbHYjedg.woff2"
+    },
+    "fonts/outfit.css": {
+      "sha256": "e61d77bee7730cb49fd99aef1ca48608295d7457a97a296e25b2c2aba3bc338f",
+      "url": "https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&display=swap"
+    },
+    "fonts/outfit/QGYvz_MVcBeNP4NJtEtq.woff2": {
+      "sha256": "6c18d579fd87c3776be068b762cbc83fde3acb543d49eabd3ade842eb987e887",
+      "url": "https://fonts.gstatic.com/s/outfit/v15/QGYvz_MVcBeNP4NJtEtq.woff2"
+    },
+    "fonts/outfit/QGYvz_MVcBeNP4NJuktqQ4E.woff2": {
+      "sha256": "0f53d1c03b3918d744a843b5039001ee31695ca1e255e3914188df81beb461e9",
+      "url": "https://fonts.gstatic.com/s/outfit/v15/QGYvz_MVcBeNP4NJuktqQ4E.woff2"
+    },
+    "fonts/playfair-display.css": {
+      "sha256": "1fdae73fa9838680aa997b716175aaf6067b0afcfaae6d14bbf9571273c52296",
+      "url": "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&display=swap"
+    },
+    "fonts/playfair-display/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgFE_.woff2": {
+      "sha256": "42898ad49a6b23f32b109243e1df596edf831015ed685f429e4dafbb181d599d",
+      "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgFE_.woff2"
+    },
+    "fonts/playfair-display/nuFiD-vYSZviVYUb_rj3ij__anPXDTPYgFE_.woff2": {
+      "sha256": "ef6446229b59773e671021650ef3882cf35806dae723ce047de87c0a6633039a",
+      "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTPYgFE_.woff2"
+    },
+    "fonts/playfair-display/nuFiD-vYSZviVYUb_rj3ij__anPXDTjYgFE_.woff2": {
+      "sha256": "c108681cba6a9820bff52f4a1a4a1d9edf356b347bd79b7c61e916028e8a8b54",
+      "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTjYgFE_.woff2"
+    },
+    "fonts/playfair-display/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2": {
+      "sha256": "e0c764a8e9e1cce92163c55bac4b2ad6cd4cf8c696ce2289ab5c41565e65b7e2",
+      "url": "https://fonts.gstatic.com/s/playfairdisplay/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgA.woff2"
+    },
+    "fonts/public-sans.css": {
+      "sha256": "8a123306704074c4703c1b6708d9af38ce47ff787a20a3b929f1f6be90fe001e",
+      "url": "https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700&display=swap"
+    },
+    "fonts/public-sans/ijwRs572Xtc6ZYQws9YVwnNGfJ4.woff2": {
+      "sha256": "5ed4d31c988e73b258894244f209069ebe77dc7e564861954b21198b6de90d68",
+      "url": "https://fonts.gstatic.com/s/publicsans/v21/ijwRs572Xtc6ZYQws9YVwnNGfJ4.woff2"
+    },
+    "fonts/public-sans/ijwRs572Xtc6ZYQws9YVwnNIfJ7Cww.woff2": {
+      "sha256": "3a00a32f0242b723dcea79935747d6d27dd93675d03ef23f470dfe274e79586a",
+      "url": "https://fonts.gstatic.com/s/publicsans/v21/ijwRs572Xtc6ZYQws9YVwnNIfJ7Cww.woff2"
+    },
+    "fonts/public-sans/ijwRs572Xtc6ZYQws9YVwnNJfJ7Cww.woff2": {
+      "sha256": "94593e69fad0885b2b0b74cd18d036c7e9cd6051b2256ab281a20f5bc9ccb46f",
+      "url": "https://fonts.gstatic.com/s/publicsans/v21/ijwRs572Xtc6ZYQws9YVwnNJfJ7Cww.woff2"
+    },
+    "fonts/roboto-mono.css": {
+      "sha256": "00c30cdf75d3873d6d1637e09393464646f596597023c5e70fd11b8cb4a24f1f",
+      "url": "https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap"
+    },
+    "fonts/roboto-mono/L0x5DF4xlVMF-BfR8bXMIjhEq3-OXg.woff2": {
+      "sha256": "a4f562a288609dcb8f13e2b52296f1f3360957f09060735d4f00b5886e5bc7e0",
+      "url": "https://fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhEq3-OXg.woff2"
+    },
+    "fonts/roboto-mono/L0x5DF4xlVMF-BfR8bXMIjhFq3-OXg.woff2": {
+      "sha256": "4cc0d52e0fa37c28084e0cbce3589a8ab32dd21e6ea619489c5f7c6e8c43b922",
+      "url": "https://fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhFq3-OXg.woff2"
+    },
+    "fonts/roboto-mono/L0x5DF4xlVMF-BfR8bXMIjhGq3-OXg.woff2": {
+      "sha256": "6d72c2150c28b5305e7bfd0290edcf6038e556a9dd11a6ef15a1652548a35693",
+      "url": "https://fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhGq3-OXg.woff2"
+    },
+    "fonts/roboto-mono/L0x5DF4xlVMF-BfR8bXMIjhIq3-OXg.woff2": {
+      "sha256": "308f763acd5f648b0556c1f79b848102f494d0450072cfd2fd8064ddf287f4f8",
+      "url": "https://fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhIq3-OXg.woff2"
+    },
+    "fonts/roboto-mono/L0x5DF4xlVMF-BfR8bXMIjhLq38.woff2": {
+      "sha256": "b81cd55177300649be8f95b3b747d721ce607e8ed2856e25bd0c630cfd631faf",
+      "url": "https://fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhLq38.woff2"
+    },
+    "fonts/roboto-mono/L0x5DF4xlVMF-BfR8bXMIjhPq3-OXg.woff2": {
+      "sha256": "4052cc0b0f8b1b39da6cfaf90460f8b3c84dfc4b7562e9308ffa0998c3b9a005",
+      "url": "https://fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhPq3-OXg.woff2"
+    },
+    "fonts/rubik.css": {
+      "sha256": "8e1def8be41b532907e624d10ff0067fdaea2681d35102ba6f3c1a4fb7107bb1",
+      "url": "https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap"
+    },
+    "fonts/rubik/iJWKBXyIfDnIV7nBrXw.woff2": {
+      "sha256": "691cd1d9b4c0cdf31a1dcf04259c86f92c85e69f6622abab7964d81e36890691",
+      "url": "https://fonts.gstatic.com/s/rubik/v31/iJWKBXyIfDnIV7nBrXw.woff2"
+    },
+    "fonts/rubik/iJWKBXyIfDnIV7nDrXyi0A.woff2": {
+      "sha256": "197b6dbe5c6bec7276c59b02d70a16ee6acd44322fc2f8d0226c07f8d57976c2",
+      "url": "https://fonts.gstatic.com/s/rubik/v31/iJWKBXyIfDnIV7nDrXyi0A.woff2"
+    },
+    "fonts/rubik/iJWKBXyIfDnIV7nErXyi0A.woff2": {
+      "sha256": "f5052e4870bf211fc22df5b85e791a292a77b9baef8cef1dc5a8e62a783ea1e0",
+      "url": "https://fonts.gstatic.com/s/rubik/v31/iJWKBXyIfDnIV7nErXyi0A.woff2"
+    },
+    "fonts/rubik/iJWKBXyIfDnIV7nFrXyi0A.woff2": {
+      "sha256": "bdb2b33ab916e9e7b42edb61f8aea5f5dd83ad773d6ee4e9b55665daf8954ce8",
+      "url": "https://fonts.gstatic.com/s/rubik/v31/iJWKBXyIfDnIV7nFrXyi0A.woff2"
+    },
+    "fonts/rubik/iJWKBXyIfDnIV7nMrXyi0A.woff2": {
+      "sha256": "35e30483bb79be6fd8de0fec4e038fda9e637fc7337f6ff61418c7d08077878b",
+      "url": "https://fonts.gstatic.com/s/rubik/v31/iJWKBXyIfDnIV7nMrXyi0A.woff2"
+    },
+    "fonts/rubik/iJWKBXyIfDnIV7nPrXyi0A.woff2": {
+      "sha256": "09472f217ad1ebb61a7669cf532f9f2f80685e07652ee862fde9a79665aef479",
+      "url": "https://fonts.gstatic.com/s/rubik/v31/iJWKBXyIfDnIV7nPrXyi0A.woff2"
+    },
+    "fonts/sora.css": {
+      "sha256": "3510b7287518b9fe0fa1a72f0cf66be4ea37e84419ec48c2faa00dc37c92d6eb",
+      "url": "https://fonts.googleapis.com/css2?family=Sora:wght@400;500;700&display=swap"
+    },
+    "fonts/sora/xMQ9uFFYT72X5wkB_18qmnndmSdSnh2BAfO5mnuyOo1lfiQwV6-x.woff2": {
+      "sha256": "811e11966d29f3a01fcb19b087b61ac067d380665a55aebb7fcdf2cda95e4a93",
+      "url": "https://fonts.gstatic.com/s/sora/v17/xMQ9uFFYT72X5wkB_18qmnndmSdSnh2BAfO5mnuyOo1lfiQwV6-x.woff2"
+    },
+    "fonts/sora/xMQ9uFFYT72X5wkB_18qmnndmSdSnh2BAfO5mnuyOo1lfiQwWa-xsaQ.woff2": {
+      "sha256": "08e1ba85bcb55277782f56766af09467dfe18cbeea49704203100c5797ac4cc5",
+      "url": "https://fonts.gstatic.com/s/sora/v17/xMQ9uFFYT72X5wkB_18qmnndmSdSnh2BAfO5mnuyOo1lfiQwWa-xsaQ.woff2"
+    },
+    "fonts/space-grotesk.css": {
+      "sha256": "c0816bb7cbb7fac2e16abf91612fea280b96483efaa81317c5b5127e1494b08d",
+      "url": "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"
+    },
+    "fonts/space-grotesk/V8mDoQDjQSkFtoMM3T6r8E7mPb54C-s0.woff2": {
+      "sha256": "8895e3d49825128bfa5238e4c96e9b432d7a3dadbe5c17c6081267398305dc71",
+      "url": "https://fonts.gstatic.com/s/spacegrotesk/v22/V8mDoQDjQSkFtoMM3T6r8E7mPb54C-s0.woff2"
+    },
+    "fonts/space-grotesk/V8mDoQDjQSkFtoMM3T6r8E7mPb94C-s0.woff2": {
+      "sha256": "952dddb45d2f96f71cbf3b7f510b24379afc3c89ea02fcf89d377b45d62c0166",
+      "url": "https://fonts.gstatic.com/s/spacegrotesk/v22/V8mDoQDjQSkFtoMM3T6r8E7mPb94C-s0.woff2"
+    },
+    "fonts/space-grotesk/V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2": {
+      "sha256": "0640890476fc1198ab4de571fb658de443c4d85b66466ec09534a8737ab1ce9d",
+      "url": "https://fonts.gstatic.com/s/spacegrotesk/v22/V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2"
+    },
+    "fonts/ui.css": {
+      "sha256": "4ae72446f9b101dfe91d50865f5ee15621f6cd2816909377dfa2e3a6625232dc",
+      "url": "https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    },
+    "fonts/ui/ijwRs572Xtc6ZYQws9YVwnNGfJ4.woff2": {
+      "sha256": "5ed4d31c988e73b258894244f209069ebe77dc7e564861954b21198b6de90d68",
+      "url": "https://fonts.gstatic.com/s/publicsans/v21/ijwRs572Xtc6ZYQws9YVwnNGfJ4.woff2"
+    },
+    "fonts/ui/ijwRs572Xtc6ZYQws9YVwnNIfJ7Cww.woff2": {
+      "sha256": "3a00a32f0242b723dcea79935747d6d27dd93675d03ef23f470dfe274e79586a",
+      "url": "https://fonts.gstatic.com/s/publicsans/v21/ijwRs572Xtc6ZYQws9YVwnNIfJ7Cww.woff2"
+    },
+    "fonts/ui/ijwRs572Xtc6ZYQws9YVwnNJfJ7Cww.woff2": {
+      "sha256": "94593e69fad0885b2b0b74cd18d036c7e9cd6051b2256ab281a20f5bc9ccb46f",
+      "url": "https://fonts.gstatic.com/s/publicsans/v21/ijwRs572Xtc6ZYQws9YVwnNJfJ7Cww.woff2"
+    },
+    "fonts/ui/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx3cwhsk.woff2": {
+      "sha256": "62213be8a78b42f1e29d1452d91e2f8b3e745572a9dd98d3941e39fa00b37d76",
+      "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx3cwhsk.woff2"
+    },
+    "fonts/ui/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx7cwhsk.woff2": {
+      "sha256": "db5ff4db83e580426280e9337a58dc57d3a83784a1b03ad80914651594441d52",
+      "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx7cwhsk.woff2"
+    },
+    "fonts/ui/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2": {
+      "sha256": "83c005d49d8a6a50474c73a5a36ac0468076e9c4a29da7bdb14995d80560a5be",
+      "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2"
+    },
+    "fonts/ui/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxPcwhsk.woff2": {
+      "sha256": "0a557721b1f8b36d3f3f84442689a71ca4a744300abcb46a1953f51bfc663b66",
+      "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxPcwhsk.woff2"
+    },
+    "fonts/ui/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxTcwhsk.woff2": {
+      "sha256": "e17cfd15fb96909d64095015f958207063a0c07191da3512df7d560a781aebdf",
+      "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxTcwhsk.woff2"
+    },
+    "fonts/ui/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx_cwhsk.woff2": {
+      "sha256": "c89b9cc0bc6262bd4f8d8494b6961601f3aefa829d08c2e3635f4d501d3a47c2",
+      "url": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPx_cwhsk.woff2"
+    },
+    "fonts/work-sans.css": {
+      "sha256": "6a8dcea8a19ed53c144dd79859ae2412e7956f7ef86518c5458b5a58442a45d5",
+      "url": "https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;700&display=swap"
+    },
+    "fonts/work-sans/QGYsz_wNahGAdqQ43Rh_c6Dpp_k.woff2": {
+      "sha256": "b36b1cc3005352fac514c5703c55bc87b431663db8fbe94e5159d366ac1216b5",
+      "url": "https://fonts.gstatic.com/s/worksans/v24/QGYsz_wNahGAdqQ43Rh_c6Dpp_k.woff2"
+    },
+    "fonts/work-sans/QGYsz_wNahGAdqQ43Rh_cqDpp_k.woff2": {
+      "sha256": "2aa17fc7b072e46652e84bbe3dbba9ec57cdea320d89e8c951ed7cf3218c300b",
+      "url": "https://fonts.gstatic.com/s/worksans/v24/QGYsz_wNahGAdqQ43Rh_cqDpp_k.woff2"
+    },
+    "fonts/work-sans/QGYsz_wNahGAdqQ43Rh_fKDp.woff2": {
+      "sha256": "1dd49afc07fb2231b2ff686cbf007725fb2742271bb1f28ebd98f22a0d817343",
+      "url": "https://fonts.gstatic.com/s/worksans/v24/QGYsz_wNahGAdqQ43Rh_fKDp.woff2"
+    },
+    "material-symbols/ac_unit.svg": {
+      "sha256": "dc5cd5f5ceb1604308e567b27732f06078b6bb10dfb389cce2eee480fdf0ab2d",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/ac_unit.svg"
+    },
+    "material-symbols/add.svg": {
+      "sha256": "af9c14bac552f531361f2f943b234637fbf09b873f4b18e350596ecc6ccd97be",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/add.svg"
+    },
+    "material-symbols/apartment.svg": {
+      "sha256": "94f5e3bb8ba9e4b5e19a77bea346cb0a126bf19604bafb431697a7ae81171b8d",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/apartment.svg"
+    },
+    "material-symbols/architecture.svg": {
+      "sha256": "96cf95a8721a33595381dc64a09ade5ebeac02bd43aa31bd39ff64f773c43de8",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/architecture.svg"
+    },
+    "material-symbols/archive.svg": {
+      "sha256": "2a37cff0b4f6dbd3c26ed06e4e7a6f047180a0fc04fc0eff99d822400f2e3695",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/archive.svg"
+    },
+    "material-symbols/attach_file.svg": {
+      "sha256": "8c43f5475afa79170a94156fef10987360e692b9097a1fa86232e5bc7c08c38a",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/attach_file.svg"
+    },
+    "material-symbols/auto_stories.svg": {
+      "sha256": "825b064475d8b921a3950b674ceb306bfcec3a01650466ba974a343bcc8fe2b9",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/auto_stories.svg"
+    },
+    "material-symbols/backpack.svg": {
+      "sha256": "b0952eba152763f16165f1fe6865064a86e7dcd9b6b35286fe4f6343466175ad",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/backpack.svg"
+    },
+    "material-symbols/battery_full.svg": {
+      "sha256": "b4b165a614238ad2ea65698d53e3674692f72a99b6ce630e221afc5614806052",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/battery_full.svg"
+    },
+    "material-symbols/beach_access.svg": {
+      "sha256": "839651f400fe4a0433d243215414990aee943e28e4077a61a0ab2915f86dc202",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/beach_access.svg"
+    },
+    "material-symbols/bed.svg": {
+      "sha256": "28b9f87daea341c242c37fdd6b873d6223aaf96e4f97abb78b881a7fac51f526",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/bed.svg"
+    },
+    "material-symbols/biotech.svg": {
+      "sha256": "4aa2a1a01a114f59ecaa8b35a53fc559f7105f9e1ad99e55ea847c421fef1b93",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/biotech.svg"
+    },
+    "material-symbols/bolt.svg": {
+      "sha256": "1bbdf93533ff01036b87f3b6089752249e236b62fc45051e195d43687abc3aba",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/bolt.svg"
+    },
+    "material-symbols/bookmark.svg": {
+      "sha256": "ee6f44f529a4fe923738f018110d47846df3a05b34f8d99b79ecf18a081270ef",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/bookmark.svg"
+    },
+    "material-symbols/brush.svg": {
+      "sha256": "be12ad5d1deba783a9bf84a172393cf5003d647d4e3c629c25b1b2bf55ea0f03",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/brush.svg"
+    },
+    "material-symbols/build.svg": {
+      "sha256": "034d07d290421566b30ce590ecbe9d5ecfa9d8aabe13bf460176e731fcee9e4a",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/build.svg"
+    },
+    "material-symbols/cable.svg": {
+      "sha256": "7603aef95aa5c606ea8fb222d123e27a5389b2a37aaf4685db55788919722a7d",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/cable.svg"
+    },
+    "material-symbols/cake.svg": {
+      "sha256": "6089bba7315fb3fb63d54fd871c791b44743a07051356968f13dc29f1a927d5d",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/cake.svg"
+    },
+    "material-symbols/calculate.svg": {
+      "sha256": "8a1d30c493d8e8e3f8c3dffdc40bdbe259b4e2ed440fee634aa139fbddabe705",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/calculate.svg"
+    },
+    "material-symbols/calendar_month.svg": {
+      "sha256": "9bb57747213cf403a7bafa706d3eab57f21ca381bef910737457836b6d2af20a",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/calendar_month.svg"
+    },
+    "material-symbols/carpenter.svg": {
+      "sha256": "4fd0a298f17e1caeb9e9dedaf9b6ce6dddb71e840f9a93131d97397a3df9b9bd",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/carpenter.svg"
+    },
+    "material-symbols/chair.svg": {
+      "sha256": "c20152965f51b38483ff60b8307421771b9ff587123bbf55596c50455ba7f557",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/chair.svg"
+    },
+    "material-symbols/check_circle.svg": {
+      "sha256": "2e67802cdc562f318a7359783a235ea0b8e459dcbc12f514f26c45baef9b6bdc",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/check_circle.svg"
+    },
+    "material-symbols/checkroom.svg": {
+      "sha256": "b6609a83a69bc6eb2b0ea0b3299077d67c7a530f47d684d09ed39dea5531a825",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/checkroom.svg"
+    },
+    "material-symbols/cleaning_services.svg": {
+      "sha256": "c856f63e8ae13897a07320c1b9316178611445c59ad2ceda0edfb8602d623372",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/cleaning_services.svg"
+    },
+    "material-symbols/computer.svg": {
+      "sha256": "e302eb60288705e7bbac4f95b21ad023bbd146dfb7d3e718c9fee7cbc08ead2e",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/computer.svg"
+    },
+    "material-symbols/construction.svg": {
+      "sha256": "1a8f853a1d58c25f738b8a30c53c3fde0bd34c249aed6b8ca8c56a58cf1c8edc",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/construction.svg"
+    },
+    "material-symbols/content_paste.svg": {
+      "sha256": "7228e987f17ccf171f15a63b414f9f1690408fc924ce4e450af9990ccf5bbb3a",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/content_paste.svg"
+    },
+    "material-symbols/delete.svg": {
+      "sha256": "0b62a0f6843ab1154d9ab343caaee4078a0b7df982aeb02fb3c82f68110370b5",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/delete.svg"
+    },
+    "material-symbols/description.svg": {
+      "sha256": "a9fce7306054cc04da5711e227bf25692d4867275a372567b3a13c40024006bf",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/description.svg"
+    },
+    "material-symbols/design_services.svg": {
+      "sha256": "0cc76b3ec4228b41c25ccec899c071ec9da6bbd4852fb583b8d1ebfc5b410cea",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/design_services.svg"
+    },
+    "material-symbols/developer_board.svg": {
+      "sha256": "0f3feff5fe54d1dbb68f7a3ef02beb6c0566b70b16b92d58f228dbc5ca2509fa",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/developer_board.svg"
+    },
+    "material-symbols/directions_car.svg": {
+      "sha256": "dd7e74e58ca97a3461d89499f8d7af5ec845f7e5a0f6ed2165fd39c3dc01b849",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/directions_car.svg"
+    },
+    "material-symbols/door_front.svg": {
+      "sha256": "4ddf8fae259f8b04a1f7c6a73f3ddfcb379686d0a4ac7c70fd7297f023c19447",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/door_front.svg"
+    },
+    "material-symbols/draw.svg": {
+      "sha256": "a42f5dbeed88a3480dc8bc2bb7123053d3a03a2d4740738b02e96cd478a7f185",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/draw.svg"
+    },
+    "material-symbols/dry_cleaning.svg": {
+      "sha256": "e4d8167757325ae3448047972b97bf7165d80552f5b60f092c078d96055a48e8",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/dry_cleaning.svg"
+    },
+    "material-symbols/edit.svg": {
+      "sha256": "b2611dd33ce0b5e24aa8182e26450db4b703019ef0f2957ac74648d66e90c8a0",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/edit.svg"
+    },
+    "material-symbols/egg.svg": {
+      "sha256": "0b94812f580643f8a9901ec8ff47129c02a0f01a5df9828121ec179eebd5233f",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/egg.svg"
+    },
+    "material-symbols/electrical_services.svg": {
+      "sha256": "9c87d9217a910fc68e5247b6826ea397547f963767eedbe71731ffeba8d12de0",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/electrical_services.svg"
+    },
+    "material-symbols/favorite.svg": {
+      "sha256": "4f3bf0356331edb3d97ce2d050b7d705c454eeaf88e4e2b522e7beae113628e1",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/favorite.svg"
+    },
+    "material-symbols/fitness_center.svg": {
+      "sha256": "7a7648d8b58313c012f4dcb4ff388820d072639fd9616848578e284da384c8c4",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/fitness_center.svg"
+    },
+    "material-symbols/flashlight_on.svg": {
+      "sha256": "a8f616de321534dbe2d044b6089792067ff662e8923d4797a6a95e4d6555adc2",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/flashlight_on.svg"
+    },
+    "material-symbols/flight.svg": {
+      "sha256": "d1716a939021b65a09552e7cc51d9cf431d47679b13f888a837ec218c3065bd1",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/flight.svg"
+    },
+    "material-symbols/folder.svg": {
+      "sha256": "9604f6f4d44003f3cb011fe25e5a319de3799cd7919a6d7868de513d0f448d15",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/folder.svg"
+    },
+    "material-symbols/forest.svg": {
+      "sha256": "a374f43781ad168625d065d320cf3c9c321a93b25d85c67059d2d63bf3fa5f7a",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/forest.svg"
+    },
+    "material-symbols/format_paint.svg": {
+      "sha256": "3f37667ee6c526a278612c57353d78f3a5a0f3d98d20e0083396e1f626020e84",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/format_paint.svg"
+    },
+    "material-symbols/garage.svg": {
+      "sha256": "97e684cc925ea2c1cc8f4b3203eb97723104f35b8d0a4d6f0eb796f6ffc1013a",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/garage.svg"
+    },
+    "material-symbols/grass.svg": {
+      "sha256": "fe843defba8722839f5c7262c46d2bef305a8f472a58bbd5ca0803fc664aaf8e",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/grass.svg"
+    },
+    "material-symbols/handyman.svg": {
+      "sha256": "a220a35d9c5cd4982c76186a3cd58e80e07483988e7609770bbcafddba6a6597",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/handyman.svg"
+    },
+    "material-symbols/hardware.svg": {
+      "sha256": "b1539800365930ef701233a886377ecacdafcdbbcf9e1501531cc5cef6a50b83",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/hardware.svg"
+    },
+    "material-symbols/headphones.svg": {
+      "sha256": "60c2b86d274fa68a8633f189b5e3f75f3b155d26cd5b93dce0a3fa29783c90d2",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/headphones.svg"
+    },
+    "material-symbols/hiking.svg": {
+      "sha256": "6fa763dc34870cbff829e34bed1440883357867950d559d9fecb0d145c6983c6",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/hiking.svg"
+    },
+    "material-symbols/home.svg": {
+      "sha256": "9e358ddfc94899a2f6376882266772b21a64515d4c4e465e87f8c67c7845cdbb",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/home.svg"
+    },
+    "material-symbols/icecream.svg": {
+      "sha256": "f1a9fdfc0da1a2bce7bcebf97748efa769ff23fc18bafa8e26660cb80d0db1cb",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/icecream.svg"
+    },
+    "material-symbols/info.svg": {
+      "sha256": "5e398f5f1271d1112fa68c7775a8408cbb974d1d83bc0bd120c1cc1cc319fcdb",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/info.svg"
+    },
+    "material-symbols/inventory_2.svg": {
+      "sha256": "866413597c29e6208ae62d18d055e4cae86dbb630ad1a93c0da74c118264e920",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/inventory_2.svg"
+    },
+    "material-symbols/key.svg": {
+      "sha256": "d6c8988be34ce8d0dfee3dfb76ddf05bae4a3c317b9df5f2dc7ea83d9c643c9b",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/key.svg"
+    },
+    "material-symbols/keyboard.svg": {
+      "sha256": "2e0faddd4c71fef1127cec8bfd8a96eade4e932c12d7d511897113f073019510",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/keyboard.svg"
+    },
+    "material-symbols/kitchen.svg": {
+      "sha256": "6a85922aabb5ef16bc786f59781345b00b5d7f0c3a03cd5518ebbe64f71c3180",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/kitchen.svg"
+    },
+    "material-symbols/label.svg": {
+      "sha256": "d7cecf95bab02e4ecb9b092377937873b0af582c4db67cd109e1564ebd9688e2",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/label.svg"
+    },
+    "material-symbols/lightbulb.svg": {
+      "sha256": "68fd7bb8b3a63e97b2011bb228b44e37a16b40d6e90974c9eb4294b0359f513d",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/lightbulb.svg"
+    },
+    "material-symbols/link.svg": {
+      "sha256": "fbfe592407116e42ae9eb427e7d571647c7ef18d6f6bc76bd7037a7b1eaee335",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/link.svg"
+    },
+    "material-symbols/liquor.svg": {
+      "sha256": "6d6fcd255f84c5e77ea7720f4f54288f58be26419a4b883d23664f9ea07a04ab",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/liquor.svg"
+    },
+    "material-symbols/local_cafe.svg": {
+      "sha256": "5fa93e008b1e5b3afe2aeca489992a3fc84c99a8bef1cfd935a92ac899e299b7",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/local_cafe.svg"
+    },
+    "material-symbols/local_fire_department.svg": {
+      "sha256": "2573992d380fdb544ebe7ba350110dc33443747a65b9bbd2f5dd4a4d92675973",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/local_fire_department.svg"
+    },
+    "material-symbols/local_florist.svg": {
+      "sha256": "717482dfeb7743085007cc1006a67174cb5fa8d55b4901f198da2c78ed8ba132",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/local_florist.svg"
+    },
+    "material-symbols/local_shipping.svg": {
+      "sha256": "8a65f382bee958c21588ad429d40d5597880c88c177a5da019a5c9f303fb488a",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/local_shipping.svg"
+    },
+    "material-symbols/lock.svg": {
+      "sha256": "1610299df96ea624b9936e7efd5afc06d4685cd52e9d197bd6f534f99228bb3b",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/lock.svg"
+    },
+    "material-symbols/luggage.svg": {
+      "sha256": "bbd178f107f9ddaf0324690ec93eb86a813d9568cfc1f78f64badefac6e05e78",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/luggage.svg"
+    },
+    "material-symbols/medical_services.svg": {
+      "sha256": "fc7cf084a340af471f842c1b27f02922718b157c6e06af41c82182698517faa7",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/medical_services.svg"
+    },
+    "material-symbols/medication.svg": {
+      "sha256": "833d2d746a6a156f436cf6492c1a7ed4fe87ed62b8c46e2e9c7d7965605fd4d3",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/medication.svg"
+    },
+    "material-symbols/memory.svg": {
+      "sha256": "da28dbd93dd8e3bc225e6a2827285096a69e681dff2e04bf1c72f86b9829f043",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/memory.svg"
+    },
+    "material-symbols/menu_book.svg": {
+      "sha256": "df756112272b4714757539ae8ec4160e32b71fafe771874bbc3713b14375ffe6",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/menu_book.svg"
+    },
+    "material-symbols/mic.svg": {
+      "sha256": "d07397a2fd8bf321cb1eff2a58d5b985e81bb7d53209127b7a6ebe552022a346",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/mic.svg"
+    },
+    "material-symbols/mouse.svg": {
+      "sha256": "e32fac4bee7d98cbc564a1c4055eb9b1002e8a25faf0f5889421bbdf8f10f6ed",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/mouse.svg"
+    },
+    "material-symbols/music_note.svg": {
+      "sha256": "38f2ea0137bcdeda9fa4fc3fecd664d3474bc60454e64c4a85b85ed31b3888eb",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/music_note.svg"
+    },
+    "material-symbols/numbers.svg": {
+      "sha256": "159705cba0cbfb161d3fb53e4fe3ab1dc8700f990613ae10dbb35431f3775eeb",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/numbers.svg"
+    },
+    "material-symbols/package_2.svg": {
+      "sha256": "bef65a172bf7adb48407ecceb3a48f1355b74d9420849e55b0c23aeb69bd934f",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/package_2.svg"
+    },
+    "material-symbols/palette.svg": {
+      "sha256": "8ca70b8a3ced0aa630ebfa299ad2cd234cbc941cc06541c4b01a8fa2ac8fd2d6",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/palette.svg"
+    },
+    "material-symbols/park.svg": {
+      "sha256": "d58f1fafad7b21c89947d5b9c81866e765abdf50a88c570bccc95cad5fe04e3d",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/park.svg"
+    },
+    "material-symbols/pedal_bike.svg": {
+      "sha256": "249ab6a70a264c65983f56a5a599a8b0b7bf375bc5994d2201d0a164d8b625bd",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/pedal_bike.svg"
+    },
+    "material-symbols/pets.svg": {
+      "sha256": "fcbfb2d6f484beae07f6dbbefaada5362a25581ac374d4b6614dd4ffad6bb15d",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/pets.svg"
+    },
+    "material-symbols/photo_camera.svg": {
+      "sha256": "88a1d32ae3dff49b7b145cb39f9a3ba9ab9df14446c9e1a9db6bf25408f8d176",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/photo_camera.svg"
+    },
+    "material-symbols/piano.svg": {
+      "sha256": "91d6ee0b2418e155ae6297fdbde96101a2e2bdf2bdfd93ede2e1a59eccd5fb91",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/piano.svg"
+    },
+    "material-symbols/plumbing.svg": {
+      "sha256": "c0eeef27e72bd730a98df240deabf0a91de13af63c3035481b824491ac786d4b",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/plumbing.svg"
+    },
+    "material-symbols/power.svg": {
+      "sha256": "1d010f5233ec76e21708b67bbf1f4ec57ea258efbcb699bb6edf833ee9b3aa89",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/power.svg"
+    },
+    "material-symbols/print.svg": {
+      "sha256": "16d1939243544647111a38825545b0bb0b80351ba859cf5b73f78ee1a04d2d35",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/print.svg"
+    },
+    "material-symbols/qr_code.svg": {
+      "sha256": "886b6306a1e5893a6996e75a7371ee9cfbd4d97adc19bf37e90fcaccb9d74727",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/qr_code.svg"
+    },
+    "material-symbols/radio.svg": {
+      "sha256": "6b7ab0ec9759d901fb3ca07a8543ecaba5223e0eaeec67babf03226d8036ccb9",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/radio.svg"
+    },
+    "material-symbols/recycling.svg": {
+      "sha256": "c22ad662dd7fbdfc24a3929c07f6d92bdae44cade2adb8d819ef8453140616d8",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/recycling.svg"
+    },
+    "material-symbols/remove.svg": {
+      "sha256": "020f53eae0315abe7d7d84d121c1d8d38e92fd1407302e6f1ae299024aa2d9ff",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/remove.svg"
+    },
+    "material-symbols/restaurant.svg": {
+      "sha256": "e2a02c68741cf1799be1abc9d3f0851feaed4f97fb4748b3ae1d856f45735de6",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/restaurant.svg"
+    },
+    "material-symbols/router.svg": {
+      "sha256": "8668fcc9d31929c1e743ca4012b9b60548cf0c2c8e8cc09b8935912e1be607e7",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/router.svg"
+    },
+    "material-symbols/sailing.svg": {
+      "sha256": "a9592030a0dafaa470efa83680c18a8fe3cfe5e3939dffdebfe336fd37d16958",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/sailing.svg"
+    },
+    "material-symbols/save.svg": {
+      "sha256": "4d219a44eddace13faf12f31afacc0833dec83a46777c9f64cf520edcdf869a6",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/save.svg"
+    },
+    "material-symbols/schedule.svg": {
+      "sha256": "e8dfd705f592896f1f778f739d63267e9e91a0ef37ca41775d5d9c672e05e045",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/schedule.svg"
+    },
+    "material-symbols/school.svg": {
+      "sha256": "56c6cafe4f1e82b71af7e399240e293842e6530076011a21146b873ed136ab1b",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/school.svg"
+    },
+    "material-symbols/science.svg": {
+      "sha256": "26da8a8de2e4bd587451e35e10e45c6d944c171e9ca545494aba741c90d4cf5b",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/science.svg"
+    },
+    "material-symbols/sd_card.svg": {
+      "sha256": "ed76c03d5fc37a19568a37f5f63b788c076da4c262132db8d794240f46d79a9b",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/sd_card.svg"
+    },
+    "material-symbols/search.svg": {
+      "sha256": "16f9192bb2593c0069b8e7df1d0e36be632035949a20fa4db5530de1d4f8fefb",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/search.svg"
+    },
+    "material-symbols/self_improvement.svg": {
+      "sha256": "7daa2dff3779eea9e8ed1770f81ebfaf010a5ea3f56db91d4473151d65774e2d",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/self_improvement.svg"
+    },
+    "material-symbols/set_meal.svg": {
+      "sha256": "9c31c20df2d600f7dfcadec6dee8641c1ccc7f45cf734c99baf09680bde3fc37",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/set_meal.svg"
+    },
+    "material-symbols/settings.svg": {
+      "sha256": "f3a6366b98528acfbd05ea67f4c0ee2e7d33c0fc278fdc885d5f95c431e3c2bb",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/settings.svg"
+    },
+    "material-symbols/shopping_bag.svg": {
+      "sha256": "20376d28ac67e29f51769c6224755a4304a7149385456c6dda39975ad81ae2ab",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/shopping_bag.svg"
+    },
+    "material-symbols/soap.svg": {
+      "sha256": "a6f06a20b75dfa26409de8f508b376a04975251aefa87493466dbb7d97c2cd39",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/soap.svg"
+    },
+    "material-symbols/speaker.svg": {
+      "sha256": "dd09fffc9e56316cb875457870658258cd39848091a041e493d95ac81e938fa3",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/speaker.svg"
+    },
+    "material-symbols/sports_basketball.svg": {
+      "sha256": "f4681919fc8e4910d9eed4dc530affee638bdfd3c7980d82df87b2a0a7ce9bbb",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/sports_basketball.svg"
+    },
+    "material-symbols/sports_esports.svg": {
+      "sha256": "c957977565f9c0a309ce8dc5995f894f844b038e42bb9d8a667439e26fd2d5fd",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/sports_esports.svg"
+    },
+    "material-symbols/stairs.svg": {
+      "sha256": "a0a58659bddbe7b569e92e3166208ddad6abcc1cc587ad7294f7884e8c9c443e",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/stairs.svg"
+    },
+    "material-symbols/star.svg": {
+      "sha256": "467dde69c74a6a7962db397faae8dd187051199528df03e4a7c994dd9f993fd2",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/star.svg"
+    },
+    "material-symbols/storefront.svg": {
+      "sha256": "77532505780685408d23d38a0ae6dcb0ce61e67cd37d4767796633328eabd24f",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/storefront.svg"
+    },
+    "material-symbols/straighten.svg": {
+      "sha256": "75c18670b7cb0189919f313045bab323be7d2add36a18a97a064f5c9a546b41e",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/straighten.svg"
+    },
+    "material-symbols/table_restaurant.svg": {
+      "sha256": "20589d1524a755837cacbaa6dc2e287537677a61f031478a3407d23e482e41e5",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/table_restaurant.svg"
+    },
+    "material-symbols/tablet.svg": {
+      "sha256": "a1dc3cff01abc6e2924b90cf03267c31380c2fc92cdff209576ac974dae4c948",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/tablet.svg"
+    },
+    "material-symbols/tag.svg": {
+      "sha256": "159705cba0cbfb161d3fb53e4fe3ab1dc8700f990613ae10dbb35431f3775eeb",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/tag.svg"
+    },
+    "material-symbols/toys.svg": {
+      "sha256": "fed770780cc4879642da00518487241edc5474aeb0bb09faf916e1de8f99ac6a",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/toys.svg"
+    },
+    "material-symbols/train.svg": {
+      "sha256": "77e6b1c989c6065204326f91ff8440b45ab6e315db38a79b1f4588714795bf05",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/train.svg"
+    },
+    "material-symbols/tune.svg": {
+      "sha256": "e413b97b139d0cc79c469ad903591757af601a7a2ee0c70ca553d43c2af912f5",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/tune.svg"
+    },
+    "material-symbols/tv.svg": {
+      "sha256": "ea37a15279cae8bab80a722f7b38f12ffbd9baafabdd011b619793ff7e308432",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/tv.svg"
+    },
+    "material-symbols/two_wheeler.svg": {
+      "sha256": "96eaeee4aa6c0efacd74b82d359d89d61ba9bee7ca8fd2858c5dc391d48ce430",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/two_wheeler.svg"
+    },
+    "material-symbols/umbrella.svg": {
+      "sha256": "fc4140b31729883700875e161b65388905e540b9bd8c915ff75677e12cc941cc",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/umbrella.svg"
+    },
+    "material-symbols/usb.svg": {
+      "sha256": "9ad2581dcd8742977e9a2353f5c183300923defca12719f4445ce212d70a9b40",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/usb.svg"
+    },
+    "material-symbols/vaccines.svg": {
+      "sha256": "a3f039c281e5beda3de3c987b6b975f6c265b20d5131264501e37e6b33593381",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/vaccines.svg"
+    },
+    "material-symbols/videocam.svg": {
+      "sha256": "ea0bf66f191faffd481166a9c5697f7d5ddaff5ea2275b4c6b143b71a1ad529c",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/videocam.svg"
+    },
+    "material-symbols/warehouse.svg": {
+      "sha256": "642e8fd840408c3d80cac6f04b29c396c0e1a3c9fe383a9bdbf28e868579e058",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/warehouse.svg"
+    },
+    "material-symbols/warning.svg": {
+      "sha256": "086b9b4f9f3373685db8b9c96805e0eecc6032813f71ee8aa51d7fe93234bc9f",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/warning.svg"
+    },
+    "material-symbols/watch.svg": {
+      "sha256": "36c6e56c1c2059ab021f5bfb628dc6d05a81c90ed7fd47ab06783281fbf23043",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/watch.svg"
+    },
+    "material-symbols/water_drop.svg": {
+      "sha256": "0df9ec99a526fadafaf34c1f38c6c960691a1b515ae33cb1fa7da32ef1341ae2",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/water_drop.svg"
+    },
+    "material-symbols/weekend.svg": {
+      "sha256": "117beb29524fe1bd779d47a8b64f47896e1eb772a63f89497ef3f0730a758859",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/weekend.svg"
+    },
+    "material-symbols/wifi.svg": {
+      "sha256": "0883e31e757d93884d9ab4c4b9b8db2e1a407944bdcad0939e23abba5b0400ec",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/wifi.svg"
+    },
+    "material-symbols/window.svg": {
+      "sha256": "1299c58af60b7d85e6a3cf6f409bf27ccbc551ef05ad01a570436ef2ef64c35e",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/window.svg"
+    },
+    "material-symbols/yard.svg": {
+      "sha256": "512c11dd45113b2034d0f927e69ae3677ab5236e7c56b9d3cde0a2eb3d9ddc5d",
+      "url": "https://cdn.jsdelivr.net/npm/@material-symbols/svg-400/outlined/yard.svg"
+    },
+    "mdi/mdi.js": {
+      "sha256": "0edde73c83c07bc4d8675e96aba3a853a1fc8fa2b251e3f5f6dede4d0332ab3f",
+      "url": "https://cdn.jsdelivr.net/npm/@mdi/js@7.4.47/mdi.js"
+    },
+    "qrcode-svg/qrcode.min.js": {
+      "sha256": "91f38189117ac0f42f84afe2377c551cf30d9550f6890fe9a41bdae3f8b43ffc",
+      "url": "https://cdn.jsdelivr.net/npm/qrcode-svg@1.1.0/lib/qrcode.min.js"
+    }
+  },
+  "meta": {
+    "material-symbols": {
+      "missing": [
+        "cut",
+        "smartphone",
+        "push_pin"
+      ],
+      "version": "0.47.4"
+    }
+  }
+}
