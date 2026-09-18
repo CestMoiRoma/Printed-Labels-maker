@@ -164,6 +164,41 @@ const fmt = (s, vals) => String(s || "").replace(/\{(\w+)\}/g, (m, k) => (vals[k
 
 const newRow = (o) => Object.assign({ title: "", subtitle: "", contents: "", code: "", date: "", qrText: "", n: 1, iSrc: "none", iD: "", iVB: "0 0 24 24", iUrl: "", iName: "" }, o || {});
 
+// ---------- strings added or corrected since the export (docs/review.md) ----------
+// The block above stays byte-identical to the export; every change to its texts is listed here.
+const DICT_FIXES = {
+  fr: { rangeFmt: "Entre {min} et {max}" },
+  en: { rangeFmt: "Between {min} and {max}" },
+  es: { rangeFmt: "Entre {min} y {max}" },
+  de: { rangeFmt: "Zwischen {min} und {max}" },
+  it: { rangeFmt: "Tra {min} e {max}" },
+  pt: { rangeFmt: "Entre {min} e {max}" },
+  nl: { rangeFmt: "Tussen {min} en {max}" }
+};
+for (const code in DICT_FIXES) Object.assign(DICT[code], DICT_FIXES[code]);
+
+// ---------- bounds of the numeric fields (review B4, I14) ----------
+// [min, max] from the other fields: the label always fits on the A4 sheet, inside its margins.
+const BOUNDS = {
+  w: s => [Math.max(10, 2 * s.pad + 2), 210 - 2 * s.mx],
+  h: s => [Math.max(10, 2 * s.pad + 2), 297 - 2 * s.my],
+  mx: s => [0, Math.min(50, (210 - s.w) / 2)],
+  my: s => [0, Math.min(50, (297 - s.h) / 2)],
+  pad: s => [0, Math.min(s.w, s.h) / 2 - 1],
+  bw: () => [0, 5],
+  br: s => [0, Math.min(s.w, s.h) / 2],
+  titlePt: () => [4, 72],
+  subPt: () => [4, 72],
+  bodyPt: () => [4, 72],
+  colW: s => [4, Math.max(4, s.w - 2 * s.pad - 12)],
+  gapCol: () => [0, 20],
+  iconSizeSolo: () => [1, 100],
+  iconSize: () => [1, 100],
+  divW: () => [0, 2],
+  gap: () => [0, 20]
+};
+const MAX_COPIES = 999;
+
 // Props of the design component, fixed at their defaults.
 const PROPS = { startMode: "batch", showSheetPreview: true, defaultFont: "Archivo" };
 
@@ -186,6 +221,16 @@ const state = {
 };
 
 // ---------- state ----------
+// Text typed in a numeric field that is empty or out of bounds: shown and flagged, never applied.
+const drafts = {};
+function bounds(k, s) { const [lo, hi] = BOUNDS[k](s); return [lo, Math.max(lo, hi)]; }
+function inBounds(k, v, s) { const [lo, hi] = bounds(k, s); return Number.isFinite(v) && v >= lo && v <= hi; }
+// The state with every numeric field clamped into its bounds: all geometry reads this.
+function S() {
+  const s = Object.assign({}, state);
+  for (const k in BOUNDS) { const [lo, hi] = bounds(k, s); s[k] = Math.min(Math.max(+s[k], lo), hi); }
+  return s;
+}
 let renderQueued = false;
 function setState(patch) {
   const next = typeof patch === "function" ? patch(state) : patch;
@@ -252,7 +297,7 @@ function qrMarkup(text, size, x, y) {
 }
 
 function buildInner(it) {
-  const s = state, W = +s.w, H = +s.h, pad = +s.pad, bw = +s.bw;
+  const s = S(), W = +s.w, H = +s.h, pad = +s.pad, bw = +s.bw;
   const o = [];
   o.push('<rect x="' + (bw / 2) + '" y="' + (bw / 2) + '" width="' + Math.max(0, W - bw) + '" height="' + Math.max(0, H - bw) +
     '" rx="' + s.br + '" fill="' + s.bg + '"' + (bw > 0 ? ' stroke="' + s.borderColor + '" stroke-width="' + bw + '"' : ' stroke="none"') + "/>");
@@ -339,7 +384,7 @@ function buildInner(it) {
 }
 
 function labelSVG(it, sized) {
-  const s = state;
+  const s = S();
   const dim = sized === false ? 'width="100%" height="100%"' : 'width="' + s.w + 'mm" height="' + s.h + 'mm"';
   return '<svg xmlns="http://www.w3.org/2000/svg" ' + dim + ' viewBox="0 0 ' + s.w + " " + s.h + '">' + buildInner(it) + "</svg>";
 }
@@ -354,13 +399,13 @@ function items() {
   return out.length ? out : [activeItem()];
 }
 function grid() {
-  const s = state, g = +s.gap;
+  const s = S(), g = +s.gap;
   const cols = Math.max(1, Math.floor((210 - 2 * s.mx + g) / (+s.w + g)));
   const rows = Math.max(1, Math.floor((297 - 2 * s.my + g) / (+s.h + g)));
   return { cols, rows, per: cols * rows };
 }
 function sheetSVG(pageItems, real) {
-  const s = state, W = +s.w, H = +s.h, g = +s.gap, { cols, rows } = grid();
+  const s = S(), W = +s.w, H = +s.h, g = +s.gap, { cols, rows } = grid();
   const totalW = cols * W + (cols - 1) * g, totalH = rows * H + (rows - 1) * g;
   const ox = Math.max(+s.mx, (210 - totalW) / 2), oy = Math.max(+s.my, (297 - totalH) / 2);
   const o = ['<rect width="210" height="297" fill="#ffffff"/>'];
@@ -449,9 +494,14 @@ function download(name, text, type) {
 const handlers = {
   setField(el) {
     const k = el.dataset.k;
-    let v = el.dataset.bool ? el.checked : el.dataset.num ? (el.value === "" ? "" : parseFloat(el.value)) : el.value;
-    if (el.dataset.num && Number.isNaN(v)) v = 0;
-    setState({ [k]: v });
+    if (el.dataset.num) {
+      const v = el.value === "" ? NaN : parseFloat(el.value);
+      if (!inBounds(k, v, state)) { drafts[k] = el.value; setState({}); return; }
+      delete drafts[k];
+      setState({ [k]: v });
+      return;
+    }
+    setState({ [k]: el.dataset.bool ? el.checked : el.value });
   },
   setContent(el) { patchRow({ [el.dataset.k]: el.value }); },
   toggleLang() { setState(s => ({ langOpen: !s.langOpen })); },
@@ -464,7 +514,7 @@ const handlers = {
   setRealView(el) { setState({ realView: el.dataset.v }); },
   selRow(el) { setState({ sel: +el.dataset.i }); },
   setRowN(el) {
-    const i = +el.dataset.i, v = Math.max(1, parseInt(el.value, 10) || 1);
+    const i = +el.dataset.i, v = Math.min(MAX_COPIES, Math.max(1, parseInt(el.value, 10) || 1));
     setState(s => { const rows = s.rows.slice(); rows[i] = Object.assign({}, rows[i], { n: v }); return { rows }; });
   },
   addRow() {
@@ -503,6 +553,7 @@ const handlers = {
   setFont(el) { const f = el.value; setState({ font: f }); loadFont(f); },
   applyPreset(el) {
     const p = el.dataset.preset.split("x");
+    delete drafts.w; delete drafts.h;
     setState({ w: +p[0], h: +p[1] });
   },
   setIconSource(el) {
@@ -520,10 +571,10 @@ const handlers = {
     rd.onload = () => { patchRow({ iSrc: "upload", iUrl: rd.result, iD: "", iName: f.name }); setState({ results: [] }); };
     rd.readAsDataURL(f);
   },
-  exportSVG() { download("etiquette-" + state.w + "x" + state.h + "mm.svg", labelSVG(activeItem())); },
+  exportSVG() { const s = S(); download("etiquette-" + s.w + "x" + s.h + "mm.svg", labelSVG(activeItem())); },
   exportSheetSVG() { download("planche-a4.svg", sheetSVG(pages()[0], true)); },
   exportPNG() {
-    const s = state;
+    const s = S();
     const px = m => Math.round(m / 25.4 * 300);
     const svg = labelSVG(activeItem());
     const img = new Image();
@@ -556,7 +607,7 @@ function flagMarkup(l) {
 }
 
 function viewValues() {
-  const s = state;
+  const s = S();
   const g = grid(), total = items().length;
   const scale = Math.min(540 / Math.max(1, +s.w), 340 / Math.max(1, +s.h));
   const act = activeItem(), si = selIndex();
@@ -593,6 +644,20 @@ function setHTML(el, html) {
   if (el.__html !== html) { el.innerHTML = html; el.__html = html; }
 }
 
+// A numeric field is in error while its typed text is not applied, or when another field moved its
+// bounds past its value (the geometry then uses the clamped value).
+function renderErrors(v) {
+  const number = new Intl.NumberFormat(state.lang, { maximumFractionDigits: 2 });
+  for (const el of $$("input[data-num]")) {
+    const k = el.dataset.k, [lo, hi] = bounds(k, state);
+    const bad = k in drafts || !inBounds(k, +state[k], state);
+    const msg = document.getElementById("err-" + k);
+    el.toggleAttribute("aria-invalid", bad);
+    msg.hidden = !bad;
+    msg.textContent = bad ? fmt(v.T.rangeFmt, { min: number.format(lo), max: number.format(hi) }) : "";
+  }
+}
+
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
@@ -609,7 +674,7 @@ function renderRows(v) {
     row.className = "row";
     row.innerHTML =
       '<button type="button" class="row-main" data-action="selRow"><span class="row-title"><span></span></span><span class="row-sub"><span></span></span></button>' +
-      '<input type="number" min="1" step="1" class="row-copies" data-on="setRowN">' +
+      '<input type="number" min="1" max="' + MAX_COPIES + '" step="1" class="row-copies" data-on="setRowN">' +
       '<button type="button" class="row-btn" data-action="dupRow">' + COPY_ICON + "</button>" +
       '<button type="button" class="row-btn row-btn-remove" data-action="delRow">×</button>';
     box.appendChild(row);
@@ -650,7 +715,7 @@ function renderIconGrid() {
 }
 
 function render() {
-  const s = state, v = viewValues();
+  const s = state, c = S(), v = viewValues();
   for (const el of $$("[data-t]")) el.textContent = v.T[el.dataset.t];
   for (const el of $$("[data-ph]")) el.placeholder = v.T[el.dataset.ph];
   for (const el of $$("[data-bind]")) el.textContent = v[el.dataset.bind];
@@ -666,8 +731,9 @@ function render() {
   for (const el of $$("[data-k]")) {
     const k = el.dataset.k;
     const content = el.dataset.on === "setContent";
-    setValue(el, content ? (v.act[k] || "") : s[k]);
+    if (!(k in drafts)) setValue(el, content ? (v.act[k] || "") : s[k]);
   }
+  renderErrors(v);
 
   const icon = $(".logo-icon");
   icon.setAttribute("viewBox", v.act.iVB || "0 0 24 24");
@@ -675,17 +741,17 @@ function render() {
   renderIconGrid();
 
   const preview = $(".label-preview");
-  preview.style.width = "min(100%, " + (+s.w * v.scale) + "px)";
+  preview.style.width = "min(100%, " + (+c.w * v.scale) + "px)";
   preview.style.minWidth = "0";
-  preview.style.aspectRatio = (+s.w) + " / " + (+s.h);
+  preview.style.aspectRatio = (+c.w) + " / " + (+c.h);
   setHTML(preview, labelSVG(v.act, false));
 
   if (v.isRealLabel) {
     const real = $(".label-real");
-    real.style.width = (+s.w) + "mm";
-    real.style.height = (+s.h) + "mm";
+    real.style.width = (+c.w) + "mm";
+    real.style.height = (+c.h) + "mm";
     real.style.flex = "0 0 auto";
-    real.style.marginInline = (+s.w) / 25.4 * 96 <= 400 ? "auto" : "0";
+    real.style.marginInline = (+c.w) / 25.4 * 96 <= 400 ? "auto" : "0";
     setHTML(real, labelSVG(v.act, false));
   }
   const pageList = pages();
@@ -711,6 +777,14 @@ document.addEventListener("click", (e) => {
 document.addEventListener("input", onEvent);
 document.addEventListener("change", onEvent);
 
+for (const el of $$("input[data-num]")) {
+  const msg = document.createElement("span");
+  msg.className = "fld-error";
+  msg.id = "err-" + el.dataset.k;
+  msg.hidden = true;
+  el.setAttribute("aria-describedby", msg.id);
+  el.after(msg);
+}
 $('[data-k="font"]').innerHTML = FONTS.map(f => '<option value="' + esc(f) + '">' + esc(f) + "</option>").join("");
 if (PROPS.defaultFont !== state.font || PROPS.startMode !== state.mode) Object.assign(state, { font: PROPS.defaultFont, mode: PROPS.startMode });
 render();

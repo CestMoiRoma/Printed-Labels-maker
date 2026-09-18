@@ -30,3 +30,12 @@ def test_every_language_has_the_same_keys():
     keys = [re.findall(r"(\w+):(?=\"|\[)", body) for _, body in languages]
     assert len(keys[0]) == 82  # 81 interface strings + the demo rows
     assert all(k == keys[0] for k in keys)
+
+
+def test_string_fixes_cover_every_language_with_the_same_keys():
+    app = (REPO / "site" / "app.js").read_text(encoding="utf-8")
+    fixes = app[app.index("const DICT_FIXES = {") : app.index("for (const code in DICT_FIXES)")]
+    languages = re.findall(r"^  (\w\w): \{(.*?)\}(?:,)?$", fixes, re.M)
+    assert [code for code, _ in languages] == ["fr", "en", "es", "de", "it", "pt", "nl"]
+    keys = [re.findall(r"(\w+):(?=\s*\")", body) for _, body in languages]
+    assert keys[0] and all(k == keys[0] for k in keys)

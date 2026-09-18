@@ -16,6 +16,7 @@
   --line: #e6e1db;
   --line-field: #ddd6ce;
   --line-control: #948c84;
+  --error: #b3261e;
   --line-soft: #f0ece7;
   --line-menu: #f4f0eb;
   --line-flag: #e0dad3;
@@ -662,6 +663,16 @@ button {
   gap: 4px;
   font-size: 11px;
   color: var(--muted);
+}
+
+.num[aria-invalid] {
+  border-color: var(--error);
+}
+
+.fld-error {
+  font-size: 10.5px;
+  line-height: 1.4;
+  color: var(--error);
 }
 
 .swatch {
